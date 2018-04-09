@@ -11,7 +11,7 @@
 --  database:.MDF && .LDG. Data resides in the first file; transaction log
 --  information lives in the second.  A database's transaction log is the 
 --  area where the server first carries out changes made to the data.
--- Once those changes succeed, they're applied atomically�in one piece�to 
+-- Once those changes succeed, they're applied atomically in one piece to 
 --   the actual data.  
 -- It's advantageous for both recoverability and performance to separate 
 --   user data from transaction log data.
@@ -31,28 +31,24 @@ USE master
 --  DROP DATABASE! DROP DATABASE! DROP DATABASE! Are you sure? ...............
 --
 
-IF ( EXISTS( SELECT * FROM [dbo].[sysdatabases] Where name = 'DBProject') )
+IF ( EXISTS( SELECT * FROM [dbo].[sysdatabases] Where name = 'Giss') )
 Begin
-  DROP DATABASE DBProject
+  DROP DATABASE Giss
 end
 
 -------------------------------------------------------------------------------
---
 -- Se nao existir a BD entao vamos cria-la...
--- (if not exists the Projecto database then create them)
---
-IF (NOT EXISTS( SELECT * FROM [dbo].[sysdatabases] Where name = 'DBProject') )
+-------------------------------------------------------------------------------
+IF (NOT EXISTS( SELECT * FROM [dbo].[sysdatabases] Where name = 'Giss') )
 Begin
 
 -------------------------------------------------------------------------------
---  Criar a DBProject com um datafile e um logfile
---  (create the DBProject database with datafile 'Projdat.mdf' 
---                                              and log file 'Projlog.ldf')
+--  Criar a Giss com um datafile ('Projdat.mdf')  e um logfile ('Projlog.ldf')
 -------------------------------------------------------------------------------
-  CREATE DATABASE DBProject
+  CREATE DATABASE Giss
   ON 
    ( NAME = 'Projecto_dat',
-      FILENAME = 'C:\BD1718\Projectodat.mdf',
+      FILENAME = 'C:\BDGiss\Projectodat.mdf',
 --      FILENAME = N'e:\Microsoft SQL Server\MSSQL\data\Projdat.mdf',
       
       SIZE = 10,
@@ -60,7 +56,7 @@ Begin
       FILEGROWTH = 5 )
    LOG ON
    ( NAME = 'Projecto_log',
-     FILENAME = 'C:\BD1718\Projectolog.ldf',
+     FILENAME = 'C:\BDGiss\Projectolog.ldf',
 --    FILENAME = N'e:\Microsoft SQL Server\MSSQL\data\Projlog.ldf',
 
      SIZE = 5MB,
