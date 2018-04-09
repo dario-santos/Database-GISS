@@ -5,17 +5,59 @@
  */
 package my.guiss;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
- * @author themu
+ * @author Dario
  */
 public class GissUI extends javax.swing.JFrame {
 
+    
+
+    private void iniciarJDBC()
+    {
+    
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=1234";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement();   
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+    
+    }
+    
     /**
      * Creates new form GissUI
      */
     public GissUI() {
         initComponents();
+        
+        iniciarJDBC();
     }
 
     /**
@@ -47,6 +89,7 @@ public class GissUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -75,7 +118,7 @@ public class GissUI extends javax.swing.JFrame {
             public void run() {
                 new GissUI().setVisible(true);
             }
-        });
+        });    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
