@@ -14,3 +14,4 @@ Projeto de Base de Dados desenvolvido no ano letivo 2017/2018 para a **Universid
 ### Recursos:
 - **[📋 To-do Board](https://app.asana.com/0/626492023034709/board)**: See what we need to do and what is in done.
 - **[📝 ERD Diagram](https://erdplus.com/)**: The Website that we use to make the ERD Diagram.**Note:** You can find the up-to-date diagrame [here](https://github.com/S4ndM4nPt/UBI-BDGISS/tree/beta/Ficheiros/Diagrama)
+- **[🗃️ Relatório](https://www.sharelatex.com)**: Website para fazer no geral pdfs.
