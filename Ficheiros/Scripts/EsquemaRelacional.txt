@@ -1,0 +1,87 @@
+Progride(IdECliInicial, IdECliDerivada)
+
+
+EpisodioClinico(IdECli ,IdTO , IdColaborador, IdUtente, Observacao)
+
+
+TipoOcorrencia(IdTO, Descricao)
+
+
+Agenda/Atribuicao(IdECli, IdHorarioLocal)
+
+
+HorarioLocal(IdHorarioLocal, Data , Hora , IdLocal, Disponibilidade)
+
+
+Reserva(IdECli, IdHorarioRecurso, Quantidade)
+
+
+HorarioRecurso(IdHorarioRecurso, Data, Hora, IdRecurso)
+
+
+Recurso(IdRecurso, Disponibilidade, Validade, Quantidade)
+
+
+Utente(IdUtente, Nome)
+
+
+HistoricoClinico(IdUtente, IdColaborador, IdECli)
+
+
+Gera(IdECli, IdMarcacao)
+
+
+Marcacao(IdMarcacao, Data, Hora, )
+
+
+Marca(IdMarcacao, IdHorarioLocal)
+
+
+Faz(IdUtente, IdMarcacao)
+
+
+Colaborador(IdColaborador, Nome, IdCentroHospitalar)
+
+
+Detem(IdColaborador, IdEspecializacao)
+
+
+Especializacao(IdEspecializacao, Descricao)
+
+
+HorarioTrabalho(IdHorarioTrabalho, IdColaborador, Data, Hora)
+
+
+Distribuicao(IdHorarioTrabalho, IdServico)
+
+
+Servico(IdServico, Nome)
+
+
+Engloba(IdServico, IdAreaClinica)
+
+
+AreaClinica(IdAreaClinica, Nome)
+
+
+Hospital(IdHospital, Nome, IdCentroHospitalar)
+
+
+Constituido(IdHospital, IdServico)
+
+
+CentroHospitalar(IdCentroHospitalar, IdRegiao)
+
+
+Regiao(IdRegiao, Nome)
+
+
+Local(IdLocal, Nome)
+
+
+Armazena(IdLocal, IdRecurso)
+
+
+
+
+O utente é que marca todas as marcações, mas o Colaborador pode pedir a marcação de outras. Sendo assim, o Colaborador nunca marca nenhuma marcação, sendo sempre o utente.
