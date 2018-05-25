@@ -1,0 +1,1 @@
+O utente é que marca todas as marcações, mas o Colaborador pode pedir a marcação de outras. Sendo assim, o Colaborador nunca marca nenhuma marcação, sendo sempre o utente.
