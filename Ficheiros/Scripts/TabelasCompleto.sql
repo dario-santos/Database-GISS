@@ -1,5 +1,5 @@
 Use Giss
-
+GO
 -- TipoOcorrencia(IdTO, Descricao)--------------------------------------------------
 
 if not exists (select * from dbo.sysobjects 
@@ -41,16 +41,16 @@ if not exists (select * from dbo.sysobjects
                where id = object_id(N'[dbo].[HistoricoClinico]') )
 begin
     CREATE TABLE HistoricoClinico (
-        IdHistoricoClinico int
-            CONSTRAINT nn_IdHistoricoClinico NOT NULL
-            CONSTRAINT C_idHistoricoClinico CHECK (IdHistoricoClinico >= 1),
-
+        IdHistoricoClinico int NOT NULL
+			CONSTRAINT PK_IdHistoricoClinico PRIMARY KEY(IdHistoricoClinico)
+            CHECK (IdHistoricoClinico >= 1),
         IdUtente int 
             CONSTRAINT nn_IdUtente NOT NULL,
 
+
         CONSTRAINT FK_IdUtente FOREIGN KEY (IdUtente)
             REFERENCES Utente(IdUtente)
-            on update CASCADE
+            ON UPDATE CASCADE
         
     ); 
 end
@@ -222,11 +222,11 @@ CREATE TABLE Engloba(
 	CONSTRAINT PK_Engloba 
 		PRIMARY KEY (IdServico,IdAreaClinica),
 
-	CONSTRAINT FK_IdServico FOREIGN KEY(IdServico)
+	CONSTRAINT FK_Engloba_IdServico FOREIGN KEY(IdServico)
 		REFERENCES Servico(IdServico)
 		ON UPDATE CASCADE,
 
-	CONSTRAINT FK_IdAreaClinica FOREIGN KEY(IdAreaClinica)
+	CONSTRAINT FK_Engloba_IdAreaClinica FOREIGN KEY(IdAreaClinica)
 		REFERENCES AreaClinica(IdAreaClinica)
 		ON UPDATE CASCADE
 
@@ -248,11 +248,11 @@ CREATE TABLE Colaborador(
 	IdDesignacao int NOT NULL,
 	IdCentroHospitalar int NOT NULL,
 
-	CONSTRAINT FK_IdDesignacao FOREIGN KEY(IdDesignacao)
+	CONSTRAINT FK_Colaborador_IdDesignacao FOREIGN KEY(IdDesignacao)
 		REFERENCES Designacao(IdDesignacao)
 		ON UPDATE CASCADE 
        	ON DELETE NO ACTION,
-    CONSTRAINT FK_IdCentroHospitalar FOREIGN KEY(IdCentroHospitalar)
+    CONSTRAINT FK_Colaborado_IdCentroHospitalar FOREIGN KEY(IdCentroHospitalar)
     	REFERENCES CentroHospitalar(IdCentroHospitalar)
     	ON UPDATE CASCADE 
        	ON DELETE NO ACTION
@@ -273,19 +273,20 @@ CREATE TABLE Acede(
 	IdHistoricoClinico int 
 		CONSTRAINT nn_IdHistoricoClinico NOT NULL,
 
-	CONSTRAINT PK_Acede 
-		PRIMARY KEY (IdColaborador,IdHistoricoClinico),
+	CONSTRAINT PK_Acede
+		PRIMARY KEY (IdColaborador, IdHistoricoClinico),
 
-	CONSTRAINT FK_IdColaborador FOREIGN KEY(IdColaborador)
+	CONSTRAINT FK_Acede_IdColaborador FOREIGN KEY(IdColaborador)
 		REFERENCES Colaborador(IdColaborador)
 		ON UPDATE CASCADE,
 
-	CONSTRAINT FK_IdHistoricoClinico FOREIGN KEY(IdHistoricoClinico)
+	CONSTRAINT FK_Acede_IdHistoricoClinico FOREIGN KEY(IdHistoricoClinico)
 		REFERENCES HistoricoClinico(IdHistoricoClinico)
 		ON UPDATE CASCADE
 
+
 );
-END    
+END 
 
 -- HorarioTrabalho(IdHorarioTrabalho, Data, HoraInicio, HoraFim, IdColaborador, Disponibilidade) 
 
@@ -334,11 +335,11 @@ begin
         
         CONSTRAINT PK_Detem PRIMARY KEY (IdColaborador, IdEspecializacao),
 
-        CONSTRAINT FK_IdColaborador FOREIGN KEY (IdColaborador)
+        CONSTRAINT FK_Detem_IdColaborador FOREIGN KEY (IdColaborador)
             REFERENCES Colaborador(IdColaborador)
             ON UPDATE CASCADE,
 
-        CONSTRAINT FK_IdEspecializacao FOREIGN KEY (IdEspecializacao)
+        CONSTRAINT FK_Detem_IdEspecializacao FOREIGN KEY (IdEspecializacao)
             REFERENCES Especializacao(IdEspecializacao)
             ON UPDATE CASCADE
     ); 
@@ -435,8 +436,8 @@ if not exists (select * from dbo.sysobjects
 BEGIN
 CREATE TABLE HorarioLocal(
 	IdHorarioLocal int NOT NULL
-		CONSTRAINT PK_IdHorarioLocal PRIMARY KEY (IdHorarioLocal)
-		CHECK(IdHorarioLocal > 0),
+		CHECK(IdHorarioLocal >= 1)
+		CONSTRAINT PK_IdHorarioLocal PRIMARY KEY (IdHorarioLocal),
 	Data date NOT NULL,
 	HoraInicio time NOT NULL,
 	HoraFim time NOT NULL,
@@ -444,7 +445,7 @@ CREATE TABLE HorarioLocal(
 	Disponibilidade char(1) NOT NULL
 		CHECK (Disponibilidade IN ('T', 'F')),
 
-	CONSTRAINT FK_IdLocal CONSTRAINT(IdLocal)
+	CONSTRAINT FK_IdLocal FOREIGN KEY(IdLocal)
 	REFERENCES Local(IdLocal)
 
 	ON UPDATE CASCADE 
@@ -465,25 +466,30 @@ begin
             CONSTRAINT PK_IdECli PRIMARY KEY (IdECli)
 			CHECK (IdECli >= 1),
         Observacao nvarchar(300) NOT NULL,
+		IdTO int NOT NULL,
         IdColaborador int NOT NULL,
         IdUtente int NOT NULL,
         IdHistoricoClinico int NOT NULL,
 
-        CONSTRAINT FK_IdTO FOREIGN KEY(IdTO)
+        CONSTRAINT FK_EpisodioClinico_IdTO FOREIGN KEY(IdTO)
             REFERENCES TipoOcorrencia(IdTO)
-            ON UPDATE CASCADE,
+            ON UPDATE CASCADE
+			ON DELETE NO ACTION,
         
-        CONSTRAINT FK_IdColaborador FOREIGN KEY (IdColaborador)
+        CONSTRAINT FK_EpisodioClinico_IdColaborador FOREIGN KEY (IdColaborador)
             REFERENCES Colaborador(IdColaborador)
-            ON UPDATE CASCADE,
+            ON UPDATE CASCADE 
+			ON DELETE NO ACTION,
 
-        CONSTRAINT FK_IdUtente FOREIGN KEY (IdUtente)
+        CONSTRAINT FK_EpisodioClinico_IdUtente FOREIGN KEY (IdUtente)
             REFERENCES Utente(IdUtente)
-            ON UPDATE CASCADE,
+            ON UPDATE NO ACTION
+			ON DELETE NO ACTION,
 
-        CONSTRAINT FK_IdHistoricoClinico FOREIGN KEY (IdHistoricoClinico)
+        CONSTRAINT FK_EpisodioClinico_IdHistoricoClinico FOREIGN KEY (IdHistoricoClinico)
             REFERENCES HistoricoClinico(IdHistoricoClinico)
-            ON UPDATE CASCADE,
+            ON UPDATE CASCADE
+			ON DELETE NO ACTION
 
     );
 end;
@@ -504,7 +510,7 @@ CREATE TABLE Progride(
 
 
 		CONSTRAINT PK_IdECliDerivado PRIMARY KEY (IdECliDerivado),
-		CONSTRAINT FK_IdECliInicial FOREIGN KEY (FK_IdECliInicial)
+		CONSTRAINT FK_IdECliInicial FOREIGN KEY (IdECliInicial)
 		REFERENCES EpisodioClinico(IdECli)
 		ON UPDATE CASCADE
 		ON DELETE NO ACTION
@@ -533,7 +539,7 @@ begin
             ON UPDATE CASCADE,
 
         CONSTRAINT FK_IdHorarioRecurso FOREIGN KEY (IdHorarioRecurso)
-            REFERENCES HorarioRecurso(IdHorarioLocal)
+            REFERENCES HorarioRecurso(IdHorarioRecurso)
             ON UPDATE CASCADE
     );
 end
@@ -552,11 +558,11 @@ begin
         CONSTRAINT PK_Agenda
             PRIMARY KEY (IdECli, IdHorarioLocal),
 
-        CONSTRAINT FK_IdECli FOREIGN KEY (IdECli)
+        CONSTRAINT FK_Agenda_IdECli FOREIGN KEY (IdECli)
             REFERENCES EpisodioClinico(IdECli)
             ON UPDATE CASCADE,
 
-        CONSTRAINT FK_IdHorarioLocal FOREIGN KEY (IdHorarioLocal) 
+        CONSTRAINT FK_Agenda_IdHorarioLocal FOREIGN KEY (IdHorarioLocal) 
 	        REFERENCES HorarioLocal(IdHorarioLocal)
 	        ON UPDATE CASCADE
 
@@ -578,15 +584,17 @@ CREATE TABLE Marcacao(
 	IdHorarioTrabalho int NOT NULL,
 	IdUtente int NOT NULL,
 
-	CONSTRAINT FK_IdHorarioLocal FOREIGN KEY(IdHorarioLocal)
+	CONSTRAINT FK_Marcacao_IdHorarioLocal FOREIGN KEY(IdHorarioLocal)
 		REFERENCES HorarioLocal(IdHorarioLocal)
 		ON UPDATE CASCADE 
        	ON DELETE NO ACTION,
-    CONSTRAINT FK_IdHorarioTrabalho FOREIGN KEY(IdHorarioTrabalho)
-    	REFERENCES IdHorarioTrabalho(IdHorarioTrabalho)
+
+    CONSTRAINT FK_Marcacao_IdHorarioTrabalho FOREIGN KEY(IdHorarioTrabalho)
+    	REFERENCES HorarioTrabalho(IdHorarioTrabalho)
     	ON UPDATE CASCADE 
        	ON DELETE NO ACTION,
-    CONSTRAINT FK_IdUtente FOREIGN KEY(IdUtente)
+
+    CONSTRAINT FK_Marcacao_IdUtente FOREIGN KEY(IdUtente)
     	REFERENCES Utente(IdUtente)
     	ON UPDATE CASCADE 
        	ON DELETE NO ACTION
@@ -608,15 +616,15 @@ begin
         IdECli int 
             CONSTRAINT nn_IdECli NOT NULL,
 
-        CONSTRAINT PK_IdMarcacao PRIMARY KEY (IdMarcacao),
+        CONSTRAINT PK_Gera_IdMarcacao PRIMARY KEY (IdMarcacao),
 
-        CONSTRAINT FK_IdMarcacao FOREIGN KEY (IdMarcacao)
+        CONSTRAINT FK_Gera_IdMarcacao FOREIGN KEY (IdMarcacao)
             REFERENCES Marcacao(IdMarcacao)
             ON UPDATE CASCADE,
         
-        CONSTRAINT FK_IdECli FOREIGN KEY (IdECli)
+        CONSTRAINT FK_Gera_IdECli FOREIGN KEY (IdECli)
             REFERENCES EpisodioClinico(IdECli)
-            ON UPDATE CASCADE
+            ON UPDATE NO ACTION
     );
 end
 
@@ -634,13 +642,13 @@ begin
         
         CONSTRAINT PK_Participacao PRIMARY KEY (IdColaborador, IdECli),
 
-        CONSTRAINT FK_IdColaborador FOREIGN KEY (IdColaborador)
+        CONSTRAINT FK_Participacao_IdColaborador FOREIGN KEY (IdColaborador)
             REFERENCES Colaborador(IdColaborador)
             ON UPDATE CASCADE,
 
-        CONSTRAINT FK_IdECli FOREIGN KEY (IdECli)
+        CONSTRAINT FK_Participacao_IdECli FOREIGN KEY (IdECli)
             REFERENCES EpisodioClinico(IdECli)
-            ON UPDATE CASCADE
+            ON UPDATE NO ACTION
     ); 
 end
 
@@ -660,11 +668,11 @@ CREATE TABLE Distribuicao(
 	CONSTRAINT PK_Destribuicao 
 		PRIMARY KEY (IdHorarioTrabalho,IdServico),
 
-	CONSTRAINT FK_IdHorarioTrabalho FOREIGN KEY(IdHorarioTrabalho)
+	CONSTRAINT FK_Distribuicao_IdHorarioTrabalho FOREIGN KEY(IdHorarioTrabalho)
 		REFERENCES HorarioTrabalho(IdHorarioTrabalho)
 		ON UPDATE CASCADE,
 
-	CONSTRAINT FK_IdServico FOREIGN KEY(IdServico)
+	CONSTRAINT FK_Distribuicao_IdServico FOREIGN KEY(IdServico)
 		REFERENCES Servico(IdServico)
 		ON UPDATE CASCADE
 
@@ -684,11 +692,11 @@ CREATE TABLE Armazena(
 	IdRecurso int NOT NULL
 		CONSTRAINT PK_Armazena PRIMARY KEY(IdRecurso),
 
-	CONSTRAINT FK_IdLocal FOREIGN KEY(IdLocal)
+	CONSTRAINT FK_Armazena_IdLocal FOREIGN KEY(IdLocal)
 		REFERENCES Local(IdLocal)
 		ON UPDATE CASCADE,
 
-	CONSTRAINT FK_IdRecurso FOREIGN KEY(IdRecurso)
+	CONSTRAINT FK_Armazena_IdRecurso FOREIGN KEY(IdRecurso)
 		REFERENCES Recurso(IdRecurso)
 		ON UPDATE CASCADE	
 
