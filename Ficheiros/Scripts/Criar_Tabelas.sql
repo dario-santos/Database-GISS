@@ -1,6 +1,14 @@
-Use Giss
-GO
--- TipoOcorrencia(IdTO, Descricao)--------------------------------------------------
+-- ...........................................................................
+-- USE DBProject: Changes the database context to the DBProject database.
+--
+USE Giss
+--
+-- ...........................................................................
+
+-- ...........................................................................
+-- Criar as tabelas
+
+-- TipoOcorrencia(IdTO, Descricao) ...........................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[TipoOcorrencia]') )
@@ -17,7 +25,7 @@ CREATE TABLE TipoOcorrencia(
 END
 
 
--- Utente(IdUtente, Nome) ---------------------------------------------
+-- Utente(IdUtente, Nome) ................................................
 
 
 if not exists (select * from dbo.sysobjects 
@@ -55,7 +63,7 @@ begin
     ); 
 end
 
--- Designacao(IdDesignacao,Descricao)-------------------------
+-- Designacao(IdDesignacao,Descricao) ...............................
 
 
 if not exists (select * from dbo.sysobjects 
@@ -71,7 +79,7 @@ CREATE TABLE Designacao(
 );
 END
 
--- Especializacao(IdEspecializacao, Descricao) ----------------------           
+-- Especializacao(IdEspecializacao, Descricao) ..........................         
 
 
 if not exists (select * from dbo.sysobjects 
@@ -88,7 +96,7 @@ CREATE TABLE Especializacao(
 ); 
 END
 
--- Servico(IdServico, Nome) ...................................................................
+-- Servico(IdServico, Nome) ...............................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Servico]') )
@@ -142,7 +150,7 @@ begin
     );
 end
 
--- CentroHospitalar(IdCentroHospitalar, Nome, IdRegiao) -------
+-- CentroHospitalar(IdCentroHospitalar, Nome, IdRegiao) ........................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[CentroHospitalar]') )
@@ -163,7 +171,7 @@ CREATE TABLE CentroHospitalar(
 );
 END
 
--- Hospital(IdHospital, Nome, IdCentroHospitalar)
+-- Hospital(IdHospital, Nome, IdCentroHospitalar) ............................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Hospital]') )
@@ -207,7 +215,7 @@ begin
     ); 
 end    
 
--- Engloba(IdServico, IdAreaClinica)-------------------
+-- Engloba(IdServico, IdAreaClinica) ...................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Engloba]') )
@@ -234,7 +242,7 @@ CREATE TABLE Engloba(
 );
 END
 
--- Colaborador(IdColaborador, Nome,IdDesignacao, IdCentroHospitalar)---------------------------
+-- Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar) ..............................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Colaborador]') )
@@ -261,7 +269,7 @@ CREATE TABLE Colaborador(
 END
 
 
--- Acede(IdColaborador, IdHistoricoClinico)---------------
+-- Acede(IdColaborador, IdHistoricoClinico) ....................................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Acede]') )
@@ -288,7 +296,7 @@ CREATE TABLE Acede(
 );
 END 
 
--- HorarioTrabalho(IdHorarioTrabalho, Data, HoraInicio, HoraFim, IdColaborador, Disponibilidade) 
+-- HorarioTrabalho(IdHorarioTrabalho, Data, HoraInicio, HoraFim, IdColaborador, Disponibilidade)  ......................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[HorarioTrabalho]') )
@@ -321,7 +329,7 @@ begin
     ); 
 end
 
--- Detem(IdColaborador, IdEspecializacao) ..........................
+-- Detem(IdColaborador, IdEspecializacao) ..........................................................
 
 
 if not exists (select * from dbo.sysobjects 
@@ -345,7 +353,7 @@ begin
     ); 
 end
 
--- Recurso(IdRecurso, Descricao, NumUtilizacao, Validade) ....................
+-- Recurso(IdRecurso, Descricao, NumUtilizacao, Validade) ...............................................
 
 
 if not exists (select * from dbo.sysobjects 
@@ -371,7 +379,7 @@ begin
 end
 
 
--- HorarioRecurso(IdHorarioRecurso, Data, HoraInicio, HoraFim, IdRecurso,Disponibilidade)
+-- HorarioRecurso(IdHorarioRecurso, Data, HoraInicio, HoraFim, IdRecurso,Disponibilidade) .............................
 
 
 if not exists (select * from dbo.sysobjects 
@@ -400,7 +408,7 @@ CREATE TABLE HorarioRecurso(
 );
 END
 
--- Local(IdLocal, Nome, IdAreaClinica)
+-- Local(IdLocal, Nome, IdAreaClinica) ..................................................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Local]') )
@@ -427,7 +435,7 @@ end
 
 
 
--- HorarioLocal(IdHorarioLocal, Data , HoraInicio, HoraFim , IdLocal, Disponibilidade)-------------
+-- HorarioLocal(IdHorarioLocal, Data , HoraInicio, HoraFim , IdLocal, Disponibilidade) .............................
 
 
 if not exists (select * from dbo.sysobjects 
@@ -496,7 +504,7 @@ end;
 
 
 
--- Progride(IdECliInicial, IdECliDerivado) ------------------------------
+-- Progride(IdECliInicial, IdECliDerivado) ...........................................................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Progride]') )
@@ -569,7 +577,7 @@ begin
     );
 end
 
--- Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente) ---------------
+-- Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente) ..........................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Marcacao]') )
@@ -653,7 +661,7 @@ begin
 end
 
 
--- Distribuicao(IdHorarioTrabalho, IdServico) -----------------------
+-- Distribuicao(IdHorarioTrabalho, IdServico) ...........................................................................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Distribuicao]') )
@@ -680,7 +688,7 @@ CREATE TABLE Distribuicao(
 END
 
 
--- Armazena(IdLocal, IdRecurso) -----
+-- Armazena(IdLocal, IdRecurso) ...........................................................................
 
 
 if not exists (select * from dbo.sysobjects 
