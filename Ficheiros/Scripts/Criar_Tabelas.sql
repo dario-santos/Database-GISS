@@ -464,7 +464,7 @@ CREATE TABLE HorarioLocal(
 END
 
 
--- EpisodioClinico(IdECli, Observacao, IdTO, IdColaborador, IdUtente, IdHistoricoClinico) ............................................................................
+-- EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico) ............................................................................
 
 if not exists (select * from dbo.sysobjects
 			   where id = object_id(N'[dbo].[EpisodioClinico]'))
@@ -475,18 +475,12 @@ begin
 			CHECK (IdECli >= 1),
         Observacao nvarchar(300) NOT NULL,
 		IdTO int NOT NULL,
-        IdColaborador int NOT NULL,
         IdUtente int NOT NULL,
         IdHistoricoClinico int NOT NULL,
 
         CONSTRAINT FK_EpisodioClinico_IdTO FOREIGN KEY(IdTO)
             REFERENCES TipoOcorrencia(IdTO)
             ON UPDATE CASCADE
-			ON DELETE NO ACTION,
-        
-        CONSTRAINT FK_EpisodioClinico_IdColaborador FOREIGN KEY (IdColaborador)
-            REFERENCES Colaborador(IdColaborador)
-            ON UPDATE CASCADE 
 			ON DELETE NO ACTION,
 
         CONSTRAINT FK_EpisodioClinico_IdUtente FOREIGN KEY (IdUtente)
@@ -656,7 +650,7 @@ begin
 
         CONSTRAINT FK_Participacao_IdECli FOREIGN KEY (IdECli)
             REFERENCES EpisodioClinico(IdECli)
-            ON UPDATE NO ACTION
+            ON UPDATE Cascade
     ); 
 end
 
