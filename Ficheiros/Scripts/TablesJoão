@@ -129,37 +129,41 @@ INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
 Values (8 , 'Anita Santos', 1 , 1 );
 --
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (9 , 'Mariana Pereirinha', 1 , 2 );
+Values (9 , 'Mariana Pereirinha', 1 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (10 , 'Pedro Santos', 2 , 2 );
+Values (10 , 'Pedro Santos', 2 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (11 , 'Lina Maria', 3 , 2 );
+Values (11 , 'Lina Maria', 3 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (12 , 'Davide Soares', 4 , 2 );
+Values (12 , 'Davide Soares', 4 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (13 , 'Benjamim Augusto', 1 , 2 );
+Values (13 , 'Benjamim Augusto', 1 , 1 );
 --
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (14 , 'Martim Rocha', 1 , 3 );
+Values (14 , 'Martim Rocha', 1 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (15 , 'Alexandre Soares', 2 , 3 );
+Values (15 , 'Alexandre Soares', 2 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (16 , 'Bernardo Ferreira', 4 , 3 );
+Values (16 , 'Bernardo Ferreira', 4 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (17 , 'Diana Neto', 1 , 3 );
+Values (17 , 'Diana Neto', 1 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (18 , 'Claudia Souza', 3 , 3 );
+Values (18 , 'Claudia Souza', 3 , 1 );
 
 INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
-Values (19 , 'Margarida Brito', 5 , 3 );
+Values (19 , 'Margarida Brito', 5 , 1 );
+
+INSERT INTO Colaborador(IdColaborador, Nome, IdDesignacao, IdCentroHospitalar)
+Values (20 , 'Manuel Indireita', 6 , 1 );
+
 
 ---------------------------------------------------------------------------------------------
 
@@ -266,6 +270,9 @@ Values(9, 'Centro de Maternidade ');
 INSERT INTO Servico(IdServico, Nome)
 Values(10, 'Centro de Psicologia');
 
+INSERT INTO Servico(IdServico, Nome)
+Values(11, 'Centro de Fisiorerapia');
+
 -----------------------------------------------------------------------------
 
 --AreaClinica(IdAreaClinica, Nome)
@@ -306,6 +313,10 @@ Values(11, 'Ginecologia-Obstetricia');
 INSERT INTO AreaClinica(IdAreaClinica, Nome)
 Values(12, 'Psicologia');
 
+INSERT INTO AreaClinica(IdAreaClinica, Nome)
+Values(13, 'Fisiorerapia');
+
+
 -----------------------------------------------------------------------------
 
 --Engloba(IdServico, IdAreaClinica)
@@ -345,6 +356,9 @@ Values(9, 11);
 
 INSERT INTO Engloba(IdServico, IdAreaClinica)
 Values(10, 12);
+
+INSERT INTO Engloba(IdServico, IdAreaClinica)
+Values(11, 13);
 
 --------------------------------------------------------------
 
@@ -514,7 +528,7 @@ INSERT INTO Local(IdLocal, Nome, IdAreaClinica)
 Values(1 , 'Sala de maternidade' , 10 );
 
 INSERT INTO Local(IdLocal, Nome, IdAreaClinica)
-Values(2 , 'Internamento' , 10 );
+Values(2 , 'Internamento/incubadoras' , 10 );
 
 INSERT INTO Local(IdLocal, Nome, IdAreaClinica)
 Values(3 , 'Sala de Cardiologia' , 1 );
@@ -526,7 +540,7 @@ INSERT INTO Local(IdLocal, Nome, IdAreaClinica)
 Values(5 , 'Sala de Operaçao' , 3 );
 
 INSERT INTO Local(IdLocal, Nome, IdAreaClinica)
-Values(6 , 'Sala de Operao' , 3 );
+Values(6 , 'Sala de Fisiorerapia' , 13 );
 
 INSERT INTO Local(IdLocal, Nome, IdAreaClinica)
 Values(7 , 'Sala de Pediatria' , 4 );
