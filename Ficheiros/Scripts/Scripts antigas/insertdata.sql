@@ -32,37 +32,32 @@ INSERT INTO Participacao(IdColaborador,IdECli)
 Values(10,10);
 
 INSERT INTO Participacao(IdColaborador,IdECli)
-Values(2,2);
+Values(7,3);
 
 INSERT INTO Participacao(IdColaborador,IdECli)
-Values(7,7);
+Values(1,9);
 
 INSERT INTO Participacao(IdColaborador,IdECli)
-Values(3,3);
-
-INSERT INTO Participacao(IdColaborador,IdECli)
-Values(6,6);
-
-
--- D-Detem(IdColaborador, IdEspecializacao)-----------------
+Values(2,9);
+-- D-Detem(IdColaborador, IdEspecializacao) .......................................
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(1,1);
+Values(1,5);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(2,2);
+Values(2,3);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(3,3);
+Values(3,8);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(4,4);
+Values(4,1);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(5,5);
+Values(5,8);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(6,6);
+Values(6,8);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
 Values(7,7);
@@ -71,25 +66,21 @@ INSERT INTO Detem(IdColaborador,IdEspecializacao)
 Values(8,8);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(9,9);
+Values(9,3);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(10,10);
+Values(10,8);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(2,2);
+Values(4,8);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(7,7);
+Values(7,3);
 
 INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(3,3);
+Values(1,3);
 
-INSERT INTO Detem(IdColaborador,IdEspecializacao)
-Values(6,6);
-
-
--- Especializacao(IdEspecializacao, Descricao)
+-- Especializacao(IdEspecializacao, Descricao) .......................................
 
 INSERT INTO Especializacao(IdEspecializacao,Descricao)
 Values(1,'Cardiologia');
@@ -122,7 +113,7 @@ INSERT INTO Especializacao(IdEspecializacao,Descricao)
 Values(10,'Psicologia');
 
 
--- EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico)------------
+-- EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico) ..................
 
 INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
 VALUES(1,'Paciente Direcionado para Analise',1,1,1);
@@ -155,7 +146,7 @@ INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinic
 VALUES(10,'Receitado dois suplementos vitaminicos',3,10,10);
 
 
--- TipoOcorrencia(IdTO, Descricao) ---------------------------------------------------
+-- TipoOcorrencia(IdTO, Descricao) ........................................
 
 INSERT INTO TipoOcorrencia(IdTO,Descricao)
 VALUES(1,'Acidentes de Trabalho');
@@ -188,7 +179,7 @@ INSERT INTO TipoOcorrencia(IdTO,Descricao)
 VALUES(10,'Doencas graves');
 
 
--- Reserva(IdECli, IdHorarioRecurso)--------------------------------
+-- Reserva(IdECli, IdHorarioRecurso) .......................................
 
 INSERT INTO Reserva(IdECli,IdHorarioRecurso)
 VALUES(1,29);
@@ -216,18 +207,3 @@ VALUES(5,24);
 
 INSERT INTO Reserva(IdECli,IdHorarioRecurso)
 VALUES(10,33);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

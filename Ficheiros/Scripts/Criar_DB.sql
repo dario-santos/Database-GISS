@@ -1,4 +1,4 @@
-USE Giss
+USE master
 
 
 IF ( EXISTS( SELECT * FROM [dbo].[sysdatabases] Where name = 'Giss') )
