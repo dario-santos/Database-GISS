@@ -137,22 +137,91 @@ INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinic
 VALUES(4,'Paciente Direcionado Cardiologia',4,4,4);
 
 INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico)
-VALUES(5,'Foi Marcado para o paciente 2 sessoes Fisioterapia ',5,7,5);
+VALUES(5,'Foi Marcado para o paciente 2 sessoes de Fisioterapia ',7,7,5);
 
 INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
-VALUES(6,'Foram receitados dois rebuçados Dr.Bayard ',6,6,6);
+VALUES(6,'Foram receitados dois rebuçados Dr.Bayard ',3,6,6);
 
 INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
 VALUES(7,'Paciente direccionado para Radiologia',7,7,7);
 
 INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico)
-VALUES(8,'Paciente direccionado para o bar para tomar um cafe cheio e uma nata',8,8,8);
+VALUES(8,'Paciente direccionado para casa',9,8,8);
 
 INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
-VALUES(9,'Doente Direcionado para a sala de operações',9,9,9);
+VALUES(9,'Doente Direcionado para a sala de operações',6,9,9);
 
 INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
-VALUES(10,'Receitado dois suplementos vitaminicos',10,10,10);
+VALUES(10,'Receitado dois suplementos vitaminicos',3,10,10);
+
+
+-- TipoOcorrencia(IdTO, Descricao) ---------------------------------------------------
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(1,'Acidentes de Trabalho');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(2,'Acidentes de Viacao');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(3,'Intoxicacao Alimentar');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(4,'Acidente Escolar');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(5,'Infeccoes');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(6,'Hemorragias');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(7,'Idosos');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(8,'Lesoes de caracter desportivo');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(9,'Lesoes leves');
+
+INSERT INTO TipoOcorrencia(IdTO,Descricao)
+VALUES(10,'Doencas graves');
+
+
+-- Reserva(IdECli, IdHorarioRecurso)--------------------------------
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(1,29);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(3,41);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(6,49);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(7,39);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(9,19);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(4,9);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(2,17);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(5,24);
+
+INSERT INTO Reserva(IdECli,IdHorarioRecurso)
+VALUES(10,33);
+
+
+
+
+
+
 
 
 
