@@ -69,30 +69,73 @@ public class GissUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         TabbedMenu = new javax.swing.JTabbedPane();
         PanelMarcacao = new javax.swing.JPanel();
         ComboBoxHorarios = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        ComboBoxMarcacao = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         PanelConsulta = new javax.swing.JPanel();
         PanelMeioComplementar = new javax.swing.JPanel();
 
+        jButton1.setText("jButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(640, 480));
         setResizable(false);
 
-        ComboBoxHorarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Colaborador", "Recurso", "Local" }));
+        PanelMarcacao.setPreferredSize(new java.awt.Dimension(1024, 680));
 
-        jLabel1.setText("Tipo");
+        ComboBoxHorarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Colaborador", "Recurso", "Local" }));
 
         jLabel2.setText("Horário");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo" }));
+        jLabel5.setText("Marcação");
 
-        jLabel3.setText("Dia da Semana");
+        ComboBoxMarcacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sequencial", "Prévia" }));
+        ComboBoxMarcacao.setToolTipText("");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nº da Semana", "1 - 18/01", "2 - 24/02", "3 - 30/03", "4 - 10/04", "5 - 15/05" }));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano", "2018/2019", "2019/2020", "2020/2021", "2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", " " }));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"7:00-7:30", null, null, null, null, null, null, null},
+                {"7:30-8:00", null, null, null, null, null, null, null},
+                {"8:00-8:30", null, null, null, null, null, null, null},
+                {"8:30-9:00", null, null, null, null, null, null, null},
+                {"9:30-10:00", null, null, null, null, null, null, null},
+                {"10:00-10:30", null, null, null, null, null, null, null},
+                {"10:30-11:00", null, null, null, null, null, null, null},
+                {"11:30-12:00", null, null, null, null, null, null, null},
+                {"12:00-12:30", null, null, null, null, null, null, null},
+                {"12:30-13:00", null, null, null, null, null, null, null},
+                {"13:00-13:30", null, null, null, null, null, null, null},
+                {"13:30-14:00", null, null, null, null, null, null, null},
+                {"14:00-14:30", null, null, null, null, null, null, null},
+                {"14:30-15:00", null, null, null, null, null, null, null},
+                {"15:00-15:30", null, null, null, null, null, null, null},
+                {"15:30-16:00", null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Horas", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"
+            }
+        ));
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "\t\t--Escolha--" }));
+
+        jButton2.setText("Confirmar");
 
         javax.swing.GroupLayout PanelMarcacaoLayout = new javax.swing.GroupLayout(PanelMarcacao);
         PanelMarcacao.setLayout(PanelMarcacaoLayout);
@@ -101,40 +144,52 @@ public class GissUI extends javax.swing.JFrame {
             .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ComboBoxHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 466, Short.MAX_VALUE))))
+                            .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton2)
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jComboBox4, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboBoxHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         PanelMarcacaoLayout.setVerticalGroup(
             PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(ComboBoxHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboBoxHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(23, 23, 23))
         );
 
         TabbedMenu.addTab("Marcação", PanelMarcacao);
@@ -143,11 +198,11 @@ public class GissUI extends javax.swing.JFrame {
         PanelConsulta.setLayout(PanelConsultaLayout);
         PanelConsultaLayout.setHorizontalGroup(
             PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
+            .addGap(0, 1011, Short.MAX_VALUE)
         );
         PanelConsultaLayout.setVerticalGroup(
             PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 673, Short.MAX_VALUE)
         );
 
         TabbedMenu.addTab("Consulta", PanelConsulta);
@@ -156,11 +211,11 @@ public class GissUI extends javax.swing.JFrame {
         PanelMeioComplementar.setLayout(PanelMeioComplementarLayout);
         PanelMeioComplementarLayout.setHorizontalGroup(
             PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
+            .addGap(0, 1011, Short.MAX_VALUE)
         );
         PanelMeioComplementarLayout.setVerticalGroup(
             PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 673, Short.MAX_VALUE)
         );
 
         TabbedMenu.addTab("Meios Complementares", PanelMeioComplementar);
@@ -169,11 +224,11 @@ public class GissUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedMenu)
+            .addComponent(TabbedMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedMenu)
+            .addComponent(TabbedMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
         );
 
         pack();
@@ -217,14 +272,20 @@ public class GissUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxHorarios;
+    private javax.swing.JComboBox<String> ComboBoxMarcacao;
     private javax.swing.JPanel PanelConsulta;
     private javax.swing.JPanel PanelMarcacao;
     private javax.swing.JPanel PanelMeioComplementar;
     private javax.swing.JTabbedPane TabbedMenu;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
