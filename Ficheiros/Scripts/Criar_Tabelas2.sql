@@ -724,11 +724,11 @@ end
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Programa]') )
 begin 
-    CREATE TABLE Programa (
+    CREATE TABLE Programa(
         IdMarcacao int 
             CONSTRAINT nn_IdMarcacao NOT NULL,
 
-        IdHorarioTrabalho int
+        IdHorarioRecurso int
             CONSTRAINT nn_IdHorarioRecurso NOT NULL,
 
         CONSTRAINT PK_Programa PRIMARY KEY (IdHorarioRecurso),
@@ -737,14 +737,11 @@ begin
             REFERENCES Marcacao(IdMarcacao)
             ON UPDATE CASCADE,
 
-        CONSTRAINT FK_IdHorarioTrabalho_Programa FOREIGN KEY (IdHorarioRecurso)
+        CONSTRAINT FK_IdHorarioRecurso_Programa FOREIGN KEY (IdHorarioRecurso)
             REFERENCES HorarioRecurso(IdHorarioRecurso)
             ON UPDATE CASCADE
     );
 end
-
-
-
 
 
 -- Escolhe(IdMarcacao,IdHorarioLocal*)-------
@@ -754,11 +751,10 @@ if not exists (select * from dbo.sysobjects
                where id = object_id(N'[dbo].[Escolhe]') )
 begin 
     CREATE TABLE Escolhe (
-        IdMarcacao int 
-            CONSTRAINT nn_IdMarcacao NOT NULL,
+        IdMarcacao int NOT NULL,
 
         IdHorarioLocal int
-            CONSTRAINT nn_IdHorarioLocalNOT NULL,
+            CONSTRAINT nn_IdHorarioLocal NOT NULL,
 
         CONSTRAINT PK_Escolhe PRIMARY KEY (IdHorarioLocal),
 
