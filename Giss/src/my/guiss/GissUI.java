@@ -77,9 +77,9 @@ public class GissUI extends javax.swing.JFrame {
         ComboBoxTipoHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Colaborador", "Recurso", "Local" }));
         ComboBoxTipoHorario.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-                ComboBoxTipoHorarioPopupMenuCanceled(evt);
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxTipoHorarioPopupMenuWillBecomeInvisible(evt);
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -129,7 +129,7 @@ public class GissUI extends javax.swing.JFrame {
         TabelaHorario.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TabelaHorario);
 
-        ComboBoxNome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--", "123456789012345678901234567890" }));
+        ComboBoxNome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
 
         jButton2.setText("Confirmar");
 
@@ -172,17 +172,15 @@ public class GissUI extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                                .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(ComboBoxNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(96, 96, 96)
                                         .addComponent(jLabel5))
-                                    .addComponent(BotaoCarregarHorario))
+                                    .addComponent(BotaoCarregarHorario)
+                                    .addComponent(ComboBoxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -267,20 +265,11 @@ public class GissUI extends javax.swing.JFrame {
     
     
     private void BotaoCarregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCarregarHorarioMouseClicked
-          // TODO add your handling code here:
-         // TODO add your handling code here:
-        
-        ArrayList<String> resultados = Marcacao.buscarTodos("HorarioTrabalho");
-        
-        for(int i = 0 ; i < resultados.size(); i++)
-        {
-            ComboBoxNome.addItem(resultados.get(i));
-        }
-        
         // TODO add your handling code here:
+        ArrayList<String> resultados = new ArrayList<>();
         
-        String data = tratarData();
-        if("break".equals(data))
+        String data[] = tratarData();
+        if(data[0].isEmpty())
             return;//terminar função
         
         
@@ -288,20 +277,55 @@ public class GissUI extends javax.swing.JFrame {
         if("break".equals(tipoHorario))
             return; //terminar função
         
+        String id = ComboBoxNome.getSelectedItem().toString().split(" ")[0];
+        
         //Marcacao.carregarHorario(data, tipoHorario, ComboBoxNome.getSelectedItem().toString());
         
+        for(int i = 0 ; i < 7 ; i++ )
+        {
+            
+            resultados = Marcacao.carregarHorario(data[i] , "HorarioTrabalho", id);
+            for(int j = 0 ; j < resultados.size() ; j++)
+            {
+                
+                String[] parts = resultados.get(j).split(" ");     
+                isDisponivel(parts[2], i);
+               
+            }
+            
+        }
         
     }//GEN-LAST:event_BotaoCarregarHorarioMouseClicked
 
-    private void ComboBoxTipoHorarioPopupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxTipoHorarioPopupMenuCanceled
+    private void ComboBoxTipoHorarioPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxTipoHorarioPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        ComboBoxNome.removeAllItems();
+        ComboBoxNome.addItem("--Escolha--");
+        String tipoHorario = tratarTipoHorario();
+        if("break".equals(tipoHorario))
+            return; //terminar função
         
-    }//GEN-LAST:event_ComboBoxTipoHorarioPopupMenuCanceled
+        ArrayList<String> resultados = Marcacao.buscarTodos(tipoHorario);
+        
+        for(int i = 0 ; i < resultados.size(); i++)
+            ComboBoxNome.addItem(resultados.get(i));
+
+    }//GEN-LAST:event_ComboBoxTipoHorarioPopupMenuWillBecomeInvisible
     
     
-    private String tratarData()
+    private String[] tratarData()
     {
-        ArrayList<String> resultados = new ArrayList<>();
-        String data = "";
+        
+        String data[] = new String[7];
+        
+        data[0] ="2018-05-21";
+        data[1] = "2018-05-22";
+        data[2] = "2018-05-23";
+        data[3] = "2018-05-24";
+        data[4] = "2018-05-25";
+        data[5] = "2018-05-26";
+        data[6] = "2018-05-27";
+        
         int ano = Integer.parseInt(ComboBoxAno.getSelectedItem().toString());
         //int numSemana = Integer.parseInt(ComboBoxNumSemana.getSelectedItem().toString());
         
@@ -310,99 +334,95 @@ public class GissUI extends javax.swing.JFrame {
         //diaSemana - 1; // a menos que seja sabado
         int numSemanasAno = ano == 2020 ? 53 : 52;
         
-        for(int i = 0 ; i <= 7 ; i++ )
-        {
-            
-            resultados = Marcacao.carregarHorario(""+ano+"-"+"05"+"-"+(21+i) , "HorarioTrabalho", ComboBoxNome.getSelectedItem().toString());
-            for(int j = 0 ; j < resultados.size() ; j++)
-            {
-                
-                String[] parts = resultados.get(j).split(" ");     
-                
-                switch(parts[2])
-                {
-                    case "07:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 0,i+1);
-                        break;
-                    case "07:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 1,i+1);
-                        break;
-                    case "08:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 2,i+1);
-                        break;
-                    case "08:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 3,i+1);
-                        break;
-                    case "09:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 4,i+1);
-                        break;
-                    case "09:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 5,i+1);
-                        break;
-                    case "10:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 6,i+1);
-                        break;
-                    case "10:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 7,i+1);
-                        break;
-                    case "11:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 8,i+1);
-                        break;
-                    case "11:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 9,i+1);
-                        break;
-                    case "12:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 10,i+1);
-                        break;
-                    case "12:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 11,i+1);
-                        break;
-                    case "13:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 12,i+1);
-                        break;
-                    case "13:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 13,i+1);
-                        break;
-                    case "14:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 14,i+1);
-                        break;
-                    case "14:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 15,i+1);
-                        break;
-                    case "15:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 16,i+1);
-                        break;
-                    case "15:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 17,i+1);
-                        break;   
-                    case "16:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 18,i+1);
-                        break;
-                    case "16:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 19,i+1);
-                        break;
-                    case "17:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 20,i+1);
-                        break;   
-                    case "17:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 21,i+1);
-                        break; 
-                    case "18:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 22,i+1);
-                        break;
-                    case "18:30:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 23,i+1);
-                        break;   
-                    case "19:00:00.0000000":
-                        TabelaHorario.setValueAt("Ocupado", 24,i+1);
-                        break; 
-                }    
-            }
-            
-        }
-        //falta a puta do mês
+        
+      
         
         return data;
+    }
+    
+    
+    
+    private void isDisponivel(String testar, int i)
+    {
+        switch(testar)
+        {
+            case "07:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 0, i + 1);
+                break;
+            case "07:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 1, i + 1);
+                break;
+            case "08:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 2, i + 1);
+                break;
+            case "08:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 3, i + 1);
+                break;
+            case "09:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 4, i + 1);
+                break;
+            case "09:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 5, i + 1);
+                break;
+            case "10:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 6, i + 1);
+                break;
+            case "10:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 7, i + 1);
+                break;
+            case "11:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 8, i + 1);
+                break;
+            case "11:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 9, i + 1);
+                break;
+            case "12:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 10, i + 1);
+                break;
+            case "12:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 11, i + 1);
+                break;
+            case "13:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 12, i + 1);
+                break;
+            case "13:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 13, i + 1);
+                break;
+            case "14:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 14, i + 1);
+                break;
+            case "14:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 15, i + 1);
+                break;
+            case "15:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 16, i + 1);
+                break;
+            case "15:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 17, i + 1);
+                break;
+            case "16:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 18, i + 1);
+                break;
+            case "16:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 19, i + 1);
+                break;
+            case "17:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 20, i + 1);
+                break;
+            case "17:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 21, i + 1);
+                break;
+            case "18:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 22, i + 1);
+                break;
+            case "18:30:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 23, i + 1);
+                break;
+            case "19:00:00.0000000":
+                TabelaHorario.setValueAt("Ocupado", 24, i + 1);
+                break;
+        } 
+        
     }
     
     private int diaDaSemana(int ano, int mes, int dia)
@@ -434,10 +454,10 @@ public class GissUI extends javax.swing.JFrame {
                 tipoHorario = "HorarioTrabalho";
                 break;
             case "Local":
-                tipoHorario = "HorarioRecurso";
+                tipoHorario = "HorarioLocal";
                 break;
             case "Recurso":
-                tipoHorario = "HorarioLocal";
+                tipoHorario = "HorarioRecurso";
                 break;
                 
             default:

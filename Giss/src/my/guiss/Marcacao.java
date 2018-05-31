@@ -37,11 +37,34 @@ public class Marcacao
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             con = DriverManager.getConnection(connectionUrl);  
             stmt = con.createStatement(); 
+            String sql ="";
+            if("HorarioTrabalho".equals(tipo))     
+            {
+                System.out.println("DEU123");
+                sql =   "SELECT *\n" +
+                        "FROM HorarioTrabalho T, Colaborador C\n" +
+                        "WHERE T.IdColaborador =  C.IdColaborador"
+                        + " AND T.IdColaborador = " + id
+                        + " AND T.Data = '" + data + "'";
+            }
+            else if("HorarioRecurso".equals(tipo))
+            {
+                sql =   "SELECT * "
+                    + "     FROM HorarioRecurso T, Recurso R"
+                    + "     WHERE T.IdRecurso =  R.IdRecurso"
+                        + " AND T.IdRecurso = " + id
+                        + " AND T.Data = '" + data + "'";
+            }
+            else if("HorarioLocal".equals(tipo))
+            {
+                sql =   "SELECT *"
+                    + "     FROM HorarioLocal T, Local L"
+                    + "     WHERE T.IdLocal =  L.IdLocal"
+                        + " AND T.IdLocal = '" + id
+                    + "     AND T.Data = '" + data + "'";
+            }
             
             
-            String sql =   "SELECT * "
-                    + "     FROM " + tipo + " T"
-                    + "     WHERE T.Data = '" + data +"'";
             rs = stmt.executeQuery(sql);  
             
             System.out.println("\nHorario:");
@@ -88,7 +111,7 @@ public class Marcacao
             con = DriverManager.getConnection(connectionUrl);  
             stmt = con.createStatement(); 
             String sql = "";
-            System.out.println("DEU");
+            
             if("HorarioTrabalho".equals(tipo))     
             {
                 System.out.println("DEU123");
@@ -96,26 +119,26 @@ public class Marcacao
                         "FROM HorarioTrabalho T, Colaborador C\n" +
                         "WHERE T.IdColaborador =  C.IdColaborador";
             }
-            else if(tipo.equals("HorarioRecurso"))
+            else if("HorarioRecurso".equals(tipo))
             {
-                sql =   "SELECT DISTINCT R.IdRecurso, R.Nome "
-                    + "     FROM HorarioTrabalho T, Recurso R"
+                sql =   "SELECT DISTINCT R.IdRecurso, R.Descricao "
+                    + "     FROM HorarioRecurso T, Recurso R"
                     + "     WHERE T.IdRecurso =  R.IdRecurso";
             }
-            else if(tipo.equals("HorarioLocal"))
+            else if("HorarioLocal".equals(tipo))
             {
                 sql =   "SELECT DISTINCT L.Idlocal, L.Nome "
                     + "     FROM HorarioLocal T, Local L"
                     + "     WHERE T.IdLocal =  L.IdLocal";
             }
-            System.out.println("DEU321");
+         
             rs = stmt.executeQuery(sql);  
-            System.out.println("DEU1324567");
+           
             System.out.println("\nTodos os elementos:");
             // Iterate through the data in the result set and display it.  
             while (rs.next()) {  
                 System.out.println("ID:" + rs.getString(1) + ", Nome: " + rs.getString(1));  
-                resultados.add(rs.getString(1) + " " + rs.getString(2));
+                resultados.add(rs.getString(1) + " - " + rs.getString(2));
             }
         }
         // Handle any errors that may have occurred.  
