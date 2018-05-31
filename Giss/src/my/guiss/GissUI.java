@@ -97,6 +97,7 @@ public class GissUI extends javax.swing.JFrame {
         BotaoCarregarHorario = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         PanelConsulta = new javax.swing.JPanel();
         PanelMeioComplementar = new javax.swing.JPanel();
 
@@ -125,9 +126,18 @@ public class GissUI extends javax.swing.JFrame {
         ComboBoxMarcacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sequencial", "Prévia" }));
         ComboBoxMarcacao.setToolTipText("");
 
-        ComboBoxNumSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nº da Semana", "1", "2", "3", "4", "5" }));
+        ComboBoxNumSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N. da Semana" }));
 
         ComboBoxAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "" }));
+        ComboBoxAno.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxAnoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         TabelaHorario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,6 +179,9 @@ public class GissUI extends javax.swing.JFrame {
         TabelaHorario.getTableHeader().setResizingAllowed(false);
         TabelaHorario.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TabelaHorario);
+        if (TabelaHorario.getColumnModel().getColumnCount() > 0) {
+            TabelaHorario.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         ComboBoxNome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
 
@@ -189,6 +202,8 @@ public class GissUI extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel1.setOpaque(true);
 
+        jButton3.setText("Reservar");
+
         javax.swing.GroupLayout PanelMarcacaoLayout = new javax.swing.GroupLayout(PanelMarcacao);
         PanelMarcacao.setLayout(PanelMarcacaoLayout);
         PanelMarcacaoLayout.setHorizontalGroup(
@@ -196,12 +211,12 @@ public class GissUI extends javax.swing.JFrame {
             .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(11, Short.MAX_VALUE)
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 984, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 7, Short.MAX_VALUE))
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelMarcacaoLayout.createSequentialGroup()
@@ -213,19 +228,24 @@ public class GissUI extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                        .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                                .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(96, 96, 96)
+                                                .addComponent(jLabel5))
+                                            .addComponent(ComboBoxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
-                                        .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(96, 96, 96)
-                                        .addComponent(jLabel5))
-                                    .addComponent(BotaoCarregarHorario)
-                                    .addComponent(ComboBoxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addComponent(BotaoCarregarHorario)
+                                        .addGap(317, 317, 317)
+                                        .addComponent(jButton3)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -255,7 +275,9 @@ public class GissUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(ComboBoxNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BotaoCarregarHorario)
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BotaoCarregarHorario)
+                            .addComponent(jButton3))
                         .addGap(93, 93, 93)
                         .addComponent(jButton2)
                         .addContainerGap())))
@@ -307,25 +329,33 @@ public class GissUI extends javax.swing.JFrame {
     
     private void BotaoCarregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCarregarHorarioMouseClicked
         // TODO add your handling code here:
+        for (int i = 0; i < TabelaHorario.getRowCount(); i++)
+            for(int j = 1; j < TabelaHorario.getColumnCount(); j++) 
+                TabelaHorario.setValueAt("", i, j);
+            
+
+        
         ArrayList<String> resultados = new ArrayList<>();
         
-        String data[] = tratarData();
-        if(data[0].isEmpty())
+        String ano = tratarAno();
+        if(ano.isEmpty())
             return;//terminar função
         
+        ArrayList<String> semana = tratarSemana(ano);
+        if(semana.isEmpty())
+            return;//terminar função
         
         String tipoHorario = tratarTipoHorario();
-        if("break".equals(tipoHorario))
+        if(tipoHorario.isEmpty())
             return; //terminar função
         
         String id = ComboBoxNome.getSelectedItem().toString().split(" ")[0];
         
-        //Marcacao.carregarHorario(data, tipoHorario, ComboBoxNome.getSelectedItem().toString());
-        
+ 
         for(int i = 0 ; i < 7 ; i++ )
         {
             
-            resultados = Marcacao.carregarHorario(data[i] , tipoHorario, id);
+            resultados = Marcacao.carregarHorario(semana.get(i) , tipoHorario, id);
             for(int j = 0 ; j < resultados.size() ; j++)
             {
                 
@@ -352,32 +382,36 @@ public class GissUI extends javax.swing.JFrame {
             ComboBoxNome.addItem(resultados.get(i));
 
     }//GEN-LAST:event_ComboBoxTipoHorarioPopupMenuWillBecomeInvisible
+
+    private void ComboBoxAnoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxAnoPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        ComboBoxNumSemana.removeAllItems();
+        ComboBoxNumSemana.addItem("N. da Semana");
+        
+        ArrayList<String> primeirosDiasSemana = tratarNumSemanas();
+        
+        
+         for(int i = 0 ; i < primeirosDiasSemana.size(); i++)
+            ComboBoxNumSemana.addItem((i+1) +" - " + primeirosDiasSemana.get(i));
+        
+    }//GEN-LAST:event_ComboBoxAnoPopupMenuWillBecomeInvisible
     
     
-    private String[] tratarData()
+    private ArrayList<String> tratarNumSemanas()
     {
+        if(ComboBoxAno.getSelectedItem().toString().equals("Ano"))
+        {
+            return new ArrayList<String>();
+        }
         int ano = Integer.parseInt(ComboBoxAno.getSelectedItem().toString());
-        String data[] = new String[7];
-        
-        data[0] = "2018-05-21";
-        data[1] = "2018-05-22";
-        data[2] = "2018-05-23";
-        data[3] = "2018-05-24";
-        data[4] = "2018-05-25";
-        data[5] = "2018-05-26";
-        data[6] = "2018-05-27";
-        
-        
-        //int numSemana = Integer.parseInt(ComboBoxNumSemana.getSelectedItem().toString());
-        
+        String data = "";
+           
         
         int diaSemana = diaDaSemana(ano-1, 13,1);
-        System.out.println(diaSemana);
-        //diaSemana - 1; // a menos que seja sabado
         
         LocalDate date = LocalDate.of(ano, 6, 1);
         int numSemanasAno = (int) IsoFields.WEEK_OF_WEEK_BASED_YEAR.rangeRefinedBy(date).getMaximum();
-        System.out.println(numSemanasAno);
+        
         
         int numDias = 0;
         
@@ -395,49 +429,50 @@ public class GissUI extends javax.swing.JFrame {
         switch(numDias)
         {
             case 0:
-                primeirosDiasSemana.add("1");
+                data = "01-01";  
                 diaAtual = 1;
                 mes = 1;
                 break;
             case 1:
                 //Terça
-                primeirosDiasSemana.add("31");
+                data ="12-31";
                 diaAtual = 31;
                 break;
             case 2:
                 //Quarta
-                primeirosDiasSemana.add("30");
+                data ="12-30";
                 diaAtual = 30;
                 break;
             case 3:
                 //Quinta
-                primeirosDiasSemana.add("29");
+                data ="12-29";
                 diaAtual = 29;
                 break;
             case 4:
                 //Sexta
-                primeirosDiasSemana.add("28");
+                data ="12-28";
                 diaAtual = 28;
                 break;
             case 5:
                 //Sábado
-                primeirosDiasSemana.add("27");
+                data ="12-27";
                 diaAtual = 27;
                 break;
             case 6:
                 //Domingo
-                primeirosDiasSemana.add("26");
+                data ="12-26";
                 diaAtual = 26;
                 break;
         }
-        for(int i = 1 ; i <= numSemanasAno ; i++)
+        
+        primeirosDiasSemana.add(data);
+        for(int i = 0 ; i < numSemanasAno-1 ; i++)
         {
             if((diaAtual + 7) > lim )
             {
                 diaAtual = (diaAtual + 7) - lim;
-                
-                primeirosDiasSemana.add("" + diaAtual);
                 mes++;
+                
                 switch(mes)
                 {
                     case 1:
@@ -457,6 +492,11 @@ public class GissUI extends javax.swing.JFrame {
                         lim = 30;
                         break;
                     
+                    case 13:
+                        mes = 1;
+                        lim = 31;
+                        break;
+                    
                     case 2:
                         if((ano & 3) == 0 && ((ano % 25) != 0 || (ano & 15) == 0))
 
@@ -466,19 +506,34 @@ public class GissUI extends javax.swing.JFrame {
                         break;
                 
                 }
+                if(mes < 10)
+                    data = "0"+mes+"-";
+                else 
+                    data = ""+mes+"-";
+                
+                if(diaAtual < 10)
+                    data +="0"+diaAtual;
+                else
+                    data +=diaAtual;
             }
             else
             {
                 diaAtual += 7;
-                primeirosDiasSemana.add("" + diaAtual);
+                
+                if(mes < 10)
+                    data = "0"+mes+"-";
+                else 
+                    data = ""+mes+"-";
+                
+                if(diaAtual < 10)
+                    data +="0"+diaAtual;
+                else
+                    data +=diaAtual;
             }
-            System.out.println("Dia: " + diaAtual + " Mes: " + mes + "Limite " + lim);
+            primeirosDiasSemana.add(data);
         }
-        for(int i = 0 ; i < primeirosDiasSemana.size()  ;i++)
-        {
-            System.out.println("Semana:" + (i+1) + " dia: " +primeirosDiasSemana.get(i));
-        }
-        return data;
+
+        return primeirosDiasSemana;
     }
     
     
@@ -586,6 +641,137 @@ public class GissUI extends javax.swing.JFrame {
         return diaSemana;
     }
     
+    private ArrayList<String> tratarSemana(String ano)
+    {
+        if(ComboBoxNumSemana.getSelectedItem().toString().equals("N. da Semana"))
+        {
+            return new ArrayList<String>();
+        }
+        
+        String semana = ComboBoxNumSemana.getSelectedItem().toString().split(" ")[2];
+        
+        
+        
+        return calcularSemana(ano, semana);
+        
+    }
+    
+    private ArrayList<String> calcularSemana(String s_ano, String numSemana)
+    {
+        String[] data = new String[2];
+        data = numSemana.split("-");
+        int ano = Integer.parseInt(s_ano);
+        int mes = Integer.parseInt(data[0]);
+        int dia = Integer.parseInt(data[1]);
+        ArrayList<String> semana = new ArrayList<>();
+        
+        int lim = 0;
+        switch (mes) 
+        {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                lim = 31;
+                ano--;
+                break;
+
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                lim = 30;
+                break;
+
+            case 13:
+                mes = 1;
+                lim = 31;
+                ano++;
+                break;
+
+            case 2:
+                if ((ano & 3) == 0 && ((ano % 25) != 0 || (ano & 15) == 0)) {
+                    lim = 29;
+                } 
+                else 
+                {
+                    lim = 28;
+                }
+                break;
+
+        }
+        for(int i = 0 ;  i < 7 ; i++){
+            
+            
+            if(dia + i >lim)
+            {
+                mes++;
+                dia = 1 - i;
+                switch(mes)
+                {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        lim = 31;
+                        break;
+                    
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        lim = 30;
+                        break;
+                    
+                    case 13:
+                        mes = 1;
+                        lim = 31;
+                        ano++;
+                        break;
+                    
+                    case 2:
+                        if((ano & 3) == 0 && ((ano % 25) != 0 || (ano & 15) == 0))
+
+                            lim = 29;
+                        else 
+                            lim = 28;
+                        break;
+                
+                }
+            }
+            if(mes < 10)
+                if(dia < 10)
+                    semana.add(""+ano+"-0"+mes+"-0"+(dia+i));
+                else
+                    semana.add(""+ano+"-0"+mes+"-"+(dia+i));
+            else
+                if(dia < 10)
+                    semana.add(""+ano+"-"+mes+"-0"+(dia+i));
+                else
+                    semana.add(""+ano+"-"+mes+"-"+(dia+i));
+            
+            
+        
+        }
+        
+        
+        return semana;
+    }
+    
+    private String tratarAno()
+    {
+        String ano = ComboBoxAno.getSelectedItem().toString();     
+        return ano;
+    }
+    
+    
+    
     private String tratarTipoHorario()
     {
         String tipoHorario = ComboBoxTipoHorario.getSelectedItem().toString();
@@ -601,10 +787,6 @@ public class GissUI extends javax.swing.JFrame {
                 tipoHorario = "HorarioRecurso";
                 break;
                 
-            default:
-                JOptionPane.showMessageDialog(null, "Necessita de escolher um Tipo de Horário", "InfoBox: " + "Erro Tipo de Horário", JOptionPane.INFORMATION_MESSAGE);
-                tipoHorario = "break";
-                break;
         }
         
         return tipoHorario;
@@ -663,6 +845,7 @@ public class GissUI extends javax.swing.JFrame {
     private javax.swing.JTable TabelaHorario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

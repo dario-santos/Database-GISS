@@ -115,8 +115,8 @@ public class Marcacao
             if("HorarioTrabalho".equals(tipo))     
             {
                 
-                sql =   "SELECT DISTINCT C.IdColaborador, C.Nome\n" +
-                        "FROM HorarioTrabalho T, Colaborador C\n" +
+                sql =   "SELECT DISTINCT C.IdColaborador, C.Nome " +
+                        "FROM HorarioTrabalho T, Colaborador C " +
                         "WHERE T.IdColaborador =  C.IdColaborador";
             }
             else if("HorarioRecurso".equals(tipo))
