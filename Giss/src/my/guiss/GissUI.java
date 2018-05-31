@@ -75,6 +75,15 @@ public class GissUI extends javax.swing.JFrame {
         PanelMarcacao.setPreferredSize(new java.awt.Dimension(1024, 680));
 
         ComboBoxTipoHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Colaborador", "Recurso", "Local" }));
+        ComboBoxTipoHorario.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxTipoHorarioPopupMenuCanceled(evt);
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         jLabel2.setText("Horário");
 
@@ -121,15 +130,6 @@ public class GissUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TabelaHorario);
 
         ComboBoxNome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--", "123456789012345678901234567890" }));
-        ComboBoxNome.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
-                ComboBoxNomePopupMenuWillBecomeInvisible(evt);
-            }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-            }
-        });
 
         jButton2.setText("Confirmar");
 
@@ -267,12 +267,21 @@ public class GissUI extends javax.swing.JFrame {
     
     
     private void BotaoCarregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCarregarHorarioMouseClicked
+          // TODO add your handling code here:
+         // TODO add your handling code here:
+        
+        ArrayList<String> resultados = Marcacao.buscarTodos("HorarioTrabalho");
+        
+        for(int i = 0 ; i < resultados.size(); i++)
+        {
+            ComboBoxNome.addItem(resultados.get(i));
+        }
+        
         // TODO add your handling code here:
         
         String data = tratarData();
         if("break".equals(data))
             return;//terminar função
-        data = "2018-05-23";
         
         
         String tipoHorario = tratarTipoHorario();
@@ -284,18 +293,9 @@ public class GissUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BotaoCarregarHorarioMouseClicked
 
-    private void ComboBoxNomePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxNomePopupMenuWillBecomeInvisible
-        // TODO add your handling code here:
-         // TODO add your handling code here:
+    private void ComboBoxTipoHorarioPopupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxTipoHorarioPopupMenuCanceled
         
-        ArrayList<String> resultados = new ArrayList<>();
-        resultados = Marcacao.buscarTodos(ComboBoxTipoHorario.getSelectedItem().toString());
-        
-        for(int i = 0 ; i <= resultados.size(); i++)
-        {
-            ComboBoxNome.addItem(resultados.get(i));
-        }
-    }//GEN-LAST:event_ComboBoxNomePopupMenuWillBecomeInvisible
+    }//GEN-LAST:event_ComboBoxTipoHorarioPopupMenuCanceled
     
     
     private String tratarData()

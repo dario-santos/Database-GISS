@@ -50,7 +50,7 @@ public class Marcacao
                 System.out.println("ID:" + rs.getString(1)+ " Data: "+rs.getString(2) + " Hora Inicio: "+ rs.getString(3)+ " Hora Fim: "+rs.getString(4));  
                 resultados.add(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3)+ " " + rs.getString(4)+ " " + rs.getString(5) + " " + rs.getString(6));
             }
-            return resultados;
+            
         }
         // Handle any errors that may have occurred.  
         catch (Exception e) 
@@ -87,39 +87,36 @@ public class Marcacao
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             con = DriverManager.getConnection(connectionUrl);  
             stmt = con.createStatement(); 
-            String sql = null;
-            
-            if(tipo.equals("HorarioTrabalho"))
+            String sql = "";
+            System.out.println("DEU");
+            if("HorarioTrabalho".equals(tipo))     
             {
-                sql =   "SELECT  C.IdColaborador, C.Nome "
-                    + "     FROM HorarioTrabalho T, Colaborador C"
-                    + "     WHERE T.IdColaborador =  C.Colaborador";
+                System.out.println("DEU123");
+                sql =   "SELECT DISTINCT C.IdColaborador, C.Nome\n" +
+                        "FROM HorarioTrabalho T, Colaborador C\n" +
+                        "WHERE T.IdColaborador =  C.IdColaborador";
             }
             else if(tipo.equals("HorarioRecurso"))
             {
-                sql =   "SELECT  R.IdRecurso, R.Nome "
+                sql =   "SELECT DISTINCT R.IdRecurso, R.Nome "
                     + "     FROM HorarioTrabalho T, Recurso R"
                     + "     WHERE T.IdRecurso =  R.IdRecurso";
             }
             else if(tipo.equals("HorarioLocal"))
             {
-                sql =   "SELECT  L.Idlocal, L.Nome "
+                sql =   "SELECT DISTINCT L.Idlocal, L.Nome "
                     + "     FROM HorarioLocal T, Local L"
                     + "     WHERE T.IdLocal =  L.IdLocal";
             }
-            else
-            {
-                return resultados;
-            }
+            System.out.println("DEU321");
             rs = stmt.executeQuery(sql);  
-            
+            System.out.println("DEU1324567");
             System.out.println("\nTodos os elementos:");
             // Iterate through the data in the result set and display it.  
             while (rs.next()) {  
                 System.out.println("ID:" + rs.getString(1) + ", Nome: " + rs.getString(1));  
                 resultados.add(rs.getString(1) + " " + rs.getString(2));
             }
-            return resultados;
         }
         // Handle any errors that may have occurred.  
         catch (Exception e) 
