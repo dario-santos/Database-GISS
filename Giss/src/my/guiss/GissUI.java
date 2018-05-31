@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package my.guiss;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.ArrayList;
@@ -27,8 +31,35 @@ public class GissUI extends javax.swing.JFrame {
     */
     private void start()
     {
-        
-    
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            
+            
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
     }
     
     /**
@@ -126,7 +157,15 @@ public class GissUI extends javax.swing.JFrame {
             new String [] {
                 "Horas", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TabelaHorario.getTableHeader().setResizingAllowed(false);
         TabelaHorario.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TabelaHorario);
@@ -201,7 +240,7 @@ public class GissUI extends javax.swing.JFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +297,7 @@ public class GissUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+            .addComponent(TabbedMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 696, Short.MAX_VALUE)
         );
 
         pack();
@@ -286,7 +325,7 @@ public class GissUI extends javax.swing.JFrame {
         for(int i = 0 ; i < 7 ; i++ )
         {
             
-            resultados = Marcacao.carregarHorario(data[i] , "HorarioTrabalho", id);
+            resultados = Marcacao.carregarHorario(data[i] , tipoHorario, id);
             for(int j = 0 ; j < resultados.size() ; j++)
             {
                 
@@ -317,10 +356,10 @@ public class GissUI extends javax.swing.JFrame {
     
     private String[] tratarData()
     {
-        
+        int ano = Integer.parseInt(ComboBoxAno.getSelectedItem().toString());
         String data[] = new String[7];
         
-        data[0] ="2018-05-21";
+        data[0] = "2018-05-21";
         data[1] = "2018-05-22";
         data[2] = "2018-05-23";
         data[3] = "2018-05-24";
@@ -328,19 +367,117 @@ public class GissUI extends javax.swing.JFrame {
         data[5] = "2018-05-26";
         data[6] = "2018-05-27";
         
-        int ano = Integer.parseInt(ComboBoxAno.getSelectedItem().toString());
+        
         //int numSemana = Integer.parseInt(ComboBoxNumSemana.getSelectedItem().toString());
         
         
-        int diaSemana = diaDaSemana(2018, 21,5);
+        int diaSemana = diaDaSemana(ano-1, 13,1);
+        System.out.println(diaSemana);
         //diaSemana - 1; // a menos que seja sabado
-        int numSemanasAno = ano == 2020 ? 53 : 52;
         
-        LocalDate date = LocalDate.of(2015, 6, 1);
-        long weeksInYear = IsoFields.WEEK_OF_WEEK_BASED_YEAR.rangeRefinedBy(date).getMaximum();
-        System.out.println(weeksInYear);
-        //teste
+        LocalDate date = LocalDate.of(ano, 6, 1);
+        int numSemanasAno = (int) IsoFields.WEEK_OF_WEEK_BASED_YEAR.rangeRefinedBy(date).getMaximum();
+        System.out.println(numSemanasAno);
         
+        int numDias = 0;
+        
+        if(diaSemana == 1)
+            numDias = 6;
+        else if(diaSemana == 0)
+            numDias = 5;
+        else if(diaSemana > 1 && diaSemana <= 6 )
+            numDias = diaSemana - 2;
+        
+        ArrayList<String> primeirosDiasSemana = new ArrayList<>();
+        int diaAtual = 0;
+        int lim = 31;
+        int mes = 12;
+        switch(numDias)
+        {
+            case 0:
+                primeirosDiasSemana.add("1");
+                diaAtual = 1;
+                mes = 1;
+                break;
+            case 1:
+                //Terça
+                primeirosDiasSemana.add("31");
+                diaAtual = 31;
+                break;
+            case 2:
+                //Quarta
+                primeirosDiasSemana.add("30");
+                diaAtual = 30;
+                break;
+            case 3:
+                //Quinta
+                primeirosDiasSemana.add("29");
+                diaAtual = 29;
+                break;
+            case 4:
+                //Sexta
+                primeirosDiasSemana.add("28");
+                diaAtual = 28;
+                break;
+            case 5:
+                //Sábado
+                primeirosDiasSemana.add("27");
+                diaAtual = 27;
+                break;
+            case 6:
+                //Domingo
+                primeirosDiasSemana.add("26");
+                diaAtual = 26;
+                break;
+        }
+        for(int i = 1 ; i <= numSemanasAno ; i++)
+        {
+            if((diaAtual + 7) > lim )
+            {
+                diaAtual = (diaAtual + 7) - lim;
+                
+                primeirosDiasSemana.add("" + diaAtual);
+                mes++;
+                switch(mes)
+                {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        lim = 31;
+                        break;
+                    
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        lim = 30;
+                        break;
+                    
+                    case 2:
+                        if((ano & 3) == 0 && ((ano % 25) != 0 || (ano & 15) == 0))
+
+                            lim = 29;
+                        else 
+                            lim = 28;
+                        break;
+                
+                }
+            }
+            else
+            {
+                diaAtual += 7;
+                primeirosDiasSemana.add("" + diaAtual);
+            }
+            System.out.println("Dia: " + diaAtual + " Mes: " + mes + "Limite " + lim);
+        }
+        for(int i = 0 ; i < primeirosDiasSemana.size()  ;i++)
+        {
+            System.out.println("Semana:" + (i+1) + " dia: " +primeirosDiasSemana.get(i));
+        }
         return data;
     }
     

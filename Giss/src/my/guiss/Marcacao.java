@@ -24,7 +24,7 @@ public class Marcacao
         
         // Create a variable for the connection string.  
         String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
-            "databaseName=Giss;user=sa;password=1234";  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
 
         // Declare the JDBC objects.  
         Connection con = null;  
@@ -40,7 +40,7 @@ public class Marcacao
             String sql ="";
             if("HorarioTrabalho".equals(tipo))     
             {
-                System.out.println("DEU123");
+
                 sql =   "SELECT *\n" +
                         "FROM HorarioTrabalho T, Colaborador C\n" +
                         "WHERE T.IdColaborador =  C.IdColaborador"
@@ -67,10 +67,10 @@ public class Marcacao
             
             rs = stmt.executeQuery(sql);  
             
-            System.out.println("\nHorario:");
+            
             // Iterate through the data in the result set and display it.  
-            while (rs.next()) {  
-                System.out.println("ID:" + rs.getString(1)+ " Data: "+rs.getString(2) + " Hora Inicio: "+ rs.getString(3)+ " Hora Fim: "+rs.getString(4));  
+            while (rs.next()) 
+            {  
                 resultados.add(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3)+ " " + rs.getString(4)+ " " + rs.getString(5) + " " + rs.getString(6));
             }
             
@@ -97,7 +97,7 @@ public class Marcacao
         
         // Create a variable for the connection string.  
         String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
-            "databaseName=Giss;user=sa;password=1234";  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
 
         // Declare the JDBC objects.  
         Connection con = null;  
@@ -114,7 +114,7 @@ public class Marcacao
             
             if("HorarioTrabalho".equals(tipo))     
             {
-                System.out.println("DEU123");
+                
                 sql =   "SELECT DISTINCT C.IdColaborador, C.Nome\n" +
                         "FROM HorarioTrabalho T, Colaborador C\n" +
                         "WHERE T.IdColaborador =  C.IdColaborador";
@@ -134,10 +134,10 @@ public class Marcacao
          
             rs = stmt.executeQuery(sql);  
            
-            System.out.println("\nTodos os elementos:");
+            
             // Iterate through the data in the result set and display it.  
             while (rs.next()) {  
-                System.out.println("ID:" + rs.getString(1) + ", Nome: " + rs.getString(1));  
+                
                 resultados.add(rs.getString(1) + " - " + rs.getString(2));
             }
         }
