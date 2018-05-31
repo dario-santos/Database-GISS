@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package my.guiss;
+import java.time.LocalDate;
+import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -334,8 +336,10 @@ public class GissUI extends javax.swing.JFrame {
         //diaSemana - 1; // a menos que seja sabado
         int numSemanasAno = ano == 2020 ? 53 : 52;
         
-        
-      
+        LocalDate date = LocalDate.of(2015, 6, 1);
+        long weeksInYear = IsoFields.WEEK_OF_WEEK_BASED_YEAR.rangeRefinedBy(date).getMaximum();
+        System.out.println(weeksInYear);
+        //teste
         
         return data;
     }
