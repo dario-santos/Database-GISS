@@ -97,8 +97,13 @@ public class GissUI extends javax.swing.JFrame {
         BotaoCarregarHorario = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        PanelConsulta = new javax.swing.JPanel();
         PanelMeioComplementar = new javax.swing.JPanel();
+        PanelConsulta = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TableUtente = new javax.swing.JTable();
+        ButtonProcuraUtente = new javax.swing.JButton();
+        TextFieldIdUtente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -109,12 +114,12 @@ public class GissUI extends javax.swing.JFrame {
 
         ComboBoxTipoHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Colaborador", "Recurso", "Local" }));
         ComboBoxTipoHorario.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 ComboBoxTipoHorarioPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
@@ -263,19 +268,6 @@ public class GissUI extends javax.swing.JFrame {
 
         TabbedMenu.addTab("Marcação", PanelMarcacao);
 
-        javax.swing.GroupLayout PanelConsultaLayout = new javax.swing.GroupLayout(PanelConsulta);
-        PanelConsulta.setLayout(PanelConsultaLayout);
-        PanelConsultaLayout.setHorizontalGroup(
-            PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1011, Short.MAX_VALUE)
-        );
-        PanelConsultaLayout.setVerticalGroup(
-            PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
-        );
-
-        TabbedMenu.addTab("Consulta", PanelConsulta);
-
         javax.swing.GroupLayout PanelMeioComplementarLayout = new javax.swing.GroupLayout(PanelMeioComplementar);
         PanelMeioComplementar.setLayout(PanelMeioComplementarLayout);
         PanelMeioComplementarLayout.setHorizontalGroup(
@@ -288,6 +280,65 @@ public class GissUI extends javax.swing.JFrame {
         );
 
         TabbedMenu.addTab("Meios Complementares", PanelMeioComplementar);
+
+        TableUtente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Descrição T.O", "Observação ECli.", "Observações ECliA."
+            }
+        ));
+        jScrollPane2.setViewportView(TableUtente);
+
+        ButtonProcuraUtente.setText("Procura");
+        ButtonProcuraUtente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonProcuraUtenteMouseClicked(evt);
+            }
+        });
+        ButtonProcuraUtente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonProcuraUtenteActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("IdUtente:");
+
+        javax.swing.GroupLayout PanelConsultaLayout = new javax.swing.GroupLayout(PanelConsulta);
+        PanelConsulta.setLayout(PanelConsultaLayout);
+        PanelConsultaLayout.setHorizontalGroup(
+            PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ButtonProcuraUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        PanelConsultaLayout.setVerticalGroup(
+            PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFieldIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(ButtonProcuraUtente))
+                .addContainerGap(497, Short.MAX_VALUE))
+        );
+
+        TabbedMenu.addTab("Consulta", PanelConsulta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -352,6 +403,16 @@ public class GissUI extends javax.swing.JFrame {
             ComboBoxNome.addItem(resultados.get(i));
 
     }//GEN-LAST:event_ComboBoxTipoHorarioPopupMenuWillBecomeInvisible
+
+    private void ButtonProcuraUtenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonProcuraUtenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonProcuraUtenteActionPerformed
+
+    private void ButtonProcuraUtenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonProcuraUtenteMouseClicked
+        // TODO add your handling code here:
+        ProcuraUtente();
+        
+    }//GEN-LAST:event_ButtonProcuraUtenteMouseClicked
     
     
     private String[] tratarData()
@@ -611,6 +672,16 @@ public class GissUI extends javax.swing.JFrame {
         
     }
     
+    private void ProcuraUtente()
+    {
+        String Id=TextFieldIdUtente.getText();
+        
+        Consulta.ProcuraUtente(Id);
+        
+       
+        
+    }
+    
     
     
     /**
@@ -651,6 +722,7 @@ public class GissUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotaoCarregarHorario;
+    private javax.swing.JButton ButtonProcuraUtente;
     private javax.swing.JComboBox<String> ComboBoxAno;
     private javax.swing.JComboBox<String> ComboBoxMarcacao;
     private javax.swing.JComboBox<String> ComboBoxNome;
@@ -661,12 +733,16 @@ public class GissUI extends javax.swing.JFrame {
     private javax.swing.JPanel PanelMeioComplementar;
     private javax.swing.JTabbedPane TabbedMenu;
     private javax.swing.JTable TabelaHorario;
+    private javax.swing.JTable TableUtente;
+    private javax.swing.JTextField TextFieldIdUtente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
