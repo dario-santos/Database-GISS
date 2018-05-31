@@ -695,7 +695,7 @@ CREATE TABLE Armazena(
 END
 
 
--- Marcar(IdMarcacao,IdHorarioTrabalho)---------
+-- Marcar(IdMarcacao,IdHorarioTrabalho) .........................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Marcar]') )
@@ -719,7 +719,7 @@ begin
     );
 end
 
--- Programa(IdMarcacao,IdHorarioRecurso*)-------
+-- Programa(IdMarcacao,IdHorarioRecurso*) ...................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Programa]') )
@@ -744,7 +744,7 @@ begin
 end
 
 
--- Escolhe(IdMarcacao,IdHorarioLocal*)-------
+-- Escolhe(IdMarcacao,IdHorarioLocal) ..........................
 
 
 if not exists (select * from dbo.sysobjects 

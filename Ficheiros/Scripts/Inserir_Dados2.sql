@@ -1510,7 +1510,7 @@ Values (8,8 );
 INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
 Values (9,9 );
 
-INSERT INTO Marcacr(IdMarcacao,IdHorarioTrabalho)
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
 Values (10,10);
 
 -- Programa(IdMarcacao,IdHorarioRecurso)
