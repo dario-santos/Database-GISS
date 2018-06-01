@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 
@@ -84,6 +85,8 @@ public class GissUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jMenu1 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         TabbedMenu = new javax.swing.JTabbedPane();
         PanelMarcacao = new javax.swing.JPanel();
         ComboBoxTipoHorario = new javax.swing.JComboBox<>();
@@ -96,11 +99,24 @@ public class GissUI extends javax.swing.JFrame {
         TabelaHorario = new javax.swing.JTable();
         ComboBoxNome = new javax.swing.JComboBox<>();
         BotaoCarregarHorario = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        TextFieldReservaUtente = new javax.swing.JTextField();
         ButtonReservar = new javax.swing.JButton();
-        TextFieldRazaoMarcacao = new javax.swing.JTextField();
+        TextFieldMotivoMarcacao = new javax.swing.JTextField();
         TextFieldHoras = new javax.swing.JTextField();
         TextFieldData = new javax.swing.JTextField();
+        TextFieldDataReserva = new javax.swing.JTextField();
+        TextFieldHoraReserva = new javax.swing.JTextField();
+        ScrollPaneReservasDisponiveis = new javax.swing.JScrollPane();
+        ListReservasDisponiveis = new javax.swing.JList<>();
+        ComboBoxTipoReserva = new javax.swing.JComboBox<>();
+        LabelDataReserva = new javax.swing.JLabel();
+        ScrollPaneReservasEscolhidas = new javax.swing.JScrollPane();
+        ListReservasEscolhidas = new javax.swing.JList<>();
+        LabelReservasEscolhidas = new javax.swing.JLabel();
+        LabelReservasDisponiveis = new javax.swing.JLabel();
+        LabelReservar = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         PanelConsulta = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableUtente = new javax.swing.JTable();
@@ -110,6 +126,11 @@ public class GissUI extends javax.swing.JFrame {
         PanelMeioComplementar = new javax.swing.JPanel();
 
         jButton1.setText("jButton1");
+
+        jMenu1.setText("jMenu1");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -131,8 +152,17 @@ public class GissUI extends javax.swing.JFrame {
 
         jLabel5.setText("Marcação");
 
-        ComboBoxMarcacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sequencial", "Prévia" }));
+        ComboBoxMarcacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Previa", "Sequencial" }));
         ComboBoxMarcacao.setToolTipText("");
+        ComboBoxMarcacao.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxMarcacaoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         ComboBoxNumSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N. da Semana" }));
 
@@ -200,7 +230,7 @@ public class GissUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("IdUtente");
+        TextFieldReservaUtente.setText("IdUtente");
 
         ButtonReservar.setText("Reservar");
         ButtonReservar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -209,53 +239,125 @@ public class GissUI extends javax.swing.JFrame {
             }
         });
 
-        TextFieldRazaoMarcacao.setText("Razão da marcação");
+        TextFieldMotivoMarcacao.setText("Motivo da marcação");
 
         TextFieldHoras.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         TextFieldHoras.setText("14:24");
 
         TextFieldData.setText("2018-05-31");
 
+        TextFieldDataReserva.setText("2018-05-18");
+
+        TextFieldHoraReserva.setText("07:30");
+
+        ListReservasDisponiveis.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "1 - Ana maria", "2 - Dário Santos", "3 - Seringa", "4 - Seringa", "5 - Sala de operação", "6 - Sala de estar", "7 - Ana malhoa maravilha" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        ListReservasDisponiveis.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ListReservasDisponiveis.setToolTipText("");
+        ListReservasDisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListReservasDisponiveisMouseClicked(evt);
+            }
+        });
+        ScrollPaneReservasDisponiveis.setViewportView(ListReservasDisponiveis);
+
+        ComboBoxTipoReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Colaborador", "Recurso", "Local" }));
+        ComboBoxTipoReserva.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxTipoReservaPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        LabelDataReserva.setText("Data:");
+
+        ListReservasEscolhidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListReservasEscolhidasMouseClicked(evt);
+            }
+        });
+        ScrollPaneReservasEscolhidas.setViewportView(ListReservasEscolhidas);
+
+        LabelReservasEscolhidas.setText("Escolhido:");
+
+        LabelReservasDisponiveis.setText("Disponiveis:");
+
+        LabelReservar.setText("Reservar:");
+
+        jLabel8.setText("IdUtente:");
+
+        jLabel9.setText("Motivo da marcacao:");
+
         javax.swing.GroupLayout PanelMarcacaoLayout = new javax.swing.GroupLayout(PanelMarcacao);
         PanelMarcacao.setLayout(PanelMarcacaoLayout);
         PanelMarcacaoLayout.setHorizontalGroup(
             PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                        .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96)
-                        .addComponent(jLabel5))
-                    .addComponent(ComboBoxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoCarregarHorario))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                        .addComponent(ButtonReservar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                        .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                        .addComponent(TextFieldRazaoMarcacao)
-                        .addGap(14, 14, 14))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMarcacaoLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGap(15, 15, 15)
+                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(ComboBoxNome, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMarcacaoLayout.createSequentialGroup()
+                                        .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addComponent(BotaoCarregarHorario)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(LabelReservar))
+                                    .addComponent(ButtonReservar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                                .addComponent(LabelDataReserva)
+                                                .addGap(33, 33, 33)
+                                                .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                            .addComponent(LabelReservasEscolhidas)
+                            .addComponent(LabelReservasDisponiveis)
+                            .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMarcacaoLayout.createSequentialGroup()
                         .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
         PanelMarcacaoLayout.setVerticalGroup(
@@ -264,27 +366,53 @@ public class GissUI extends javax.swing.JFrame {
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(LabelReservar))
+                                .addGap(18, 18, 18)
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(LabelDataReserva)
+                                    .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9))
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(ComboBoxNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BotaoCarregarHorario))
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(LabelReservasDisponiveis)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LabelReservasEscolhidas)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ComboBoxNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextFieldRazaoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BotaoCarregarHorario)
-                    .addComponent(ButtonReservar))
-                .addContainerGap(58, Short.MAX_VALUE))
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonReservar))
+                    .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         TabbedMenu.addTab("Marcação", PanelMarcacao);
@@ -317,7 +445,7 @@ public class GissUI extends javax.swing.JFrame {
             PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelConsultaLayout.createSequentialGroup()
                 .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
                     .addGroup(PanelConsultaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3)
@@ -338,7 +466,7 @@ public class GissUI extends javax.swing.JFrame {
                     .addComponent(TextFieldIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(ButtonProcuraUtente))
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addContainerGap(488, Short.MAX_VALUE))
         );
 
         TabbedMenu.addTab("Consulta", PanelConsulta);
@@ -347,11 +475,11 @@ public class GissUI extends javax.swing.JFrame {
         PanelMeioComplementar.setLayout(PanelMeioComplementarLayout);
         PanelMeioComplementarLayout.setHorizontalGroup(
             PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1014, Short.MAX_VALUE)
+            .addGap(0, 1020, Short.MAX_VALUE)
         );
         PanelMeioComplementarLayout.setVerticalGroup(
             PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 602, Short.MAX_VALUE)
+            .addGap(0, 663, Short.MAX_VALUE)
         );
 
         TabbedMenu.addTab("Meios Complementares", PanelMeioComplementar);
@@ -360,11 +488,11 @@ public class GissUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
+            .addComponent(TabbedMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 1022, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+            .addComponent(TabbedMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
 
         pack();
@@ -449,51 +577,359 @@ public class GissUI extends javax.swing.JFrame {
     private void ButtonReservarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonReservarMouseClicked
         // TODO add your handling code here:
         
-        marcacaoSequencial();
+        //marcacaoSequencial();
+        
+        marcacaoPrevia();
         
     }//GEN-LAST:event_ButtonReservarMouseClicked
+
+    private void ListReservasDisponiveisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListReservasDisponiveisMouseClicked
+        
+        
+        if (evt.getClickCount() == 2) {
+            int index = ListReservasDisponiveis.locationToIndex(evt.getPoint());
+            
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            //Guardar elementos
+            for(int i = 0; i< ListReservasEscolhidas.getModel().getSize();i++)
+                listModel.addElement(ListReservasEscolhidas.getModel().getElementAt(i));
+
+            if(listModel.contains(ListReservasDisponiveis.getModel().getElementAt(index)))
+                JOptionPane.showMessageDialog(null, "O elemento selecionado já está adicionado!", "Elemento já adicionado", JOptionPane.ERROR_MESSAGE);
+                
+            else
+                listModel.addElement(ListReservasDisponiveis.getModel().getElementAt(index));
+            
+            
+            //Adicionar elemento selecionado
+            ListReservasEscolhidas.setModel(listModel);
+            
+            
+        }
+    }//GEN-LAST:event_ListReservasDisponiveisMouseClicked
+
+    private void ComboBoxMarcacaoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxMarcacaoPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        
+        if(ComboBoxMarcacao.getSelectedItem().equals("Sequencial"))
+        {
+            //não mostrar data, Tipo e as listas
+            ComboBoxTipoReserva.setVisible(false);
+            LabelReservar.setVisible(false);
+            LabelDataReserva.setVisible(false);
+            TextFieldDataReserva.setVisible(false);
+            TextFieldHoraReserva.setVisible(false);
+            LabelReservasDisponiveis.setVisible(false);
+            ListReservasDisponiveis.setVisible(false);
+            ScrollPaneReservasDisponiveis.setVisible(false);
+            LabelReservasEscolhidas.setVisible(false);
+            ScrollPaneReservasEscolhidas.setVisible(false);
+            ListReservasEscolhidas.setVisible(false);
+        }
+        else if(ComboBoxMarcacao.getSelectedItem().equals("Previa"))
+        {
+            //Mostrar tudo
+            ComboBoxTipoReserva.setVisible(true);
+            LabelReservar.setVisible(true);
+            LabelDataReserva.setVisible(true);
+            TextFieldDataReserva.setVisible(true);
+            TextFieldHoraReserva.setVisible(true);
+            LabelReservasDisponiveis.setVisible(true);
+            ListReservasDisponiveis.setVisible(true);
+            ScrollPaneReservasDisponiveis.setVisible(true);
+            LabelReservasEscolhidas.setVisible(true);
+            ScrollPaneReservasEscolhidas.setVisible(true);
+            ListReservasEscolhidas.setVisible(true);
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_ComboBoxMarcacaoPopupMenuWillBecomeInvisible
+
+    private void ListReservasEscolhidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListReservasEscolhidasMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int index = ListReservasEscolhidas.locationToIndex(evt.getPoint());
+            
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            //Guardar elementos
+            
+            for(int i = 0; i < ListReservasEscolhidas.getModel().getSize();i++)
+                listModel.addElement(ListReservasEscolhidas.getModel().getElementAt(i));
+
+            listModel.removeElement(ListReservasEscolhidas.getModel().getElementAt(index));
+            
+            //Adicionar elemento selecionado
+            ListReservasEscolhidas.setModel(listModel);
+            
+            
+        }
+        
+    }//GEN-LAST:event_ListReservasEscolhidasMouseClicked
+
+    private void ComboBoxTipoReservaPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxTipoReservaPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        
+        String tipoReserva = ComboBoxTipoReserva.getSelectedItem().toString();
+        if("Tipo".equals(tipoReserva))
+            return; //terminar função
+        
+        ArrayList<String> resultados = Marcacao.buscarTodosTipos(tipoReserva);
+        
+        for(int i = 0 ; i < resultados.size(); i++)
+            listModel.addElement(resultados.get(i));
+        
+        ListReservasDisponiveis.setModel(listModel);
     
+    }//GEN-LAST:event_ComboBoxTipoReservaPopupMenuWillBecomeInvisible
+    
+    private void marcacaoPrevia()
+    {
+        //descubrir o id da marcação para criar uma nova
+        String idMarcacao = tratarIdMarcacao();
+        //guardar idUtente
+        String idUtente ="";
+        try{
+            int teste = Integer.parseInt(tratarIdUtente());
+            idUtente = tratarIdUtente();
+            
+            if(!Marcacao.isIdUtenteValido(idUtente))
+            {
+                JOptionPane.showMessageDialog(null, "IdUtente inválido, Utente não existe", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "IdUtente inválido", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
+        //guardar a razão da marcação
+        String motivo = tratarMotivo();
+        
+        //Buscar Hora
+        String hora = tratarReservaHora();
+        
+        //Buscar data
+        String data = tratarReservaData();
+       
+        //Ver se todos os colaboradores, recursos e locais estão disponiveis
+        //Separar a lista em 3, colaboradores, recursos e locais
+        //tratarColaboradores
+        ArrayList<String> colaboradores = tratarColaboradores();
+        ArrayList<String> locais = tratarLocal();
+        ArrayList<String> recursos = tratarRecurso();
+        
+        
+        //ver quando é que estão todos disponiveis
+        Marcacao.buscarHorariosParaReserva(colaboradores, locais, recursos, data, hora);
+    
+        
+        //reservar a primeira meia hora livre da sala, colaborador e recurso
+        //ArrayList<String> resultados = Marcacao.buscarHorariosDisponiveis(data, hora);
+        
+        //if(resultados.isEmpty())
+        //{
+        //    JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
+        //String split[] = resultados.get(0).split(" ");
+        
+        //Marcacao.atualizarHorarioTrabalho(split[0]);
+        //Marcacao.atualizarHorarioLocal(split[1]);
+        
+        //Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+        
+        //gerar marcar
+        //Marcacao.gerarMarcar(idMarcacao, split[0]);
+        //gerar escolhe
+        //Marcacao.gerarEscolhe(idMarcacao, split[1]);
+    }
+    
+    private String tratarReservaHora()
+    {
+        String horas[] = TextFieldHoraReserva.getText().split(":");
+        String horario ="";
+        int hora = Integer.parseInt(horas[0]);
+        int minuto = Integer.parseInt(horas[1]);
+        
+        if(minuto >= 30)
+        {
+            hora++;
+            minuto = 0;
+        }
+        else
+        {
+            minuto = 30;
+        }
+        if(hora < 7)
+            hora = 7;
+        if(hora > 19)
+            hora = 7;
+        horario = hora <10 ? "0"+hora : ""+hora;
+        
+        horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
+        System.out.println(horario);
+        return horario;
+    }
+    
+    private String tratarReservaData()
+    {
+        String data = TextFieldDataReserva.getText(); 
+        return data;
+    }
+    
+    private ArrayList<String> tratarColaboradores()
+    {
+        ArrayList<String> resultados = new ArrayList<>();
+        String split[] = new String[2];
+        for(int i = 0 ; i < ListReservasEscolhidas.getModel().getSize(); i++)
+        {
+            
+            split = ListReservasEscolhidas.getModel().getElementAt(i).split(" - ");
+            
+            if(Marcacao.isColaboradorExistente(split[0], split[1]))
+            {
+                resultados.add(ListReservasEscolhidas.getModel().getElementAt(i));
+                continue;
+            }
+            
+            
+        }
+        for(int i = 0 ; i < resultados.size() ; i++)
+            System.out.println("Colaborador_Resultados: ["+ i+"] = "+resultados.get(i));
+        
+        return resultados;
+    }
+    
+    private ArrayList<String> tratarLocal()
+    {
+        ArrayList<String> resultados = new ArrayList<>();
+        String split[] = new String[2];
+        for(int i = 0 ; i < ListReservasEscolhidas.getModel().getSize(); i++)
+        {
+            
+            split = ListReservasEscolhidas.getModel().getElementAt(i).split(" - ");
+            
+            if(Marcacao.isLocalExistente(split[0], split[1]))
+            {
+                resultados.add(ListReservasEscolhidas.getModel().getElementAt(i));
+                continue;
+            }
+            
+            
+        }
+        for(int i = 0 ; i < resultados.size() ; i++)
+            System.out.println("Local_Resultados: ["+ i+"] = "+resultados.get(i));
+        
+        return resultados;
+    }
+    
+    private ArrayList<String> tratarRecurso()
+    {
+        ArrayList<String> resultados = new ArrayList<>();
+        String split[] = new String[2];
+        for(int i = 0 ; i < ListReservasEscolhidas.getModel().getSize(); i++)
+        {
+            
+            split = ListReservasEscolhidas.getModel().getElementAt(i).split(" - ");
+            
+            if(Marcacao.isRecursoExistente(split[0], split[1]))
+            {
+                resultados.add(ListReservasEscolhidas.getModel().getElementAt(i));
+                continue;
+            }
+            
+            
+        }
+        for(int i = 0 ; i < resultados.size() ; i++)
+            System.out.println("Recurso_Resultados: ["+ i+"] = "+resultados.get(i));
+        
+        return resultados;
+    }
     //Marcação sequencial
     private void marcacaoSequencial()
     {
+        //descubrir o id da marcação para criar uma nova
+        String idMarcacao = tratarIdMarcacao();
         //guardar idUtente
-        String IdUtente = tratarIdUtente();
+        String idUtente ="";
+        try{
+            int teste = Integer.parseInt(tratarIdUtente());
+            idUtente = tratarIdUtente();
+            System.out.println("AQUI");
+            if(!Marcacao.isIdUtenteValido(idUtente))
+            {
+                JOptionPane.showMessageDialog(null, "IdUtente inválido, Utente não existe", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "IdUtente inválido", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
         //guardar a razão da marcação
-        String razao = tratarRazao();
+        String motivo = tratarMotivo();
         
         //Buscar Hora
         String hora = tratarHora();
         
         //Buscar data
         String data = tratarData();
+       
         //reservar a primeira meia hora livre da sala, colaborador e recurso
+        ArrayList<String> resultados = Marcacao.buscarHorariosDisponiveis(data, hora);
         
-        if(!reservarHorario(data, hora))
+        if(resultados.isEmpty())
         {
-            
             JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
-        
+            return;
         }
+        String split[] = resultados.get(0).split(" ");
         
+        Marcacao.atualizarHorarioTrabalho(split[0]);
+        Marcacao.atualizarHorarioLocal(split[1]);
+        
+        Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+        
+        //gerar marcar
+        Marcacao.gerarMarcar(idMarcacao, split[0]);
+        //gerar escolhe
+        Marcacao.gerarEscolhe(idMarcacao, split[1]);
+        
+        
+    }
+    
+    private String tratarIdMarcacao()
+    {
+        int idMarcacao = Integer.parseInt(Marcacao.buscarUltimoIdMarcacao());
+        idMarcacao++;
+        return (""+idMarcacao);
     }
     
     private String tratarIdUtente()
     {
-        String idUtente = TextFieldRazaoMarcacao.getText();
+        String idUtente = TextFieldReservaUtente.getText();
         
         return idUtente;
     }
     
-    private String tratarRazao()
+    private String tratarMotivo()
     {
-        String razao = TextFieldRazaoMarcacao.getText();
-        if(razao.length()>=300)
+        String motivo = TextFieldMotivoMarcacao.getText();
+        if(motivo.length()>=300)
         {
-            razao = null;
+            motivo = null;
             
-            JOptionPane.showMessageDialog(null, "Razao não pode ter mais de 300 caracteres", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O motivo não pode ter mais de 300 caracteres", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        return razao;
+        return motivo;
     }
     
     private String tratarHora()
@@ -529,25 +965,6 @@ public class GissUI extends javax.swing.JFrame {
         return data;
     }
     
-    private boolean reservarHorario(String data, String hora)
-    {
-        
-        ArrayList<String> resultados = Marcacao.buscarHorariosDisponiveis(data, hora);
-        
-        if(resultados.isEmpty())
-            return false;
-        System.out.println(resultados.get(0));
-        String split[] = resultados.get(0).split(" ");
-        for(int i = 0 ; i < split.length ; i++)
-            System.out.println("i:" + i + ", split: " + split[i]);
-        
-        Marcacao.atualizarHorarioTrabalho(split[0]);
-        Marcacao.atualizarHorarioLocal(split[1]);
-        
-        return true;
-    }
-
- 
     private ArrayList<String> tratarNumSemanas()
     {
         if(ComboBoxAno.getSelectedItem().toString().equals("Ano"))
@@ -687,7 +1104,6 @@ public class GissUI extends javax.swing.JFrame {
         return primeirosDiasSemana;
     }
        
-    
     private void isDisponivel(String testar,String disponibilidade , int i)
     {
         
@@ -1004,22 +1420,37 @@ public class GissUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboBoxNome;
     private javax.swing.JComboBox<String> ComboBoxNumSemana;
     private javax.swing.JComboBox<String> ComboBoxTipoHorario;
+    private javax.swing.JComboBox<String> ComboBoxTipoReserva;
+    private javax.swing.JLabel LabelDataReserva;
+    private javax.swing.JLabel LabelReservar;
+    private javax.swing.JLabel LabelReservasDisponiveis;
+    private javax.swing.JLabel LabelReservasEscolhidas;
+    private javax.swing.JList<String> ListReservasDisponiveis;
+    private javax.swing.JList<String> ListReservasEscolhidas;
     private javax.swing.JPanel PanelConsulta;
     private javax.swing.JPanel PanelMarcacao;
     private javax.swing.JPanel PanelMeioComplementar;
+    private javax.swing.JScrollPane ScrollPaneReservasDisponiveis;
+    private javax.swing.JScrollPane ScrollPaneReservasEscolhidas;
     private javax.swing.JTabbedPane TabbedMenu;
     private javax.swing.JTable TabelaHorario;
     private javax.swing.JTable TableUtente;
     private javax.swing.JTextField TextFieldData;
+    private javax.swing.JTextField TextFieldDataReserva;
+    private javax.swing.JTextField TextFieldHoraReserva;
     private javax.swing.JTextField TextFieldHoras;
     private javax.swing.JTextField TextFieldIdUtente;
-    private javax.swing.JTextField TextFieldRazaoMarcacao;
+    private javax.swing.JTextField TextFieldMotivoMarcacao;
+    private javax.swing.JTextField TextFieldReservaUtente;
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
