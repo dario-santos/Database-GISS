@@ -1,4 +1,5 @@
 use Giss
+
 -- Utente(IdUtente, Nome) ............................
 
 INSERT INTO Utente(IdUtente, Nome)
@@ -1511,9 +1512,6 @@ INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
 Values (3,3 );
 
 INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
-Values (3,3 );
-
-INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
 Values (4,4 );
 
 INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
@@ -1599,6 +1597,18 @@ INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
 Values (10,10);
 
 
+-- TipoAnexo(IdTipoAnexo,Descricao)------------------
+
+INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
+VALUES(1, 'Analise Clinica');
+
+INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
+VALUES(2, 'Exame');
+
+INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
+VALUES(3, 'Pescricoes');
+
+
 -- Anexo(IdAnexo,Descricao,IdTipoAnexo)------------
 
 INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
@@ -1616,17 +1626,20 @@ VALUES(4, 'Xanax 10mg', 3);
 INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
 VALUES(5, 'Rebucados Dr. Bayard', 3);
 
--- TipoAnexo(IdTipoAnexo,Descricao)------------------
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
+VALUES(6, 'Raio x', 2);
 
-INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
-VALUES(1, 'Analise Clinica');
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
+VALUES(7, 'Raio x', 2);
 
-INSERT INTO TipoAnexo(IdAnexo, Descricao)
-VALUES(2, 'Exame');
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
+VALUES(8, 'Raio x', 2);
 
-INSERT INTO TipoAnexo(IdAnexo, Descricao)
-VALUES(3, 'Pescricoes');
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
+VALUES(9, 'Analise ao sangue', 1);
 
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
+VALUES(10, 'Dois Brufen 500mg', 3);
 
 -- Anexar(IdAnexo,IdECli)-----------------------
 
@@ -1637,25 +1650,25 @@ INSERT INTO Anexar(IdAnexo, IdECli)
 VALUES(1, 2);
 
 INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(1, 3);
+VALUES(6, 3);
 
 INSERT INTO Anexar(IdAnexo, IdECli)
 VALUES(4, 4);
 
 INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(1, 5);
+VALUES(7, 5);
 
 INSERT INTO Anexar(IdAnexo, IdECli)
 VALUES(5, 6);
 
 INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(1, 7);
+VALUES(8, 7);
 
 INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(2, 9);
+VALUES(9, 9);
 
 INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(3, 10);
+VALUES(10, 10);
 
 
 
