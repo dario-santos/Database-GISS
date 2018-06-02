@@ -1032,10 +1032,12 @@ public class GissUI extends javax.swing.JFrame
         }
         
         //buscarAnexos
+        
         //buscar Exames
         ArrayList<String > exames = Consulta.buscarExames(idECli);
         for(int i = 0 ; i < exames.size() ; i++)
             System.out.println("Exame["+i+"]:"+exames.get(i));
+        
         //buscar Análises
         ArrayList<String > analises = Consulta.buscarAnalises(idECli);
         for(int i = 0 ; i < analises.size() ; i++)
@@ -1805,9 +1807,7 @@ public class GissUI extends javax.swing.JFrame
            
        //3. Guardar Anexo
        //Gerar Anexo
-       MeiosComplementares.gerarAnexo(idAnexo, descricaoAnexo, idTipoAnexo);
-       //Gerar Anexar
-       MeiosComplementares.gerarAnexar(idAnexo, idECli);
+       MeiosComplementares.gerarAnexo(idAnexo, descricaoAnexo, idTipoAnexo, idECli);
        
        JOptionPane.showMessageDialog(null, "Análise clínica/Exame adicionado com sucesso.", "Adicionado com sucesso", JOptionPane.INFORMATION_MESSAGE);
             
@@ -1888,7 +1888,7 @@ public class GissUI extends javax.swing.JFrame
             preencherTabelaConsulta(nomeUtente, split[0], split[1]); 
         }
         
-        //Meter os ids dos episodios clinicos na bombo box
+        //Meter os ids dos episodios clinicos na combo box
         carregarIdECli(episodiosClinicos);
             
         

@@ -85,15 +85,14 @@ public class Consulta
              
             sqlNome =   "SELECT Nome " +
                         "FROM Utente " +
-                        "WHERE IdUtente = " +IdUtente;
+                        "WHERE IdUtente = " + IdUtente;
          
             
             rs = stmt.executeQuery(sqlNome);  
       
             // Iterate through the data in the result set and display it.  
             while (rs.next()) 
-            {
-                System.out.println(rs.getString(1));  
+            { 
                 resultado = rs.getString(1);
             }
             
@@ -141,8 +140,8 @@ public class Consulta
             String sql = "";
             
                 
-            sql =   "SELECT DISTINCT E.IdECli, E.Observacao "
-                    + "       FROM EpisodioClinico E" 
+            sql =     "     SELECT DISTINCT E.IdECli, E.Observacao "
+                    + "     FROM EpisodioClinico E" 
                     + "     WHERE E.IdUtente=" + idUtente;
          
             rs = stmt.executeQuery(sql);
@@ -191,11 +190,10 @@ public class Consulta
             
                 
             sql =   "SELECT AO.Descricao " +
-                    "FROM EpisodioClinico E, Anexar AR, Anexo AO, TipoAnexo TA " +
-                    "WHERE E.IdECli = "+ idECli +
-                    "AND E.IdECli = AR.IdECli " +
-                    "AND AR.IdAnexo = AO.IdAnexo " +
-                    "AND AO.IdTipoAnexo =TA.IdTipoAnexo " +
+                    "FROM EpisodioClinico E, Anexo AO, TipoAnexo TA " +
+                    "WHERE E.IdECli = " + idECli +
+                    "AND E.IdECli = AO.IdECli " +
+                    "AND AO.IdTipoAnexo = TA.IdTipoAnexo " +
                     "AND TA.Descricao = 'Exame'";
          
             rs = stmt.executeQuery(sql);
@@ -244,11 +242,10 @@ public class Consulta
             
                 
             sql =   "SELECT AO.Descricao " +
-                    "FROM EpisodioClinico E, Anexar AR, Anexo AO, TipoAnexo TA " +
+                    "FROM EpisodioClinico E, Anexo AO, TipoAnexo TA " +
                     "WHERE E.IdECli = "+ idECli +
-                    "AND E.IdECli = AR.IdECli " +
-                    "AND AR.IdAnexo = AO.IdAnexo " +
-                    "AND AO.IdTipoAnexo =TA.IdTipoAnexo " +
+                    "AND E.IdECli = AO.IdECli " +
+                    "AND AO.IdTipoAnexo = TA.IdTipoAnexo " +
                     "AND TA.Descricao = 'Analise Clinica'";
          
             rs = stmt.executeQuery(sql);
@@ -297,10 +294,9 @@ public class Consulta
             
                 
             sql =   "SELECT AO.Descricao " +
-                    "FROM EpisodioClinico E, Anexar AR, Anexo AO, TipoAnexo TA " +
+                    "FROM EpisodioClinico E, Anexo AO, TipoAnexo TA " +
                     "WHERE E.IdECli = "+ idECli +
-                    "AND E.IdECli = AR.IdECli " +
-                    "AND AR.IdAnexo = AO.IdAnexo " +
+                    "AND E.IdECli = AO.IdECli " +
                     "AND AO.IdTipoAnexo = TA.IdTipoAnexo " +
                     "AND TA.Descricao = 'Prescricoes'";
          

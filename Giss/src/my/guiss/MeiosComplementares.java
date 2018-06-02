@@ -62,6 +62,7 @@ public class MeiosComplementares
         } 
         return idAnexo;
     }
+    
     public static String buscarIdTipoAnexo(String descricao)
     {
         String idTipoAnexo = "";
@@ -110,7 +111,8 @@ public class MeiosComplementares
         } 
         return idTipoAnexo;
     }
-    public static void gerarAnexo(String idAnexo, String descricao, String idTipoAnexo)
+    
+    public static void gerarAnexo(String idAnexo, String descricao, String idTipoAnexo, String idECli)
     {
         // Create a variable for the connection string.  
         String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
@@ -129,46 +131,9 @@ public class MeiosComplementares
             stmt = con.createStatement(); 
           
             String sql = "INSERT INTO Anexo" +
-                         " VALUES (" + idAnexo + ",'" + descricao + "'," + idTipoAnexo + ");";
+                         " VALUES (" + idAnexo + ",'" + descricao + "'," + idTipoAnexo + ","+ idECli+");";
           
-         
-            stmt.executeUpdate(sql);  
-        }
-        // Handle any errors that may have occurred.  
-        catch (Exception e) 
-        {  
-            e.printStackTrace();  
-        }  
-        finally 
-        {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {}  
-            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
-            if (con != null) try { con.close(); } catch(Exception e) {}  
-        } 
-    }
-    
-    public static void gerarAnexar(String idAnexo, String idECli)
-    {
-        // Create a variable for the connection string.  
-        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
-            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
-
-        // Declare the JDBC objects.  
-        Connection con = null;  
-        Statement stmt = null;  
-        ResultSet rs = null;  
-
-        try 
-        {  
-            // Establish the connection.  
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
-            con = DriverManager.getConnection(connectionUrl);  
-            stmt = con.createStatement(); 
-          
-            String sql = "INSERT INTO Anexar" +
-                         " VALUES (" + idAnexo + "," + idECli + ");";
-          
-         
+            
             stmt.executeUpdate(sql);  
         }
         // Handle any errors that may have occurred.  
