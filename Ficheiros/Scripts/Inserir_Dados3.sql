@@ -1263,16 +1263,16 @@ Values (56, '2018-05-27', '15:30:00', '16:00:00', 14 , 'T');
 --	Marcacao(IdMarcacao, Motivo,IdUtente) --
 
 INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (1 , 'Dor de barriga',1 );
+Values (1, 'Dor de barriga',1 );
 
 INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (2 , 'Dor de cabeca',2 );
+Values (2, 'Dor de cabeca',2 );
 
 INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (3 , 'Ma disposicao',3 );
+Values (3, 'Ma disposicao',3 );
 
 INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (4 , 'Dor no peito',4 );
+Values (4, 'Dor no peito', 4 );
 
 INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
 Values (5 , 'Dor na perna',5 );
@@ -1412,8 +1412,6 @@ Values(10, 33);
 INSERT INTO Gera(IdMarcacao, IdECli)
 Values(1, 1);
 
-INSERT INTO Gera(IdMarcacao, IdECli)
-Values(2, 2);
 
 INSERT INTO Gera(IdMarcacao, IdECli)
 Values(2, 2);
@@ -1612,67 +1610,34 @@ INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
 VALUES(3, 'Prescricoes');
 
 
--- Anexo(IdAnexo,Descricao,IdTipoAnexo)------------
+-- Anexo(IdAnexo,Descricao,IdTipoAnexo, IdECli)------------
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(1, 'Raio x', 2);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(1, 'Raio x', 2, 2);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(2, 'Analise ao sangue', 1);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(2, 'Analise ao sangue', 1, 1);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(3, 'Dois Brufen 500mg', 3);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(4, 'Xanax 10mg', 3, 4);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(4, 'Xanax 10mg', 3);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(5, 'Rebucados Dr. Bayard', 3, 6);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(5, 'Rebucados Dr. Bayard', 3);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(6, 'Raio x', 2, 3);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(6, 'Raio x', 2);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(7, 'Raio x', 2, 5);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(7, 'Raio x', 2);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(8, 'Raio x', 2 , 7);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(8, 'Raio x', 2);
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(9, 'Analise ao sangue', 1, 9);
 
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(9, 'Analise ao sangue', 1);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo)
-VALUES(10, 'Dois Brufen 500mg', 3);
-
--- Anexar(IdAnexo,IdECli)-----------------------
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(2, 1);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(1, 2);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(6, 3);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(4, 4);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(7, 5);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(5, 6);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(8, 7);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(9, 9);
-
-INSERT INTO Anexar(IdAnexo, IdECli)
-VALUES(10, 10);
-
+INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
+VALUES(10, 'Dois Brufen 500mg', 3,10);
 
 
 

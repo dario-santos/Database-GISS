@@ -805,7 +805,7 @@ CREATE TABLE TipoAnexo(
 );
 END
 
--- Anexo(IdAnexo,Descricao,IdTipoAnexo) --
+-- Anexo(IdAnexo,Descricao,IdTipoAnexo, IdECli)
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Anexo]') )
@@ -815,43 +815,17 @@ CREATE TABLE Anexo(
     IdAnexo int NOT NULL
         CONSTRAINT PK_IdAnexo PRIMARY KEY(IdAnexo)
         CHECK(IdAnexo > 0),
+    IdECli int
+            CONSTRAINT nn_IdEcli NOT NULL,
     Descricao nvarchar(300) NOT NULL,
     IdTipoAnexo int NOT NULL,
 
     CONSTRAINT FK_IdTipoAnexo FOREIGN KEY(IdTipoAnexo)
         REFERENCES TipoAnexo(IdTipoAnexo)
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
 
-
-);
-END
-
--- Anexar(IdAnexo,IdECli) ...........................
-
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Anexar]') )
-
-begin 
-    CREATE TABLE Anexar (
-        IdAnexo int NOT NULL,
-
-        IdECli int
-            CONSTRAINT nn_IdEcli NOT NULL,
-
-        CONSTRAINT PK_Anexar PRIMARY KEY (IdAnexo),
-
-        CONSTRAINT FK_IdAnexo_Anexar FOREIGN KEY (IdAnexo) 
-            REFERENCES Anexo(IdAnexo)
-            ON UPDATE CASCADE,
-
-        CONSTRAINT FK_IdECli_Anexar FOREIGN KEY (IdECli)
+    CONSTRAINT FK_IdECli_Anexo FOREIGN KEY (IdECli)
             REFERENCES EpisodioClinico(IdECli)
             ON UPDATE CASCADE
-    );
-end
-
-
-
-
-
-
+);
+END
