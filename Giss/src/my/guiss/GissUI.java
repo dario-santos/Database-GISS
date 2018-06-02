@@ -486,22 +486,12 @@ public class GissUI extends javax.swing.JFrame
 
         jLabel11.setText("Estado da consulta:");
 
-        ListExames.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(ListExames);
 
         jLabel12.setText("Exames:");
 
         jLabel13.setText("Analises");
 
-        ListAnalises.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(ListAnalises);
 
         ComboBoxIdECli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
@@ -521,11 +511,6 @@ public class GissUI extends javax.swing.JFrame
 
         jLabel16.setText("Consultar Anexos:");
 
-        ListPrescricoes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane5.setViewportView(ListPrescricoes);
 
         jLabel17.setText("Prescrições");
@@ -798,6 +783,13 @@ public class GissUI extends javax.swing.JFrame
         consultar();
         
         //limparListas
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        //Guardar elementos
+
+        //Adicionar elemento selecionado
+        ListAnalises.setModel(listModel);
+        ListExames.setModel(listModel);
+        ListPrescricoes.setModel(listModel);
         
     }//GEN-LAST:event_ButtonProcuraUtenteMouseClicked
 
