@@ -166,6 +166,11 @@
                           </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="985" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -569,6 +574,11 @@
                 <Property name="text" type="java.lang.String" value="Motivo da marcacao:"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JSeparator" name="jSeparator2">
+              <Properties>
+                <Property name="orientation" type="int" value="1"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PanelConsulta">
@@ -627,11 +637,14 @@
                 <Component class="javax.swing.JTable" name="TableUtente">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="4">
+                      <Table columnCount="7" rowCount="4">
                         <Column editable="true" title="Nome" type="java.lang.Object"/>
-                        <Column editable="true" title="Descri&#xe7;&#xe3;o T.O" type="java.lang.Object"/>
-                        <Column editable="true" title="Observa&#xe7;&#xe3;o ECli." type="java.lang.Object"/>
-                        <Column editable="true" title="Observa&#xe7;&#xf5;es ECliA." type="java.lang.Object"/>
+                        <Column editable="true" title="IdECli" type="java.lang.Object"/>
+                        <Column editable="true" title="Motivo" type="java.lang.Object"/>
+                        <Column editable="true" title="Exames" type="java.lang.Object"/>
+                        <Column editable="true" title="Analise" type="java.lang.Object"/>
+                        <Column editable="true" title="Prescri&#xe7;&#xf5;es" type="java.lang.Object"/>
+                        <Column editable="true" title="Obs. Medico" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
