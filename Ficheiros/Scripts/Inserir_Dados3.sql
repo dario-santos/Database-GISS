@@ -1416,6 +1416,9 @@ INSERT INTO Gera(IdMarcacao, IdECli)
 Values(2, 2);
 
 INSERT INTO Gera(IdMarcacao, IdECli)
+Values(2, 2);
+
+INSERT INTO Gera(IdMarcacao, IdECli)
 Values(3, 1);
 
 INSERT INTO Gera(IdMarcacao, IdECli)

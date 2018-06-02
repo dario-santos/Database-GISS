@@ -11,14 +11,61 @@ import java.util.ArrayList;
 public class Consulta 
 {
     
-    
-    
-    
-    
-    
-    public static String ProcuraUtente(String IdUtente)
+    public static boolean isIdUtenteValido(String idUtente)
     {
-        String a="";
+         boolean valido = false;
+        
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            String sql = " SELECT idUtente"
+                    + "    FROM Utente"
+                    + "    Where IdUtente = " + idUtente;
+            
+            rs = stmt.executeQuery(sql);  
+           
+            
+            // Iterate through the data in the result set and display it.  
+            while (rs.next()) 
+            {  
+                                    
+                if(idUtente.equals(rs.getString(1)))
+                {
+                    valido = true;
+                }
+                
+            }
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+        return valido;
+        
+    }
+    
+    public static String buscarNomeUtente(String IdUtente)
+    {
+        String resultado = "";
         String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Giss;user=sa;password=Lelo69Lelo69";
         
         
@@ -36,17 +83,18 @@ public class Consulta
             String sqlNome ="";
 
              
-            sqlNome =   "SELECT Nome\n" +
-                        "FROM Utente \n" +
-                        "WHERE IdUtente = "+IdUtente;
+            sqlNome =   "SELECT Nome " +
+                        "FROM Utente " +
+                        "WHERE IdUtente = " +IdUtente;
          
             
             rs = stmt.executeQuery(sqlNome);  
       
             // Iterate through the data in the result set and display it.  
-            while (rs.next()) {  
+            while (rs.next()) 
+            {
                 System.out.println(rs.getString(1));  
-                a=rs.getString(1);
+                resultado = rs.getString(1);
             }
             
             
@@ -65,18 +113,20 @@ public class Consulta
         } 
         
         
-        return a;
+        return resultado;
         
         
         
     }
     
-    public static ArrayList<String> ProcuraIdECli(String IdUtente)
+    public static ArrayList<String> buscarEpisodiosClinicos(String idUtente)
     {
-        ArrayList<String> resultados=new ArrayList<String>();
-        String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Giss;user=sa;password=Lelo69Lelo69";
+        ArrayList<String> resultados = new ArrayList<>();
         
-        
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
         // Declare the JDBC objects.  
         Connection con = null;  
         Statement stmt = null;  
@@ -88,24 +138,21 @@ public class Consulta
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             con = DriverManager.getConnection(connectionUrl);  
             stmt = con.createStatement(); 
-            String sqlIdECli ="";
-
-             
-            sqlIdECli = "SELECT IdECli\n" +
-                        "FROM EpisodioClinico \n" +
-                        "WHERE IdUtente = "+IdUtente;
+            String sql = "";
+            
+                
+            sql =   "SELECT DISTINCT E.IdECli, E.Observacao "
+                    + "       FROM EpisodioClinico E" 
+                    + "     WHERE E.IdUtente=" + idUtente;
          
+            rs = stmt.executeQuery(sql);
             
-            rs = stmt.executeQuery(sqlIdECli);  
-      
             // Iterate through the data in the result set and display it.  
-            while (rs.next()) {  
-                System.out.println(rs.getString(1));  
-                resultados.add(rs.getString(1));
+            while (rs.next()) 
+            {  
+                
+                resultados.add(rs.getString(1) + " - " + rs.getString(2));
             }
-            
-            
-            
         }
         // Handle any errors that may have occurred.  
         catch (Exception e) 
@@ -118,19 +165,17 @@ public class Consulta
             if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
             if (con != null) try { con.close(); } catch(Exception e) {}  
         } 
-        
-        
         return resultados;
-        
-        
-    }
+    }    
     
-    public static ArrayList<String> ProcuraMotivo(String IdUtente)
+    public static ArrayList<String> buscarExames(String idECli)
     {
-        ArrayList<String> resultados=new ArrayList<String>();
-        String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=Giss;user=sa;password=Lelo69Lelo69";
+        ArrayList<String> resultados = new ArrayList<>();
         
-        
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
         // Declare the JDBC objects.  
         Connection con = null;  
         Statement stmt = null;  
@@ -142,24 +187,25 @@ public class Consulta
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             con = DriverManager.getConnection(connectionUrl);  
             stmt = con.createStatement(); 
-            String sqlMotivo ="";
-
-             
-            sqlMotivo = "SELECT Motivo\n" +
-                        "FROM Marcacao \n" +
-                        "WHERE IdUtente = "+IdUtente;
-         
+            String sql = "";
             
-            rs = stmt.executeQuery(sqlMotivo);  
-      
+                
+            sql =   "SELECT AO.Descricao " +
+                    "FROM EpisodioClinico E, Anexar AR, Anexo AO, TipoAnexo TA " +
+                    "WHERE E.IdECli = "+ idECli +
+                    "AND E.IdECli = AR.IdECli " +
+                    "AND AR.IdAnexo = AO.IdAnexo " +
+                    "AND AO.IdTipoAnexo =TA.IdTipoAnexo " +
+                    "AND TA.Descricao = 'Exame'";
+         
+            rs = stmt.executeQuery(sql);
+            
             // Iterate through the data in the result set and display it.  
-            while (rs.next()) {  
-                System.out.println(rs.getString(1));  
+            while (rs.next()) 
+            {  
+                
                 resultados.add(rs.getString(1));
             }
-            
-            
-            
         }
         // Handle any errors that may have occurred.  
         catch (Exception e) 
@@ -172,10 +218,112 @@ public class Consulta
             if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
             if (con != null) try { con.close(); } catch(Exception e) {}  
         } 
+        return resultados;
+    } 
+    
+    public static ArrayList<String> buscarAnalises(String idECli)
+    {
+        ArrayList<String> resultados = new ArrayList<>();
         
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            String sql = "";
+            
+                
+            sql =   "SELECT AO.Descricao " +
+                    "FROM EpisodioClinico E, Anexar AR, Anexo AO, TipoAnexo TA " +
+                    "WHERE E.IdECli = "+ idECli +
+                    "AND E.IdECli = AR.IdECli " +
+                    "AND AR.IdAnexo = AO.IdAnexo " +
+                    "AND AO.IdTipoAnexo =TA.IdTipoAnexo " +
+                    "AND TA.Descricao = 'Analise Clinica'";
+         
+            rs = stmt.executeQuery(sql);
+            
+            // Iterate through the data in the result set and display it.  
+            while (rs.next()) 
+            {  
+                
+                resultados.add(rs.getString(1));
+            }
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+        return resultados;
+    } 
+    
+     public static ArrayList<String> buscarPrescricoes(String idECli)
+    {
+        ArrayList<String> resultados = new ArrayList<>();
         
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            String sql = "";
+            
+                
+            sql =   "SELECT AO.Descricao " +
+                    "FROM EpisodioClinico E, Anexar AR, Anexo AO, TipoAnexo TA " +
+                    "WHERE E.IdECli = "+ idECli +
+                    "AND E.IdECli = AR.IdECli " +
+                    "AND AR.IdAnexo = AO.IdAnexo " +
+                    "AND AO.IdTipoAnexo = TA.IdTipoAnexo " +
+                    "AND TA.Descricao = 'Prescricoes'";
+         
+            rs = stmt.executeQuery(sql);
+            
+            // Iterate through the data in the result set and display it.  
+            while (rs.next()) 
+            {  
+                
+                resultados.add(rs.getString(1));
+            }
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
         return resultados;
     }
-    
-    
 }
