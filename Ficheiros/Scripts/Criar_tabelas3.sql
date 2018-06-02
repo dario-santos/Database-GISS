@@ -815,10 +815,10 @@ CREATE TABLE Anexo(
     IdAnexo int NOT NULL
         CONSTRAINT PK_IdAnexo PRIMARY KEY(IdAnexo)
         CHECK(IdAnexo > 0),
-    IdECli int
-            CONSTRAINT nn_IdEcli NOT NULL,
     Descricao nvarchar(300) NOT NULL,
     IdTipoAnexo int NOT NULL,
+	IdECli int
+            CONSTRAINT nn_IdEcli NOT NULL,
 
     CONSTRAINT FK_IdTipoAnexo FOREIGN KEY(IdTipoAnexo)
         REFERENCES TipoAnexo(IdTipoAnexo)

@@ -72,6 +72,7 @@ public class GissUI extends javax.swing.JFrame
     public GissUI() {
         start();
         initComponents();
+        tratarMenuInserirDados("Diagnostico");
         
         
         
@@ -126,8 +127,8 @@ public class GissUI extends javax.swing.JFrame
         ButtonProcuraUtente = new javax.swing.JButton();
         TextFieldIdUtente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        TextFieldSintomas = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        TextFieldDiagnostico = new javax.swing.JTextField();
+        LabelSintomas = new javax.swing.JLabel();
         ComboBoxEstadoConsulta = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -143,17 +144,23 @@ public class GissUI extends javax.swing.JFrame
         jScrollPane5 = new javax.swing.JScrollPane();
         ListPrescricoes = new javax.swing.JList<>();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        LabelInserirIdECli = new javax.swing.JLabel();
+        ComboBoxInserirIdECli = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
         ButtonInserirDados = new javax.swing.JButton();
-        jLabel20 = new javax.swing.JLabel();
-        TextFieldDiagnostico = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        LabelDiagnostico = new javax.swing.JLabel();
+        TextFieldSintomas = new javax.swing.JTextField();
+        LabelInserirMarcacao = new javax.swing.JLabel();
+        ComboBoxInserirMarcacao = new javax.swing.JComboBox<>();
+        TextFieldConsultaHoras = new javax.swing.JTextField();
+        TextFieldConsultaData = new javax.swing.JTextField();
+        LabelInserirPrescricoes = new javax.swing.JLabel();
+        TextFieldInserirPrescricoes = new javax.swing.JTextField();
+        TextFieldInserirIdUtente = new javax.swing.JTextField();
+        LabelInserirIdUtente = new javax.swing.JLabel();
+        LabelInserirTipoOcorrencia = new javax.swing.JLabel();
+        ComboBoxInserirTipoOcorrencia = new javax.swing.JComboBox<>();
         PanelMeioComplementar = new javax.swing.JPanel();
         ComboBoxConsultas = new javax.swing.JComboBox<>();
         ComboBoxTipoAnexo = new javax.swing.JComboBox<>();
@@ -335,65 +342,68 @@ public class GissUI extends javax.swing.JFrame
         PanelMarcacao.setLayout(PanelMarcacaoLayout);
         PanelMarcacaoLayout.setHorizontalGroup(
             PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMarcacaoLayout.createSequentialGroup()
+            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ComboBoxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(ComboBoxNome, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMarcacaoLayout.createSequentialGroup()
-                                        .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(39, 39, 39)
-                                .addComponent(jLabel5))
-                            .addComponent(BotaoCarregarHorario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMarcacaoLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(LabelReservasEscolhidas))
-                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
+                                .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(LabelReservasDisponiveis))
+                                .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BotaoCarregarHorario))
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                            .addComponent(LabelDataReserva)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ButtonReservar)
-                                            .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(149, 149, 149)
+                                        .addComponent(LabelReservar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(LabelReservar))
+                                        .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                        .addComponent(LabelDataReserva)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 34, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMarcacaoLayout.createSequentialGroup()
-                            .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                                        .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addGap(129, 129, 129)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(LabelReservasDisponiveis)
+                                            .addComponent(LabelReservasEscolhidas))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ButtonReservar)
+                                    .addComponent(jLabel9)
+                                    .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(15, 15, 15))
         );
         PanelMarcacaoLayout.setVerticalGroup(
             PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,60 +415,56 @@ public class GissUI extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel8)
-                                        .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ComboBoxNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(BotaoCarregarHorario))
-                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LabelDataReserva)))))
-                            .addComponent(jLabel5)
-                            .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(LabelReservasEscolhidas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMarcacaoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ButtonReservar))
-                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
-                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabelReservar))
+                                    .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ComboBoxNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BotaoCarregarHorario))
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
                                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabelReservasDisponiveis))))
-                        .addGap(18, 18, 18)
-                        .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addComponent(LabelReservar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(LabelReservasDisponiveis))
+                                            .addComponent(jLabel8))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LabelDataReserva)
+                                            .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addComponent(LabelReservasEscolhidas)
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ButtonReservar))
+                            .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8))
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         TabbedMenu.addTab("Marcação", PanelMarcacao);
@@ -490,9 +496,20 @@ public class GissUI extends javax.swing.JFrame
 
         jLabel3.setText("IdUtente:");
 
-        jLabel10.setText("Sintomas:");
+        TextFieldDiagnostico.setText("Diagnostico da Consulta");
 
-        ComboBoxEstadoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendido", "Diagnostico", "Prescrever Medicamentos", "Exame", "Analises" }));
+        LabelSintomas.setText("Sintomas:");
+
+        ComboBoxEstadoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--", "Diagnostico", "Prescrever Medicamentos", "Exame", "Analises" }));
+        ComboBoxEstadoConsulta.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         jLabel11.setText("Estado da consulta:");
 
@@ -527,9 +544,9 @@ public class GissUI extends javax.swing.JFrame
 
         jLabel17.setText("Prescrições");
 
-        jLabel18.setText("IdECli");
+        LabelInserirIdECli.setText("IdECli");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
+        ComboBoxInserirIdECli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel19.setText("Inserir Dados");
@@ -541,105 +558,138 @@ public class GissUI extends javax.swing.JFrame
             }
         });
 
-        jLabel20.setText("Diagnostico:");
+        LabelDiagnostico.setText("Diagnostico:");
 
-        jLabel21.setText("Marcacao:");
+        TextFieldSintomas.setText("Sintomas da Consulta");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        LabelInserirMarcacao.setText("Marcacao:");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        jTextField1.setText("07:45");
+        ComboBoxInserirMarcacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
 
-        jTextField2.setText("2018-05-21");
+        TextFieldConsultaHoras.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        TextFieldConsultaHoras.setText("07:45");
+
+        TextFieldConsultaData.setText("2018-05-21");
+
+        LabelInserirPrescricoes.setText("Prescrições:");
+
+        TextFieldInserirPrescricoes.setText("Prescricoes de Medicamentos");
+        TextFieldInserirPrescricoes.setAutoscrolls(false);
+        TextFieldInserirPrescricoes.setMinimumSize(new java.awt.Dimension(14, 541));
+
+        LabelInserirIdUtente.setText("IdUtente:");
+
+        LabelInserirTipoOcorrencia.setText("Tipo Ocorrencia:");
+
+        ComboBoxInserirTipoOcorrencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Acidentes de Trabalho", "2 - Acidentes de Viacao", "3 - Intoxicacao Alimentar", "4 - Acidente Escolar", "5 - Infecoes", "6 - Hemorragias", "7 - Idosos", "8 - Lesoes de caracter desportivo", "9 - Lesoes leves", "10 - Doencas graves" }));
 
         javax.swing.GroupLayout PanelConsultaLayout = new javax.swing.GroupLayout(PanelConsulta);
         PanelConsulta.setLayout(PanelConsultaLayout);
         PanelConsultaLayout.setHorizontalGroup(
             PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelConsultaLayout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(ComboBoxEstadoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
-                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelConsultaLayout.createSequentialGroup()
-                        .addContainerGap()
+                .addContainerGap()
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
+                            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel15)
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelConsultaLayout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addComponent(jLabel15)
-                                        .addGap(21, 21, 21)
-                                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ButtonProcuraUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(PanelConsultaLayout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(TextFieldIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                                                .addComponent(jLabel16)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(PanelConsultaLayout.createSequentialGroup()
-                                                .addGap(21, 21, 21)
-                                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel12)
-                                                    .addComponent(jLabel14)))
-                                            .addComponent(jLabel17)))
+                                        .addComponent(TextFieldIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel16)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel14))
                                     .addGroup(PanelConsultaLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel13)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane3)
-                                    .addComponent(jScrollPane4)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ComboBoxIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelConsultaLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel19)
-                        .addGap(139, 139, 139)
+                                        .addComponent(ButtonProcuraUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel12))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
+                                .addGap(0, 564, Short.MAX_VALUE)
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelConsultaLayout.createSequentialGroup()
-                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel21))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TextFieldSintomas, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                                    .addComponent(TextFieldDiagnostico)))
-                            .addComponent(ButtonInserirDados)
-                            .addGroup(PanelConsultaLayout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4)
+                                .addComponent(ComboBoxIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(PanelConsultaLayout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextFieldConsultaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TextFieldConsultaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1034, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
+            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel19)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LabelInserirIdECli)
+                                    .addComponent(LabelSintomas))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addComponent(ComboBoxInserirIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addComponent(TextFieldSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(LabelDiagnostico)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TextFieldDiagnostico))))
+                            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LabelInserirMarcacao)
+                                    .addComponent(LabelInserirPrescricoes))
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TextFieldInserirPrescricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ButtonInserirDados)))
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ComboBoxInserirMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(LabelInserirIdUtente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TextFieldInserirIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LabelInserirTipoOcorrencia)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboBoxInserirTipoOcorrencia, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ComboBoxEstadoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(201, 201, 201))
         );
         PanelConsultaLayout.setVerticalGroup(
             PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelConsultaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextFieldConsultaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldConsultaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -657,46 +707,52 @@ public class GissUI extends javax.swing.JFrame
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(ComboBoxIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
                     .addGroup(PanelConsultaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel19))
-                    .addGroup(PanelConsultaLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(ComboBoxEstadoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextFieldSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))))
+                            .addComponent(LabelInserirMarcacao)
+                            .addComponent(ComboBoxInserirMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelInserirIdUtente)
+                            .addComponent(TextFieldInserirIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelInserirTipoOcorrencia)
+                            .addComponent(ComboBoxInserirTipoOcorrencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelInserirIdECli)
+                    .addComponent(ComboBoxInserirIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFieldSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelSintomas)
+                    .addComponent(LabelDiagnostico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(TextFieldDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TextFieldInserirPrescricoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelInserirPrescricoes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ButtonInserirDados)
-                .addGap(38, 38, 38))
+                .addGap(33, 33, 33))
         );
 
         TabbedMenu.addTab("Consulta", PanelConsulta);
@@ -748,7 +804,7 @@ public class GissUI extends javax.swing.JFrame
                             .addComponent(ComboBoxConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ButtonAnexar)
                             .addComponent(TextFieldDescricaoAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 374, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(PanelMeioComplementarLayout.createSequentialGroup()
@@ -777,7 +833,7 @@ public class GissUI extends javax.swing.JFrame
                     .addComponent(TextFieldDescricaoAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(ButtonAnexar)
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TabbedMenu.addTab("Meios Complementares", PanelMeioComplementar);
@@ -1066,6 +1122,28 @@ public class GissUI extends javax.swing.JFrame
         inserirDadosConsulta();
         
     }//GEN-LAST:event_ButtonInserirDadosMouseClicked
+
+    private void ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        String estadoConsulta = ComboBoxEstadoConsulta.getSelectedItem().toString();
+        
+        tratarMenuInserirDados(estadoConsulta);
+        
+        if(estadoConsulta.equals("Diagnostico"))
+        {
+            ArrayList<String> idMarcacoes = buscarPossiveisMarcacoes();
+            
+            adicionarMarcacoes(idMarcacoes);            
+        }
+        else if(estadoConsulta.equals("Prescrever Medicamentos"))
+        {
+            ArrayList<String> idECli = Consulta.buscarEpisodiosClinicos();
+            
+            adicionarEpisodiosClinicos(idECli);
+        }
+        
+    
+    }//GEN-LAST:event_ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible
     
     private void marcacaoPrevia()
     {
@@ -1960,8 +2038,7 @@ public class GissUI extends javax.swing.JFrame
         //Adicionar elemento selecionado
         ListAnalises.setModel(listModel);
     }
-    
-        
+       
     private void mostrarPrescricoes(ArrayList<String> prescricoes)
     {
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -1981,33 +2058,315 @@ public class GissUI extends javax.swing.JFrame
         //Receber estado da consulta
         String estadoConsulta = ComboBoxEstadoConsulta.getSelectedItem().toString();
         
-        tratarMenuInserirDados(estadoConsulta);
-        //mostrar menu certo para cada situação
+        if(estadoConsulta.equals("Diagnostico"))
+        {
+            tratarDiagnostico();
+            
+            
+        
+        }
+        else if(estadoConsulta.equals("Prescrever Medicamentos"))
+        {
+        
+        
+        
+        }
+        else if(estadoConsulta.equals("Exame"))
+        {
+        
+        
+        }
+        else if(estadoConsulta.equals("Analises"))
+        {
+        
+        
+        }
+        
+        
+        
+        
     
+    }
+    
+    private void tratarDiagnostico()
+    {
+        //EpisodioClinico
+        //IdECli
+        String idECli = buscarIdECliMarcacao();
+        //Marcacao
+        //idMarcacao
+        String idMarcacao = ComboBoxInserirMarcacao.getSelectedItem().toString();
+        if(idMarcacao.equals("--Escolha--"))
+        {
+            JOptionPane.showMessageDialog(null, "IdMarcacao inválido.", "Erro IdMarcacao ", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //DiagnosticoTextField
+        String diagnostico = TextFieldDiagnostico.getText();
+        if(diagnostico.length() > 140)
+        {
+            JOptionPane.showMessageDialog(null, "Diagnostico com mais de 150 caracteres.", "Erro Diagnostico", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //SintomasTextField
+        String sintomas = TextFieldSintomas.getText();
+        if(sintomas.length() > 139)
+        {
+            JOptionPane.showMessageDialog(null, "Sintomas com mais de 150 caracteres.", "Erro Sintomas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String observacao = ("Sintomas:"+sintomas)+ ("Diagnostico:" + diagnostico);
+        
+        String idEstado = "2"; //Diagnostico
+        
+        String idTipoOcorrencia = buscarIdTipoOcorrencia();
+        
+        
+        
+        String idUtente;
+        
+        try{
+            
+            int teste = Integer.parseInt(buscarInserirIdUtente());
+            idUtente = buscarInserirIdUtente();
+            
+            if(!Marcacao.isIdUtenteValido(idUtente))
+            {
+                JOptionPane.showMessageDialog(null, "IdUtente inválido, Utente não existe", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "IdUtente inválido, tem que ser um numero", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
+        
+        //GerarIdHistorico
+        String  idHistoricoClinico = buscarIdHistoricoClinico();
+        
+        Consulta.gerarHistoricoClinico(idHistoricoClinico, idUtente);
+        
+        Consulta.gerarEpisodioClinico(idECli, observacao, idEstado, idTipoOcorrencia, idUtente, idHistoricoClinico);
+        
+        //Diagnostico
+        //buscarDiagnostico()   
+        //buscarSintomas();
+        
+    }
+    
+    private String buscarIdHistoricoClinico()
+    {
+        int idHistoricoClinico = Integer.parseInt(Consulta.buscarUltimoIdHistoricoClinico());
+        idHistoricoClinico++;
+        return ""+idHistoricoClinico;
+    }
+    
+    private String buscarInserirIdUtente()
+    {
+        String idUtente = TextFieldInserirIdUtente.getText();
+        
+        return idUtente; 
+    }  
+    
+    private String buscarIdTipoOcorrencia()
+    {
+        String idTipoOcorrencia = ComboBoxInserirTipoOcorrencia.getSelectedItem().toString().split(" - ")[0];
+        System.out.println("IDTO:"+idTipoOcorrencia);
+        return idTipoOcorrencia;
+    }
+    
+    private String buscarIdECliMarcacao()
+    {
+        int idECli = Integer.parseInt(Consulta.buscarUltimoIdECli());
+        idECli++;
+        return ""+idECli;
+    }
+    
+    private ArrayList<String> buscarPossiveisMarcacoes()
+    {
+        ArrayList<String> idMarcacoes = new ArrayList<>();
+        //Hora
+        String hora = tratarHoraConsulta();
+        
+        //Data
+        String data = TextFieldConsultaData.getText();
+        
+        //Receber Marcacoes que são menores do que esta data e hora
+        idMarcacoes = Consulta.buscarMarcacoes(data, hora);
+        
+        System.out.println(idMarcacoes);
+        
+        
+        return idMarcacoes;
+        
+    }
+    
+    private String tratarHoraConsulta()
+    {
+        String horas[] = TextFieldConsultaHoras.getText().split(":");
+        String horario ="";
+        int hora = Integer.parseInt(horas[0]);
+        int minuto = Integer.parseInt(horas[1]);
+        
+        if(minuto >= 30)
+        {
+            hora++;
+            minuto = 0;
+        }
+        else if( minuto == 0)
+        {
+            minuto = 00;
+        }
+        else 
+        {
+            minuto = 30;
+        }
+        if(hora < 7)
+            hora = 7;
+        if(hora > 19)
+            hora = 7;
+        horario = hora <10 ? "0"+hora : ""+hora;
+        
+        horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
+        
+        return horario;
+    }
+    
+    private String tratarDataConsulta()
+    {
+        String data = TextFieldConsultaData.getText(); 
+        return data;
     }
     
     private void tratarMenuInserirDados(String estadoConsulta)
     {
-        if(estadoConsulta.equals("Atendido") || estadoConsulta.equals("Diagnostico"))
+        if(estadoConsulta.equals("Diagnostico"))
         {
-            //IdECli não mostra
+            ComboBoxInserirMarcacao.setVisible(true);
+            LabelInserirMarcacao.setVisible(true);
+            LabelDiagnostico.setVisible(true);
+            TextFieldSintomas.setVisible(true);
+            LabelSintomas.setVisible(true);
+            TextFieldDiagnostico.setVisible(true);
+            LabelInserirIdECli.setVisible(false);
+            ComboBoxInserirIdECli.setVisible(false);
+            LabelInserirPrescricoes.setVisible(false);
+            TextFieldInserirPrescricoes.setVisible(false);
+            LabelInserirIdUtente.setVisible(true);
+            TextFieldInserirIdUtente.setVisible(true);
+            
+            LabelInserirTipoOcorrencia.setVisible(true);
+            ComboBoxInserirTipoOcorrencia.setVisible(true);
+            
+            
+            
         }
         else if(estadoConsulta.equals("Prescrever Medicamentos"))
         {
-            System.out.println("Prescrever Medicamentos");
+            ComboBoxInserirMarcacao.setVisible(false);
+            LabelInserirMarcacao.setVisible(false);
+            LabelDiagnostico.setVisible(false);
+            TextFieldSintomas.setVisible(false);
+            LabelSintomas.setVisible(false);
+            TextFieldDiagnostico.setVisible(false);
+            LabelInserirIdECli.setVisible(true);
+            ComboBoxInserirIdECli.setVisible(true);
+            LabelInserirPrescricoes.setVisible(true);
+            TextFieldInserirPrescricoes.setVisible(true);
+            LabelInserirIdUtente.setVisible(false);
+            TextFieldInserirIdUtente.setVisible(false);
+            
+            LabelInserirTipoOcorrencia.setVisible(false);
+            ComboBoxInserirTipoOcorrencia.setVisible(false);
         }
-        else if(estadoConsulta.equals("Exame"))
+        else if(estadoConsulta.equals("Exame") || estadoConsulta.equals("Analises"))
         {
-            System.out.println("Exame");
+            ComboBoxInserirMarcacao.setVisible(false);
+            LabelInserirMarcacao.setVisible(false);
+            LabelDiagnostico.setVisible(false);
+            TextFieldSintomas.setVisible(false);
+            LabelSintomas.setVisible(false);
+            TextFieldDiagnostico.setVisible(false);
+            LabelInserirIdECli.setVisible(true);
+            ComboBoxInserirIdECli.setVisible(true);
+            LabelInserirPrescricoes.setVisible(false);
+            TextFieldInserirPrescricoes.setVisible(false);
+            LabelInserirIdUtente.setVisible(false);
+            TextFieldInserirIdUtente.setVisible(false);
+            
+            LabelInserirTipoOcorrencia.setVisible(false);
+            ComboBoxInserirTipoOcorrencia.setVisible(false);
         }
-        else if(estadoConsulta.equals("Analises"))
-        {
-            System.out.println("Analises");
-        }
-    
+        
     
     }
-
+    
+    private void adicionarMarcacoes(ArrayList<String> marcacoes)
+    {
+        ComboBoxInserirMarcacao.removeAllItems();
+        ComboBoxInserirMarcacao.addItem("--Escolha--");
+        
+        for(int i = 0 ; i < marcacoes.size() ; i++)
+        {
+            ComboBoxInserirMarcacao.addItem(marcacoes.get(i));
+            
+        }
+    
+    }
+    
+    
+    private void tratarPrescrever()
+    {
+        //Id Anexo
+        String idAnexo = buscarIdAnexo();
+        
+        
+        //Receber ID
+        String idECli = ComboBoxInserirIdECli.getSelectedItem().toString();
+        if(ComboBoxInserirIdECli.equals("--Escolha--"))
+        {
+            JOptionPane.showMessageDialog(null, "IdEpisodioClinico inválido.", "Erro IdEpisodioClinico ", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Receber String
+        String descricao = TextFieldInserirPrescricoes.getText();
+        if(descricao.length() > 300)
+        {
+            JOptionPane.showMessageDialog(null, "A prescricao não pode conter mais de 300 caracteres.", "Erro Prescricao", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Gerar o Anexo
+        //Consulta.gerarAnexo(idAnexo, descricao, "3", idECli);
+        
+    }
+    
+    private String buscarIdAnexo()
+    {
+        int idAnexo =Integer.parseInt( Consulta.buscarUltimoIdAnexo());
+        idAnexo++;
+        return ""+idAnexo;
+    
+    }
+    
+    private void adicionarEpisodiosClinicos(ArrayList<String> idECli)
+    {
+        ComboBoxInserirIdECli.removeAllItems();
+        ComboBoxInserirIdECli.addItem("--Escolha--");
+        
+        for(int i = 0 ; i < idECli.size() ; i++)
+        {
+            ComboBoxInserirIdECli.addItem(idECli.get(i));
+            
+        }
+    
+    }
     
     /**
      * @param args the command line arguments
@@ -2055,6 +2414,9 @@ public class GissUI extends javax.swing.JFrame
     private javax.swing.JComboBox<String> ComboBoxConsultas;
     private javax.swing.JComboBox<String> ComboBoxEstadoConsulta;
     private javax.swing.JComboBox<String> ComboBoxIdECli;
+    private javax.swing.JComboBox<String> ComboBoxInserirIdECli;
+    private javax.swing.JComboBox<String> ComboBoxInserirMarcacao;
+    private javax.swing.JComboBox<String> ComboBoxInserirTipoOcorrencia;
     private javax.swing.JComboBox<String> ComboBoxMarcacao;
     private javax.swing.JComboBox<String> ComboBoxNome;
     private javax.swing.JComboBox<String> ComboBoxNumSemana;
@@ -2062,9 +2424,16 @@ public class GissUI extends javax.swing.JFrame
     private javax.swing.JComboBox<String> ComboBoxTipoHorario;
     private javax.swing.JComboBox<String> ComboBoxTipoReserva;
     private javax.swing.JLabel LabelDataReserva;
+    private javax.swing.JLabel LabelDiagnostico;
+    private javax.swing.JLabel LabelInserirIdECli;
+    private javax.swing.JLabel LabelInserirIdUtente;
+    private javax.swing.JLabel LabelInserirMarcacao;
+    private javax.swing.JLabel LabelInserirPrescricoes;
+    private javax.swing.JLabel LabelInserirTipoOcorrencia;
     private javax.swing.JLabel LabelReservar;
     private javax.swing.JLabel LabelReservasDisponiveis;
     private javax.swing.JLabel LabelReservasEscolhidas;
+    private javax.swing.JLabel LabelSintomas;
     private javax.swing.JList<String> ListAnalises;
     private javax.swing.JList<String> ListExames;
     private javax.swing.JList<String> ListPrescricoes;
@@ -2078,6 +2447,8 @@ public class GissUI extends javax.swing.JFrame
     private javax.swing.JTabbedPane TabbedMenu;
     private javax.swing.JTable TabelaHorario;
     private javax.swing.JTable TableUtente;
+    private javax.swing.JTextField TextFieldConsultaData;
+    private javax.swing.JTextField TextFieldConsultaHoras;
     private javax.swing.JTextField TextFieldData;
     private javax.swing.JTextField TextFieldDataReserva;
     private javax.swing.JTextField TextFieldDescricaoAnexo;
@@ -2085,15 +2456,14 @@ public class GissUI extends javax.swing.JFrame
     private javax.swing.JTextField TextFieldHoraReserva;
     private javax.swing.JTextField TextFieldHoras;
     private javax.swing.JTextField TextFieldIdUtente;
+    private javax.swing.JTextField TextFieldInserirIdUtente;
+    private javax.swing.JTextField TextFieldInserirPrescricoes;
     private javax.swing.JTextField TextFieldMotivoMarcacao;
     private javax.swing.JTextField TextFieldReservaUtente;
     private javax.swing.JTextField TextFieldSintomas;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -2101,11 +2471,8 @@ public class GissUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2122,7 +2489,5 @@ public class GissUI extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
