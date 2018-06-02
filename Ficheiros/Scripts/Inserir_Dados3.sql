@@ -1606,7 +1606,7 @@ INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
 VALUES(2, 'Exame');
 
 INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
-VALUES(3, 'Pescricoes');
+VALUES(3, 'Prescricoes');
 
 
 -- Anexo(IdAnexo,Descricao,IdTipoAnexo)------------
