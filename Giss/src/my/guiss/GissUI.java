@@ -230,8 +230,6 @@ public class GissUI extends javax.swing.JFrame {
             }
         });
 
-        TextFieldReservaUtente.setText("IdUtente");
-
         ButtonReservar.setText("Reservar");
         ButtonReservar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,19 +240,14 @@ public class GissUI extends javax.swing.JFrame {
         TextFieldMotivoMarcacao.setText("Motivo da marcação");
 
         TextFieldHoras.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        TextFieldHoras.setText("14:24");
+        TextFieldHoras.setText("7:45");
 
-        TextFieldData.setText("2018-05-31");
+        TextFieldData.setText("2018-05-21");
 
         TextFieldDataReserva.setText("2018-05-18");
 
         TextFieldHoraReserva.setText("07:30");
 
-        ListReservasDisponiveis.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "1 - Ana maria", "2 - Dário Santos", "3 - Seringa", "4 - Seringa", "5 - Sala de operação", "6 - Sala de estar", "7 - Ana malhoa maravilha" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListReservasDisponiveis.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ListReservasDisponiveis.setToolTipText("");
         ListReservasDisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -286,9 +279,9 @@ public class GissUI extends javax.swing.JFrame {
 
         LabelReservasEscolhidas.setText("Escolhido:");
 
-        LabelReservasDisponiveis.setText("Disponiveis:");
+        LabelReservasDisponiveis.setText("Todos:");
 
-        LabelReservar.setText("Reservar:");
+        LabelReservar.setText("Marcar");
 
         jLabel8.setText("IdUtente:");
 
@@ -357,7 +350,7 @@ public class GissUI extends javax.swing.JFrame {
                         .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
         PanelMarcacaoLayout.setVerticalGroup(
@@ -366,9 +359,9 @@ public class GissUI extends javax.swing.JFrame {
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(24, 24, 24)
                 .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelMarcacaoLayout.createSequentialGroup()
                         .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,9 +570,12 @@ public class GissUI extends javax.swing.JFrame {
     private void ButtonReservarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonReservarMouseClicked
         // TODO add your handling code here:
         
-        //marcacaoSequencial();
+        String tipoMarcacao = ComboBoxMarcacao.getSelectedItem().toString();
+        if(tipoMarcacao.equals("Sequencial"))
+            marcacaoSequencial();
         
-        marcacaoPrevia();
+        if(tipoMarcacao.equals("Previa"))
+            marcacaoPrevia();
         
     }//GEN-LAST:event_ButtonReservarMouseClicked
 
@@ -720,34 +716,57 @@ public class GissUI extends javax.swing.JFrame {
         //Ver se todos os colaboradores, recursos e locais estão disponiveis
         //Separar a lista em 3, colaboradores, recursos e locais
         //tratarColaboradores
-        ArrayList<String> colaboradores = tratarColaboradores();
+        ArrayList<String> colaboradores = tratarColaboradores();    
+        if(colaboradores.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Tem que marcar pelo menos um colaborador", "Erro sem colaborador", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         ArrayList<String> locais = tratarLocal();
+        if(locais.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Tem que marcar pelo menos uma sala", "Erro sem sala", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         ArrayList<String> recursos = tratarRecurso();
         
         
         //ver quando é que estão todos disponiveis
-        Marcacao.buscarHorariosParaReserva(colaboradores, locais, recursos, data, hora);
-    
+        ArrayList<String> resultados = Marcacao.buscarHorariosParaReserva(colaboradores, locais, recursos, data, hora);     
+        if(resultados.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
-        //reservar a primeira meia hora livre da sala, colaborador e recurso
-        //ArrayList<String> resultados = Marcacao.buscarHorariosDisponiveis(data, hora);
+        String split[] = resultados.get(0).split(" ");
+        Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+       
+        //Colaborador
+        for(int i = 0 ; i < colaboradores.size(); i++)
+        {
+            Marcacao.atualizarHorarioTrabalho(split[i]);
+            Marcacao.gerarMarcar(idMarcacao, split[i]);
+        }
         
-        //if(resultados.isEmpty())
-        //{
-        //    JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-        //String split[] = resultados.get(0).split(" ");
+        //Local
+        for(int i = colaboradores.size() ; i < (colaboradores.size()+locais.size()) ; i++)
+        {
+            
+            Marcacao.atualizarHorarioLocal(split[i]);
+            Marcacao.gerarEscolhe(idMarcacao, split[i]);
         
-        //Marcacao.atualizarHorarioTrabalho(split[0]);
-        //Marcacao.atualizarHorarioLocal(split[1]);
+        }
+        //Recursos
+        for(int i = locais.size() + colaboradores.size() ; i < (colaboradores.size()+locais.size()+recursos.size()) ; i++)
+        {
+            Marcacao.atualizarHorarioRecurso(split[i]);
+            Marcacao.gerarPrograma(idMarcacao, split[i]);
         
-        //Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+        }
+        JOptionPane.showMessageDialog(null,"A sua marcação ficou para a data: "+data +" e hora: "+hora , "Sucesso na marcação", JOptionPane.INFORMATION_MESSAGE);
+
         
-        //gerar marcar
-        //Marcacao.gerarMarcar(idMarcacao, split[0]);
-        //gerar escolhe
-        //Marcacao.gerarEscolhe(idMarcacao, split[1]);
     }
     
     private String tratarReservaHora()
@@ -762,6 +781,10 @@ public class GissUI extends javax.swing.JFrame {
             hora++;
             minuto = 0;
         }
+        else if(minuto == 0)
+        {
+            minuto = 0;
+        }
         else
         {
             minuto = 30;
@@ -773,7 +796,7 @@ public class GissUI extends javax.swing.JFrame {
         horario = hora <10 ? "0"+hora : ""+hora;
         
         horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
-        System.out.println(horario);
+        
         return horario;
     }
     
@@ -800,9 +823,7 @@ public class GissUI extends javax.swing.JFrame {
             
             
         }
-        for(int i = 0 ; i < resultados.size() ; i++)
-            System.out.println("Colaborador_Resultados: ["+ i+"] = "+resultados.get(i));
-        
+       
         return resultados;
     }
     
@@ -823,9 +844,7 @@ public class GissUI extends javax.swing.JFrame {
             
             
         }
-        for(int i = 0 ; i < resultados.size() ; i++)
-            System.out.println("Local_Resultados: ["+ i+"] = "+resultados.get(i));
-        
+      
         return resultados;
     }
     
@@ -846,9 +865,7 @@ public class GissUI extends javax.swing.JFrame {
             
             
         }
-        for(int i = 0 ; i < resultados.size() ; i++)
-            System.out.println("Recurso_Resultados: ["+ i+"] = "+resultados.get(i));
-        
+   
         return resultados;
     }
     //Marcação sequencial
@@ -861,7 +878,6 @@ public class GissUI extends javax.swing.JFrame {
         try{
             int teste = Integer.parseInt(tratarIdUtente());
             idUtente = tratarIdUtente();
-            System.out.println("AQUI");
             if(!Marcacao.isIdUtenteValido(idUtente))
             {
                 JOptionPane.showMessageDialog(null, "IdUtente inválido, Utente não existe", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
@@ -903,6 +919,8 @@ public class GissUI extends javax.swing.JFrame {
         //gerar escolhe
         Marcacao.gerarEscolhe(idMarcacao, split[1]);
         
+        JOptionPane.showMessageDialog(null,"A sua marcação ficou para a data: "+data +" e hora: "+hora , "Sucesso na marcação", JOptionPane.INFORMATION_MESSAGE);
+
         
     }
     
@@ -944,7 +962,11 @@ public class GissUI extends javax.swing.JFrame {
             hora++;
             minuto = 0;
         }
-        else
+        else if( minuto == 0)
+        {
+            minuto = 00;
+        }
+        else 
         {
             minuto = 30;
         }
@@ -955,7 +977,7 @@ public class GissUI extends javax.swing.JFrame {
         horario = hora <10 ? "0"+hora : ""+hora;
         
         horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
-        System.out.println(horario);
+        
         return horario;
     }
     
@@ -1211,7 +1233,8 @@ public class GissUI extends javax.swing.JFrame {
     }
     
     private ArrayList<String> tratarSemana(String ano)
-    {
+    {     
+        
         if(ComboBoxNumSemana.getSelectedItem().toString().equals("N. da Semana"))
         {
             return new ArrayList<String>();

@@ -154,7 +154,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="TextFieldHoras" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="1" min="-2" pref="985" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" min="-2" pref="985" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
@@ -167,9 +167,9 @@
                           <Component id="TextFieldHoras" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="TextFieldData" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="376" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -428,9 +428,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="TextFieldReservaUtente">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="IdUtente"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonReservar">
               <Properties>
@@ -450,12 +447,12 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="14:24"/>
+                <Property name="text" type="java.lang.String" value="7:45"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="TextFieldData">
               <Properties>
-                <Property name="text" type="java.lang.String" value="2018-05-31"/>
+                <Property name="text" type="java.lang.String" value="2018-05-21"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="TextFieldDataReserva">
@@ -478,15 +475,7 @@
                 <Component class="javax.swing.JList" name="ListReservasDisponiveis">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="7">
-                        <StringItem index="0" value="1 - Ana maria"/>
-                        <StringItem index="1" value="2 - D&#xe1;rio Santos"/>
-                        <StringItem index="2" value="3 - Seringa"/>
-                        <StringItem index="3" value="4 - Seringa"/>
-                        <StringItem index="4" value="5 - Sala de opera&#xe7;&#xe3;o"/>
-                        <StringItem index="5" value="6 - Sala de estar"/>
-                        <StringItem index="6" value="7 - Ana malhoa maravilha"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                     <Property name="selectionMode" type="int" value="0"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -552,12 +541,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="LabelReservasDisponiveis">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Disponiveis:"/>
+                <Property name="text" type="java.lang.String" value="Todos:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelReservar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reservar:"/>
+                <Property name="text" type="java.lang.String" value="Marcar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">

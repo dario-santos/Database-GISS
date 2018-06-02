@@ -65,11 +65,10 @@ public class Marcacao
             
             rs = stmt.executeQuery(sql);  
             
-            System.out.println("QUI TOU AQUI");
             // Iterate through the data in the result set and display it.  
             while (rs.next()) 
             {  
-                System.out.println("QUI TOU AQUI");
+                
                 resultados.add(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3)+ " " + rs.getString(4)+ " " + rs.getString(5) + " " + rs.getString(6));
             }
             
@@ -449,9 +448,7 @@ public class Marcacao
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             con = DriverManager.getConnection(connectionUrl);  
             stmt = con.createStatement(); 
-            System.out.println("idMarcacao: " + idMarcacao);
-            System.out.println("motivo: " + motivo);
-            System.out.println("idUtente: " + idUtente);
+          
             String sql = "INSERT INTO Marcacao" +
                          " VALUES (" + idMarcacao + ",'" + motivo + "'," + idUtente + ");";
           
@@ -526,6 +523,42 @@ public class Marcacao
             stmt = con.createStatement(); 
             String sql = "INSERT INTO Escolhe" +
                          " VALUES (" + idMarcacao + "," + idHorarioLocal +");" ;
+          
+         
+            stmt.executeUpdate(sql);  
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+    }
+     
+    public static void gerarPrograma(String idMarcacao,String idHorarioRecurso)
+    {
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            String sql = "INSERT INTO Programa" +
+                         " VALUES (" + idMarcacao + "," + idHorarioRecurso +");" ;
           
          
             stmt.executeUpdate(sql);  
@@ -763,6 +796,16 @@ public class Marcacao
         
     }
     
+    
+    /**
+     * 
+     * @param colaboradores
+     * @param locais
+     * @param recursos
+     * @param data
+     * @param horaInicio
+     * @return IdHorarioTrabalho(...) IdHorarioLocal(..) IdHorarioRecursos(...)
+     */
     public static ArrayList<String> buscarHorariosParaReserva(ArrayList<String> colaboradores, ArrayList<String> locais, ArrayList<String> recursos, String data, String horaInicio)
     {
         ArrayList<String> resultados = new ArrayList<>();
@@ -781,35 +824,124 @@ public class Marcacao
             // Establish the connection.  
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             con = DriverManager.getConnection(connectionUrl);  
-            stmt = con.createStatement(); 
+            stmt = con.createStatement();
             String sql = "";
+            
+           
+            //Colaborador
+            String select = "SELECT HT0.IdHorarioTrabalho";
             String from = " FROM Colaborador C0, HorarioTrabalho HT0";
             String where = " WHERE C0.IdColaborador= HT0.IdColaborador "; 
+            String fim = "";
+            //Colaborador
             for(int i = 0 ; i < colaboradores.size()  ; i++)
             {
-                if(i > 0)
-                    from +=   ", Colaborador C"+i+", HorarioTrabalho HT"+i;
                 
+                if(i > 0)
+                {
+                    select += ", HT"+i+".IdHorarioTrabalho ";
+                    from += ", Colaborador C"+i+", HorarioTrabalho HT"+i;
+                    
+                }
                 where  += " AND C"+i+".IdColaborador = " + colaboradores.get(i).split(" - ")[0]
                         + " AND HT"+i+".IdColaborador = C"+i+".IdColaborador"
                         + " AND HT"+i+".Data >= '"+ data+"'"
                         + " AND HT"+i+".HoraInicio >= '"+ horaInicio+"'"
                         + " AND HT"+i+".Disponibilidade = 'T'";
+                
+                if(i > 0)
+                {
+                    fim += " AND HT"+(i-1)+".Data = HT"+i+".Data "
+                        +  " AND HT"+(i-1)+".HoraInicio = HT"+i+".HoraInicio ";
+                }
             
             }
             
-            sql = "SELECT * "+ from + where;
-            System.out.println("sql:\n" + sql);
-            //rs = stmt.executeQuery(sql);  
+            //Locais
+            for(int i = 0 ; i < locais.size() ; i++)
+            {
+                select += ", HL"+i+".IdHorarioLocal";
+                from +=   ", Local L"+i+", HorarioLocal HL"+i;
+                
+                where  += " AND L"+i+".IdLocal = " + locais.get(i).split(" - ")[0]
+                        + " AND HL"+i+".IdLocal = L"+i+".IdLocal"
+                        + " AND HL"+i+".Data >= '"+data+"'"
+                        + " AND HL"+i+".HoraInicio >= '"+horaInicio+"'"
+                        + " AND HL"+i+".Disponibilidade = 'T'";
+                
+                if(i >= 0)
+                {
+                    for(int j  = 0 ; j < colaboradores.size()  ; j++)
+                    {
+                        fim += " AND HT"+(j)+".Data = HL"+i+".Data "
+                            +  " AND HT"+(j)+".HoraInicio = HL"+(i)+".HoraInicio";
+                    }
+                }
+                if(i >= 1)
+                {
+                    fim += " AND HL"+(i-1)+".Data = HL"+i+".Data "
+                         + " AND HL"+(i-1)+".HoraInicio = HL"+i+".HoraInicio";
+                }
+            }
+            
+            //Recursos
+            for(int i = 0 ; i < recursos.size() ; i++)
+            {
+                select += ", HR"+i+".IdHorarioRecurso";
+                
+                from +=   ", Recurso R"+i+", HorarioRecurso HR"+i;
+                
+                where  += " AND R"+i+".IdRecurso = " + recursos.get(i).split(" - ")[0]
+                        + " AND HR"+i+".IdRecurso = R"+i+".IdRecurso"
+                        + " AND HR"+i+".Data >= '"+data+"'"
+                        + " AND HR"+i+".HoraInicio >= '"+horaInicio+"'"
+                        + " AND HR"+i+".Disponibilidade = 'T'";
+                
+                if(i >= 0)
+                {
+                    for(int j  = 0 ; j < colaboradores.size()  ; j++)
+                    {
+                        fim += " AND HT"+(j)+".Data = HR"+i+".Data "
+                            +  " AND HT"+(j)+".HoraInicio = HR"+(i)+".HoraInicio";
+                    }
+                    
+                    for(int j  = 0 ; j < locais.size()  ; j++)
+                    {
+                        fim += " AND HL"+(j)+".Data = HR"+i+".Data "
+                            +  " AND HL"+(j)+".HoraInicio = HR"+(i)+".HoraInicio";
+                    }
+                    
+                }
+                
+                if(i >= 1)
+                {
+                    fim += " AND HR"+(i-1)+".Data = HR"+i+".Data "
+                        +  " AND HR"+(i-1)+".HoraInicio = HR"+i+".HoraInicio";
+                }
+            }
+            
+            sql = select + " " + from + " " + where + " " + fim;
+            
+            
+            
+            rs = stmt.executeQuery(sql);  
            
             
             // Iterate through the data in the result set and display it.  
             while (rs.next()) 
-            {  
+            {
                 
-                resultados.add(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+                String resultado = "";
+                for(int i = 1 ; i <= ( colaboradores.size() + locais.size() + recursos.size()) ; i++)
+                {
+                    resultado += rs.getString(i) + " ";
+                }
+                
+                resultados.add(resultado);
+               
             }
         }
+        
         // Handle any errors that may have occurred.  
         catch (Exception e) 
         {  
