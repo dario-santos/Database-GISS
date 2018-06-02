@@ -2067,7 +2067,7 @@ public class GissUI extends javax.swing.JFrame
         }
         else if(estadoConsulta.equals("Prescrever Medicamentos"))
         {
-        
+            tratarPrescrever();
         
         
         }
