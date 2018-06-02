@@ -463,8 +463,23 @@ CREATE TABLE HorarioLocal(
 );
 END
 
+-- Estado(IdEstado, Descricao) ...........................................
 
--- EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico) ............................................................................
+if not exists (select * from dbo.sysobjects 
+               where id = object_id(N'[dbo].[Estado]') )
+
+BEGIN 
+CREATE TABLE Estado(
+	IdEstado int NOT NULL
+		CHECK(IdEstado > 0),
+	Descricao nvarchar(30) NOT NULL,
+
+	CONSTRAINT PK_IdEstado PRIMARY KEY (IdEstado)
+
+);
+END
+
+-- EpisodioClinico(IdECli, Observacao, IdEstado, IdTO, IdUtente, IdHistoricoClinico) ............................................................................
 
 if not exists (select * from dbo.sysobjects
 			   where id = object_id(N'[dbo].[EpisodioClinico]'))
@@ -474,6 +489,7 @@ begin
             CONSTRAINT PK_IdECli PRIMARY KEY (IdECli)
 			CHECK (IdECli >= 1),
         Observacao nvarchar(300) NOT NULL,
+		IdEstado int NOT NULL,
 		IdTO int NOT NULL,
         IdUtente int NOT NULL,
         IdHistoricoClinico int NOT NULL,
@@ -490,6 +506,11 @@ begin
 
         CONSTRAINT FK_EpisodioClinico_IdHistoricoClinico FOREIGN KEY (IdHistoricoClinico)
             REFERENCES HistoricoClinico(IdHistoricoClinico)
+            ON UPDATE CASCADE
+			ON DELETE NO ACTION,
+
+		CONSTRAINT FK_EpisodioClinico_IdEstado FOREIGN KEY (IdEstado)
+            REFERENCES Estado(IdEstado)
             ON UPDATE CASCADE
 			ON DELETE NO ACTION
 
@@ -768,30 +789,6 @@ begin
     );
 end
 
--- Anexar(IdAnexo,IdECli)-----------------------
-
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Anexar]') )
-
-begin 
-    CREATE TABLE Anexar (
-        IdAnexo int NOT NULL,
-
-        IdECli int
-            CONSTRAINT nn_IdEcli NOT NULL,
-
-        CONSTRAINT PK_Anexar PRIMARY KEY (IdAnexo, IdECli),
-
-        CONSTRAINT FK_IdAnexo_Anexar FOREIGN KEY (IdAnexo) 
-            REFERENCES Anexar(IdAnexo)
-            ON UPDATE CASCADE,
-
-        CONSTRAINT FK_IdECli_Anexar FOREIGN KEY (IdECli)
-            REFERENCES EpisodioClinico(IdECli)
-            ON UPDATE CASCADE
-    );
-end
-
 
 -- TipoAnexo(IdTipoAnexo,Descricao)--
 
@@ -802,8 +799,8 @@ BEGIN
 CREATE TABLE TipoAnexo(
     IdTipoAnexo int NOT NULL
         CONSTRAINT PK_IdTipoAnexo PRIMARY KEY(IdTipoAnexo)
-        CHECK(IdTipoAnexo >0),
-    Descricao nvarchar(50) NOT NULL
+        CHECK(IdTipoAnexo > 0),
+    Descricao nvarchar(30) NOT NULL
 
 );
 END
@@ -829,6 +826,29 @@ CREATE TABLE Anexo(
 );
 END
 
+-- Anexar(IdAnexo,IdECli) ...........................
+
+if not exists (select * from dbo.sysobjects 
+               where id = object_id(N'[dbo].[Anexar]') )
+
+begin 
+    CREATE TABLE Anexar (
+        IdAnexo int NOT NULL,
+
+        IdECli int
+            CONSTRAINT nn_IdEcli NOT NULL,
+
+        CONSTRAINT PK_Anexar PRIMARY KEY (IdAnexo),
+
+        CONSTRAINT FK_IdAnexo_Anexar FOREIGN KEY (IdAnexo) 
+            REFERENCES Anexo(IdAnexo)
+            ON UPDATE CASCADE,
+
+        CONSTRAINT FK_IdECli_Anexar FOREIGN KEY (IdECli)
+            REFERENCES EpisodioClinico(IdECli)
+            ON UPDATE CASCADE
+    );
+end
 
 
 
