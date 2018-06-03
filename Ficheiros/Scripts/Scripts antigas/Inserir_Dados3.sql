@@ -1501,6 +1501,103 @@ INSERT INTO Progride(IdECliInicial, IdECliDerivado)
 Values (8, 9);
 
 
+-- Marcar(IdMarcacao,IdHorarioTrabalho) ------------
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (1,1 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (2,2 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (3,3 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (4,4 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (5,5 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (6,6 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (7,7 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (8,8 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (9,9 );
+
+INSERT INTO Marcar(IdMarcacao,IdHorarioTrabalho)
+Values (10,10);
+
+-- Programa(IdMarcacao,IdHorarioRecurso)
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (1,1);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (2,2);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (3,3);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (4,4);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (5,5);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (6,6);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (7,7);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (8,8);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (9,9);
+
+INSERT INTO Programa(IdMarcacao,IdHorarioRecurso)
+Values (10,10);
+
+-- Escolhe(IdMarcacao,IdHorarioLocal)
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (1,1);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (2,2);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (3,3);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (4,4);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (5,5);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (6,6);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (7,7);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (8,8);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (9,9);
+
+INSERT INTO Escolhe(IdMarcacao,IdHorarioLocal)
+Values (10,10);
+
+
 -- TipoAnexo(IdTipoAnexo,Descricao)------------------
 
 INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)

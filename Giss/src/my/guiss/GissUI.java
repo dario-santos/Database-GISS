@@ -1195,9 +1195,55 @@ public class GissUI extends javax.swing.JFrame
         
         //Buscar Hora
         String hora = tratarReservaHora();
-        
+        if(hora.equals("break"))
+        {
+            JOptionPane.showMessageDialog(null, "Hora inválida, hora tem que ser no formato hh:mm", "Erro Hora", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         //Buscar data
         String data = tratarReservaData();
+        String dataSplit[] = data.split("-");
+        if(dataSplit.length != 3)
+        {
+            JOptionPane.showMessageDialog(null, "Data inválida, data tem que ser no formato AAAA-MM-DD", "Erro Data", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try{
+            int anoTeste = Integer.parseInt(dataSplit[0]);
+            int mesTeste = Integer.parseInt(dataSplit[1]);
+            int diaTeste = Integer.parseInt(dataSplit[2]);
+            
+            if(anoTeste > 9999 || anoTeste <=0)
+            {
+                JOptionPane.showMessageDialog(null, "Ano inválido, tem que ser AAAA-MM-DD", "Erro ano", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(mesTeste > 12 || mesTeste <=0)
+            {
+                JOptionPane.showMessageDialog(null, "Mes inválido, tem que ser AAAA-MM-DD", "Erro mes", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(diaTeste > 31 || diaTeste <=0)
+            {
+                JOptionPane.showMessageDialog(null, "Mes inválido, tem que ser AAAA-MM-DD", "Erro mes", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Data inválida, data tem que ser no formato AAAA-MM-DD", "Erro Data", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
+        
+        
+        
+        
+        
        
         //Ver se todos os colaboradores, recursos e locais estão disponiveis
         //Separar a lista em 3, colaboradores, recursos e locais
@@ -1259,9 +1305,18 @@ public class GissUI extends javax.swing.JFrame
     {
         String horas[] = TextFieldHoraReserva.getText().split(":");
         String horario ="";
-        int hora = Integer.parseInt(horas[0]);
-        int minuto = Integer.parseInt(horas[1]);
+        int hora = 0;
+        int minuto = 0;
+        try{
+            hora = Integer.parseInt(horas[0]);
+            minuto = Integer.parseInt(horas[1]);
         
+        }
+        catch(NumberFormatException e)
+        {
+            return "break";
+        
+        }
         if(minuto >= 30)
         {
             hora++;
@@ -1288,7 +1343,7 @@ public class GissUI extends javax.swing.JFrame
     
     private String tratarReservaData()
     {
-        String data = TextFieldDataReserva.getText(); 
+        String data = TextFieldDataReserva.getText();
         return data;
     }
     

@@ -463,23 +463,8 @@ CREATE TABLE HorarioLocal(
 );
 END
 
--- Estado(IdEstado, Descricao) ...........................................
 
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Estado]') )
-
-BEGIN 
-CREATE TABLE Estado(
-	IdEstado int NOT NULL
-		CHECK(IdEstado > 0),
-	Descricao nvarchar(30) NOT NULL,
-
-	CONSTRAINT PK_IdEstado PRIMARY KEY (IdEstado)
-
-);
-END
-
--- EpisodioClinico(IdECli, Observacao, IdEstado, IdTO, IdUtente, IdHistoricoClinico) ............................................................................
+-- EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico) ............................................................................
 
 if not exists (select * from dbo.sysobjects
 			   where id = object_id(N'[dbo].[EpisodioClinico]'))
@@ -489,7 +474,6 @@ begin
             CONSTRAINT PK_IdECli PRIMARY KEY (IdECli)
 			CHECK (IdECli >= 1),
         Observacao nvarchar(300) NOT NULL,
-		IdEstado int NOT NULL,
 		IdTO int NOT NULL,
         IdUtente int NOT NULL,
         IdHistoricoClinico int NOT NULL,
@@ -506,11 +490,6 @@ begin
 
         CONSTRAINT FK_EpisodioClinico_IdHistoricoClinico FOREIGN KEY (IdHistoricoClinico)
             REFERENCES HistoricoClinico(IdHistoricoClinico)
-            ON UPDATE CASCADE
-			ON DELETE NO ACTION,
-
-		CONSTRAINT FK_EpisodioClinico_IdEstado FOREIGN KEY (IdEstado)
-            REFERENCES Estado(IdEstado)
             ON UPDATE CASCADE
 			ON DELETE NO ACTION
 
@@ -592,7 +571,7 @@ begin
     );
 end
 
--- Marcacao(IdMarcacao, Motivo,IdUtente) ..........................
+-- Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente) ..........................
 
 if not exists (select * from dbo.sysobjects 
                where id = object_id(N'[dbo].[Marcacao]') )
@@ -603,10 +582,21 @@ CREATE TABLE Marcacao(
 		CONSTRAINT PK_IdMarcacao PRIMARY KEY(IdMarcacao)
 		CHECK(IdMarcacao >0),
 	Motivo nvarchar(300) NOT NULL,
+	IdHorarioLocal int NOT NULL,
+	IdHorarioTrabalho int NOT NULL,
 	IdUtente int NOT NULL,
 
+	CONSTRAINT FK_Marcacao_IdHorarioLocal FOREIGN KEY(IdHorarioLocal)
+		REFERENCES HorarioLocal(IdHorarioLocal)
+		ON UPDATE CASCADE 
+       	ON DELETE NO ACTION,
 
-        CONSTRAINT FK_Marcacao_IdUtente FOREIGN KEY(IdUtente)
+    CONSTRAINT FK_Marcacao_IdHorarioTrabalho FOREIGN KEY(IdHorarioTrabalho)
+    	REFERENCES HorarioTrabalho(IdHorarioTrabalho)
+    	ON UPDATE CASCADE 
+       	ON DELETE NO ACTION,
+
+    CONSTRAINT FK_Marcacao_IdUtente FOREIGN KEY(IdUtente)
     	REFERENCES Utente(IdUtente)
     	ON UPDATE CASCADE 
        	ON DELETE NO ACTION
@@ -716,116 +706,3 @@ CREATE TABLE Armazena(
 END
 
 
--- Marcar(IdMarcacao,IdHorarioTrabalho) .........................
-
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Marcar]') )
-begin 
-    CREATE TABLE Marcar (
-        IdMarcacao int 
-            CONSTRAINT nn_IdMarcacao NOT NULL,
-
-        IdHorarioTrabalho int
-            CONSTRAINT nn_IdHorarioTrabalho NOT NULL,
-
-        CONSTRAINT PK_Marcar PRIMARY KEY (IdHorarioTrabalho),
-
-        CONSTRAINT FK_IdMarcacao_Marcar FOREIGN KEY (IdMarcacao) 
-            REFERENCES Marcacao(IdMarcacao)
-            ON UPDATE CASCADE,
-
-        CONSTRAINT FK_IdHorarioTrabalho_Marcar FOREIGN KEY (IdHorarioTrabalho)
-            REFERENCES HorarioTrabalho(IdHorarioTrabalho)
-            ON UPDATE CASCADE
-    );
-end
-
--- Programa(IdMarcacao,IdHorarioRecurso*) ...................
-
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Programa]') )
-begin 
-    CREATE TABLE Programa(
-        IdMarcacao int 
-            CONSTRAINT nn_IdMarcacao NOT NULL,
-
-        IdHorarioRecurso int
-            CONSTRAINT nn_IdHorarioRecurso NOT NULL,
-
-        CONSTRAINT PK_Programa PRIMARY KEY (IdHorarioRecurso),
-
-        CONSTRAINT FK_IdMarcacao_Programa FOREIGN KEY (IdMarcacao) 
-            REFERENCES Marcacao(IdMarcacao)
-            ON UPDATE CASCADE,
-
-        CONSTRAINT FK_IdHorarioRecurso_Programa FOREIGN KEY (IdHorarioRecurso)
-            REFERENCES HorarioRecurso(IdHorarioRecurso)
-            ON UPDATE CASCADE
-    );
-end
-
-
--- Escolhe(IdMarcacao,IdHorarioLocal) ..........................
-
-
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Escolhe]') )
-begin 
-    CREATE TABLE Escolhe (
-        IdMarcacao int NOT NULL,
-
-        IdHorarioLocal int
-            CONSTRAINT nn_IdHorarioLocal NOT NULL,
-
-        CONSTRAINT PK_Escolhe PRIMARY KEY (IdHorarioLocal),
-
-        CONSTRAINT FK_IdMarcacao_Escolhe FOREIGN KEY (IdMarcacao) 
-            REFERENCES Marcacao(IdMarcacao)
-            ON UPDATE CASCADE,
-
-        CONSTRAINT FK_IdHorarioTrabalho_Escolhe FOREIGN KEY (IdHorarioLocal)
-            REFERENCES HorarioLocal(IdHorarioLocal)
-            ON UPDATE CASCADE
-    );
-end
-
-
--- TipoAnexo(IdTipoAnexo,Descricao)--
-
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[TipoAnexo]') )
-
-BEGIN
-CREATE TABLE TipoAnexo(
-    IdTipoAnexo int NOT NULL
-        CONSTRAINT PK_IdTipoAnexo PRIMARY KEY(IdTipoAnexo)
-        CHECK(IdTipoAnexo > 0),
-    Descricao nvarchar(30) NOT NULL
-
-);
-END
-
--- Anexo(IdAnexo,Descricao,IdTipoAnexo, IdECli)
-
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Anexo]') )
-
-BEGIN
-CREATE TABLE Anexo(
-    IdAnexo int NOT NULL
-        CONSTRAINT PK_IdAnexo PRIMARY KEY(IdAnexo)
-        CHECK(IdAnexo > 0),
-    Descricao nvarchar(300) NOT NULL,
-    IdTipoAnexo int NOT NULL,
-	IdECli int
-            CONSTRAINT nn_IdEcli NOT NULL,
-
-    CONSTRAINT FK_IdTipoAnexo FOREIGN KEY(IdTipoAnexo)
-        REFERENCES TipoAnexo(IdTipoAnexo)
-        ON UPDATE CASCADE,
-
-    CONSTRAINT FK_IdECli_Anexo FOREIGN KEY (IdECli)
-            REFERENCES EpisodioClinico(IdECli)
-            ON UPDATE CASCADE
-);
-END

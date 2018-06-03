@@ -1,5 +1,4 @@
 use Giss
-
 -- Utente(IdUtente, Nome) ............................
 
 INSERT INTO Utente(IdUtente, Nome)
@@ -1260,90 +1259,69 @@ INSERT INTO HorarioLocal(IdHorarioLocal, Data , HoraInicio, HoraFim , IdLocal, D
 Values (56, '2018-05-27', '15:30:00', '16:00:00', 14 , 'T');
 
 
---	Marcacao(IdMarcacao, Motivo,IdUtente) --
+--	Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente) --
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (1, 'Dor de barriga',1 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (1 , 'Dor de barriga', 1 , 1 , 1 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (2, 'Dor de cabeca',2 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (2 , 'Dor de cabeca', 2 , 2 , 2 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (3, 'Ma disposicao',3 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (3 , 'Ma disposicao', 3 , 3 , 3 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (4, 'Dor no peito', 4 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (4 , 'Dor no peito', 4 , 4 , 4 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (5 , 'Dor na perna',5 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (5 , 'Dor na perna', 5 , 5 , 5 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (6 , 'Tosse forte',6 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (6 , 'Tosse forte', 6 , 6 , 6 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (7 , 'Dor de costas',7 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (7 , 'Dor de costas', 7 , 7 , 7 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (8 , 'Desmaios constantes',8 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (8 , 'Desmaios constantes', 8 , 8 , 8 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (9 , 'Dificuldade a respirar',9 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (9 , 'Dificuldade a respirar', 9 , 9 , 9 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo,IdUtente)
-Values (10 , 'Falta de força',10 );
+INSERT INTO Marcacao(IdMarcacao, Motivo, IdHorarioLocal, IdHorarioTrabalho, IdUtente)
+Values (10 , 'Falta de força', 10 , 10 , 10 );
 
-INSERT INTO Marcacao(IdMarcacao, Motivo, IdUtente)
-Values (11 , 'Ansiedade' ,7)
+-- EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico) ..................
 
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
+VALUES(1,'Paciente Direcionado para Analise',1,1,1);
 
--- Estado(IdEstado, Descricao) ...................
-INSERT INTO Estado(IdEstado, Descricao)
-Values (1 , 'Atendido')
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico)
+VALUES(2,'Paciente Direccionado com emergencia para a sala de operações ',2,1,2);
 
-INSERT INTO Estado(IdEstado, Descricao)
-Values (2 , 'Diagnostico')
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
+VALUES(3,'Doente Direcionado para Medicina Geral',3,10,3);
 
-INSERT INTO Estado(IdEstado, Descricao)
-Values (3 , 'Analises')
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
+VALUES(4,'Paciente Direcionado Cardiologia',4,4,4);
 
-INSERT INTO Estado(IdEstado, Descricao)
-Values (4 , 'Exames')
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico)
+VALUES(5,'Foi Marcado para o paciente 2 sessoes de Fisioterapia ',7,7,5);
 
-INSERT INTO Estado(IdEstado, Descricao)
-Values (5 , 'Completo')
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
+VALUES(6,'Foram receitados dois rebuçados Dr.Bayard ',3,6,6);
 
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
+VALUES(7,'Paciente direccionado para Radiologia',7,7,7);
 
--- EpisodioClinico(IdECli, Observacao, IdEstado ,IdTO, IdUtente, IdHistoricoClinico) ..................
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico)
+VALUES(8,'Paciente direccionado para casa',9,8,8);
 
-INSERT INTO EpisodioClinico(IdECli, Observacao,IdEstado ,IdTO,IdUtente, IdHistoricoClinico)
-VALUES(1,'Paciente Direcionado para Analise',3,1,1,1);
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
+VALUES(9,'Doente Direcionado para a sala de operações',6,9,9);
 
-INSERT INTO EpisodioClinico(IdECli, Observacao, IdEstado,IdTO, IdUtente, IdHistoricoClinico)
-VALUES(2,'Paciente Direccionado com emergencia para a sala de operações',4,2,1,2);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao, IdEstado,IdTO,IdUtente, IdHistoricoClinico)
-VALUES(3,'Doente Direcionado para Medicina Geral',4,3,10,3);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao, IdEstado,IdTO,IdUtente, IdHistoricoClinico)
-VALUES(4,'Paciente Direcionado Cardiologia',2,4,4,4);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao, IdEstado,IdTO, IdUtente, IdHistoricoClinico)
-VALUES(5,'Foi Marcado para o paciente 2 sessoes de Fisioterapia',4,7,7,5);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao,IdEstado, IdTO,IdUtente, IdHistoricoClinico)
-VALUES(6,'Foram receitados dois rebuçados Dr.Bayard ',2,3,6,6);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao, IdEstado,IdTO,IdUtente, IdHistoricoClinico)
-VALUES(7,'Paciente direccionado para Radiologia',4,7,7,7);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao,IdEstado, IdTO, IdUtente, IdHistoricoClinico)
-VALUES(8,'Paciente direccionado para casa',5,9,8,8);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao, IdEstado,IdTO,IdUtente, IdHistoricoClinico)
-VALUES(9,'Doente Direcionado para a sala de operações',2,6,9,9);
-
-INSERT INTO EpisodioClinico(IdECli, Observacao,IdEstado, IdTO,IdUtente, IdHistoricoClinico)
-VALUES(10,'Receitado dois suplementos vitaminicos',2,3,10,10);
+INSERT INTO EpisodioClinico(IdECli, Observacao, IdTO,IdUtente, IdHistoricoClinico)
+VALUES(10,'Receitado dois suplementos vitaminicos',3,10,10);
 
 -- Reserva(IdECli, IdHorarioRecurso) .......................................
 
@@ -1411,7 +1389,6 @@ Values(10, 33);
 
 INSERT INTO Gera(IdMarcacao, IdECli)
 Values(1, 1);
-
 
 INSERT INTO Gera(IdMarcacao, IdECli)
 Values(2, 2);
@@ -1499,49 +1476,3 @@ Values (6, 7);
 
 INSERT INTO Progride(IdECliInicial, IdECliDerivado)
 Values (8, 9);
-
-
--- TipoAnexo(IdTipoAnexo,Descricao)------------------
-
-INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
-VALUES(1, 'Analise Clinica');
-
-INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
-VALUES(2, 'Exame');
-
-INSERT INTO TipoAnexo(IdTipoAnexo, Descricao)
-VALUES(3, 'Prescricoes');
-
-
--- Anexo(IdAnexo,Descricao,IdTipoAnexo, IdECli)------------
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(1, 'Raio x', 2, 2);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(2, 'Analise ao sangue', 1, 1);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(4, 'Xanax 10mg', 3, 4);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(5, 'Rebucados Dr. Bayard', 3, 6);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(6, 'Raio x', 2, 3);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(7, 'Raio x', 2, 5);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(8, 'Raio x', 2 , 7);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(9, 'Analise ao sangue', 1, 9);
-
-INSERT INTO Anexo(IdAnexo, Descricao, IdTipoAnexo, IdECli)
-VALUES(10, 'Dois Brufen 500mg', 3,10);
-
-
-
-
