@@ -140,9 +140,10 @@ public class Consulta
             String sql = "";
             
                 
-            sql =     "     SELECT DISTINCT E.IdECli, E.Observacao "
-                    + "     FROM EpisodioClinico E" 
-                    + "     WHERE E.IdUtente=" + idUtente;
+            sql =     "     SELECT DISTINCT E.IdECli, E.Observacao, Est.Descricao "
+                    + "     FROM EpisodioClinico E, Estado Est" 
+                    + "     WHERE E.IdUtente=" + idUtente
+                    + "     AND  Est.IdEstado = E.IdEstado";
          
             rs = stmt.executeQuery(sql);
             
@@ -150,7 +151,7 @@ public class Consulta
             while (rs.next()) 
             {  
                 
-                resultados.add(rs.getString(1) + " - " + rs.getString(2));
+                resultados.add(rs.getString(1) + " - " + rs.getString(2) + " - " + rs.getString(3));
             }
         }
         // Handle any errors that may have occurred.  
@@ -426,7 +427,6 @@ public class Consulta
         return idAnexo;
     }
      
-     
     public static String buscarUltimoIdHistoricoClinico()
     {
         String idAnexo = "";
@@ -647,4 +647,132 @@ public class Consulta
         return idAnexo;
     }
     
+    public static void gerarAnexo(String idAnexo, String descricao, String idTipoAnexo, String idECli)
+    {
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+          
+            String sql = "INSERT INTO Anexo" +
+                         " VALUES (" + idAnexo + ",'" + descricao + "'," + idTipoAnexo + ","+ idECli+");";
+          
+            
+            stmt.executeUpdate(sql);  
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+    }
+    
+    
+    public static void atualizarEpisodioClinico(String idECli, String estado)
+    {
+    // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            
+            String sql = "UPDATE EpisodioClinico "
+                    + "   SET IdEstado = "+ estado
+                    + "   WHERE IdECli= "+ idECli;
+          
+         
+            stmt.executeUpdate(sql);  
+           
+            
+
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+    }
+    
+    
+    public static String buscarIdUtenteEC(String idECli)
+    {
+        String resultado = "";
+        
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            String sql = "    SELECT E.IdUtente "
+                       + "    FROM EpisodioClinico E "
+                       + "    WHERE E.IdECli = " + idECli;
+            
+            
+         
+            rs = stmt.executeQuery(sql);  
+           
+            
+            // Iterate through the data in the result set and display it.  
+            while (rs.next()) 
+            {  
+                
+                resultado = rs.getString(1);
+            }
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+        return resultado;
+    }
 }
