@@ -37,26 +37,26 @@ public class Marcacao
             if("HorarioTrabalho".equals(tipo))     
             {
 
-                sql =   "SELECT *\n" +
-                        "FROM HorarioTrabalho T, Colaborador C\n" +
-                        "WHERE T.IdColaborador =  C.IdColaborador"
+                sql =   " SELECT * " +
+                        " FROM HorarioTrabalho T, Colaborador C " +
+                        " WHERE T.IdColaborador =  C.IdColaborador "
                         + " AND T.IdColaborador = " + id
                         + " AND T.Data = '" + data + "'";
             }
             else if("HorarioRecurso".equals(tipo))
             {
                 sql =   "SELECT * "
-                    + "     FROM HorarioRecurso T, Recurso R"
-                    + "     WHERE T.IdRecurso =  R.IdRecurso"
+                    + "     FROM HorarioRecurso T, Recurso R "
+                    + "     WHERE T.IdRecurso =  R.IdRecurso "
                         + " AND T.IdRecurso = " + id
                         + " AND T.Data = '" + data + "'";
             }
             else if("HorarioLocal".equals(tipo))
             {
                 
-                sql = "     SELECT *"
-                    + "     FROM HorarioLocal T, Local L"
-                    + "     WHERE T.IdLocal =  L.IdLocal"
+                sql = "     SELECT * "
+                    + "     FROM HorarioLocal T, Local L "
+                    + "     WHERE T.IdLocal =  L.IdLocal "
                     + "     AND T.IdLocal = " + id
                     + "     AND T.Data = '" + data + "'";
                     
@@ -954,6 +954,56 @@ public class Marcacao
             if (con != null) try { con.close(); } catch(Exception e) {}  
         } 
         return resultados;
+    }
+    
+    
+    public static String buscarDataHora(String idHorarioTrabalho)
+    {
+        String resultado = "";
+        
+        // Create a variable for the connection string.  
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
+
+        // Declare the JDBC objects.  
+        Connection con = null;  
+        Statement stmt = null;  
+        ResultSet rs = null;  
+
+        try 
+        {  
+            // Establish the connection.  
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+            con = DriverManager.getConnection(connectionUrl);  
+            stmt = con.createStatement(); 
+            String sql = "Select HT.Data, HT.HoraInicio "
+                    + "   From HorarioTrabalho HT" 
+                    + "   Where HT.IdHorarioTrabalho = " + idHorarioTrabalho;
+            
+            
+         
+            rs = stmt.executeQuery(sql);  
+           
+            
+            // Iterate through the data in the result set and display it.  
+            while (rs.next()) 
+            {  
+                
+                resultado = rs.getString(1) + " - " + rs.getString(2);
+            }
+        }
+        // Handle any errors that may have occurred.  
+        catch (Exception e) 
+        {  
+            e.printStackTrace();  
+        }  
+        finally 
+        {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {}  
+            if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
+            if (con != null) try { con.close(); } catch(Exception e) {}  
+        } 
+        return resultado;
     }
             
      

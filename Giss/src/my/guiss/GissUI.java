@@ -1130,6 +1130,7 @@ public class GissUI extends javax.swing.JFrame
         // TODO add your handling code here:
         
         inserirDadosConsulta();
+
         
     }//GEN-LAST:event_ButtonInserirDadosMouseClicked
 
@@ -1296,7 +1297,10 @@ public class GissUI extends javax.swing.JFrame
             Marcacao.gerarPrograma(idMarcacao, split[i]);
         
         }
-        JOptionPane.showMessageDialog(null,"A sua marcação ficou para a data: "+data +" e hora: "+hora , "Sucesso na marcação", JOptionPane.INFORMATION_MESSAGE);
+        
+        String dataHora = Marcacao.buscarDataHora(split[0]);
+        String splitDataHora[] = dataHora.split(" - ");
+        JOptionPane.showMessageDialog(null,"A sua marcação ficou para a data: "+splitDataHora[0] +" e hora: "+splitDataHora[1].split(".0000000")[0] , "Sucesso na marcação", JOptionPane.INFORMATION_MESSAGE);
 
         
     }
@@ -1317,7 +1321,7 @@ public class GissUI extends javax.swing.JFrame
             return "break";
         
         }
-        if(minuto >= 30)
+        if(minuto > 30)
         {
             hora++;
             minuto = 0;
@@ -1332,9 +1336,9 @@ public class GissUI extends javax.swing.JFrame
         }
         if(hora < 7)
             hora = 7;
-        if(hora > 19)
+        if(hora >= 19)
             hora = 7;
-        horario = hora <10 ? "0"+hora : ""+hora;
+        horario = hora < 10 ? "0"+hora : ""+hora;
         
         horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
         
@@ -1513,7 +1517,7 @@ public class GissUI extends javax.swing.JFrame
         }
         if(hora < 7)
             hora = 7;
-        if(hora > 19)
+        if(hora >= 19)
             hora = 7;
         horario = hora <10 ? "0"+hora : ""+hora;
         
@@ -2140,6 +2144,7 @@ public class GissUI extends javax.swing.JFrame
         {
             
             tratarDiagnostico();
+            
         
         }
         else if(estadoConsulta.equals("Prescrever Medicamentos"))
@@ -2236,6 +2241,8 @@ public class GissUI extends javax.swing.JFrame
         //Diagnostico
         //buscarDiagnostico()   
         //buscarSintomas();
+        
+        JOptionPane.showMessageDialog(null, "Guardado", "Sucesso ", JOptionPane.INFORMATION_MESSAGE);
         
     }
     
@@ -2343,6 +2350,9 @@ public class GissUI extends javax.swing.JFrame
             LabelInserirTipoOcorrencia.setVisible(true);
             ComboBoxInserirTipoOcorrencia.setVisible(true);
             
+            LabelInserirMotivo.setVisible(false);
+            TextFieldInseridoMotivo.setVisible(false);
+            
             
             
         }
@@ -2363,6 +2373,9 @@ public class GissUI extends javax.swing.JFrame
             
             LabelInserirTipoOcorrencia.setVisible(false);
             ComboBoxInserirTipoOcorrencia.setVisible(false);
+            
+            LabelInserirMotivo.setVisible(false);
+            TextFieldInseridoMotivo.setVisible(false);
         }
         else if(estadoConsulta.equals("Exame") || estadoConsulta.equals("Analises"))
         {
@@ -2381,6 +2394,9 @@ public class GissUI extends javax.swing.JFrame
             
             LabelInserirTipoOcorrencia.setVisible(false);
             ComboBoxInserirTipoOcorrencia.setVisible(false);
+            
+            LabelInserirMotivo.setVisible(true);
+            TextFieldInseridoMotivo.setVisible(true);
         }
         
     
@@ -2428,6 +2444,8 @@ public class GissUI extends javax.swing.JFrame
         
         //Atualizar EpisodioClinico
         Consulta.atualizarEpisodioClinico(idECli, "5");
+        
+        JOptionPane.showMessageDialog(null, "Guardado", "Sucesso ", JOptionPane.INFORMATION_MESSAGE);
         
     }
     
