@@ -64,6 +64,28 @@ public class GissUI extends javax.swing.JFrame
             if (con != null) try { con.close(); } catch(Exception e) {}  
         } 
     }
+    private void limparMenuConsulta()
+    {
+        ComboBoxInserirMarcacao.setVisible(false);
+        LabelInserirMarcacao.setVisible(false);
+        LabelDiagnostico.setVisible(false);
+        TextFieldSintomas.setVisible(false);
+        LabelSintomas.setVisible(false);
+        TextFieldDiagnostico.setVisible(false);
+        LabelInserirIdECli.setVisible(false);
+        ComboBoxInserirIdECli.setVisible(false);
+        LabelInserirPrescricoes.setVisible(false);
+        TextFieldInserirPrescricoes.setVisible(false);
+        LabelInserirIdUtente.setVisible(false);
+        TextFieldInserirIdUtente.setVisible(false);
+
+        LabelInserirTipoOcorrencia.setVisible(false);
+        ComboBoxInserirTipoOcorrencia.setVisible(false);
+
+        LabelInserirMotivo.setVisible(false);
+        TextFieldInseridoMotivo.setVisible(false);
+
+    }
     
     
     /**
@@ -72,7 +94,7 @@ public class GissUI extends javax.swing.JFrame
     public GissUI() {
         start();
         initComponents();
-        tratarMenuInserirDados("Diagnostico");
+        limparMenuConsulta();
         
         
         
@@ -2591,7 +2613,6 @@ public class GissUI extends javax.swing.JFrame
         
         
     }
-    
     
     private String buscarHora()
     {
