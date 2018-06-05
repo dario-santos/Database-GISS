@@ -463,23 +463,8 @@ CREATE TABLE HorarioLocal(
 );
 END
 
--- Estado(IdEstado, Descricao) ...........................................
 
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Estado]') )
-
-BEGIN 
-CREATE TABLE Estado(
-	IdEstado int NOT NULL
-		CHECK(IdEstado > 0),
-	Descricao nvarchar(30) NOT NULL,
-
-	CONSTRAINT PK_IdEstado PRIMARY KEY (IdEstado)
-
-);
-END
-
--- EpisodioClinico(IdECli, Observacao, IdEstado, IdTO, IdUtente, IdHistoricoClinico) ............................................................................
+-- EpisodioClinico(IdECli, Observacao, IdTO, IdUtente, IdHistoricoClinico) ............................................................................
 
 if not exists (select * from dbo.sysobjects
 			   where id = object_id(N'[dbo].[EpisodioClinico]'))
@@ -489,7 +474,6 @@ begin
             CONSTRAINT PK_IdECli PRIMARY KEY (IdECli)
 			CHECK (IdECli >= 1),
         Observacao nvarchar(300) NOT NULL,
-		IdEstado int NOT NULL,
 		IdTO int NOT NULL,
         IdUtente int NOT NULL,
         IdHistoricoClinico int NOT NULL,
@@ -506,11 +490,6 @@ begin
 
         CONSTRAINT FK_EpisodioClinico_IdHistoricoClinico FOREIGN KEY (IdHistoricoClinico)
             REFERENCES HistoricoClinico(IdHistoricoClinico)
-            ON UPDATE CASCADE
-			ON DELETE NO ACTION,
-
-		CONSTRAINT FK_EpisodioClinico_IdEstado FOREIGN KEY (IdEstado)
-            REFERENCES Estado(IdEstado)
             ON UPDATE CASCADE
 			ON DELETE NO ACTION
 
@@ -790,42 +769,9 @@ begin
 end
 
 
--- TipoAnexo(IdTipoAnexo,Descricao)--
 
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[TipoAnexo]') )
 
-BEGIN
-CREATE TABLE TipoAnexo(
-    IdTipoAnexo int NOT NULL
-        CONSTRAINT PK_IdTipoAnexo PRIMARY KEY(IdTipoAnexo)
-        CHECK(IdTipoAnexo > 0),
-    Descricao nvarchar(30) NOT NULL
 
-);
-END
 
--- Anexo(IdAnexo,Descricao,IdTipoAnexo, IdECli)
 
-if not exists (select * from dbo.sysobjects 
-               where id = object_id(N'[dbo].[Anexo]') )
 
-BEGIN
-CREATE TABLE Anexo(
-    IdAnexo int NOT NULL
-        CONSTRAINT PK_IdAnexo PRIMARY KEY(IdAnexo)
-        CHECK(IdAnexo > 0),
-    Descricao nvarchar(300) NOT NULL,
-    IdTipoAnexo int NOT NULL,
-	IdECli int
-            CONSTRAINT nn_IdEcli NOT NULL,
-
-    CONSTRAINT FK_IdTipoAnexo FOREIGN KEY(IdTipoAnexo)
-        REFERENCES TipoAnexo(IdTipoAnexo)
-        ON UPDATE CASCADE,
-
-    CONSTRAINT FK_IdECli_Anexo FOREIGN KEY (IdECli)
-            REFERENCES EpisodioClinico(IdECli)
-            ON UPDATE CASCADE
-);
-END

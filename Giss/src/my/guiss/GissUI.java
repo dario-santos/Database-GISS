@@ -4,26 +4,39 @@
  * and open the template in the editor.
  */
 package my.guiss;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.temporal.IsoFields;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
  * @author Dario
  */
-public class GissUI extends javax.swing.JFrame {
-
+public class GissUI extends javax.swing.JFrame 
+{
     
-
-    private void iniciarJDBC()
+    
+    /**
+    * Inicializa qualquer funcao e/ou atributo
+    *
+    * @author  Dario Santos
+    * @version 1.0
+    * @since   2018-05-30
+    */
+    private void start()
     {
-    
         // Create a variable for the connection string.  
         String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
-            "databaseName=Giss;user=sa;password=1234";  
+            "databaseName=Giss;user=sa;password=Lelo69Lelo69";  
 
         // Declare the JDBC objects.  
         Connection con = null;  
@@ -35,7 +48,9 @@ public class GissUI extends javax.swing.JFrame {
             // Establish the connection.  
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             con = DriverManager.getConnection(connectionUrl);  
-            stmt = con.createStatement();   
+            stmt = con.createStatement(); 
+            
+            
         }
         // Handle any errors that may have occurred.  
         catch (Exception e) 
@@ -48,16 +63,41 @@ public class GissUI extends javax.swing.JFrame {
             if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
             if (con != null) try { con.close(); } catch(Exception e) {}  
         } 
-    
     }
+    private void limparMenuConsulta()
+    {
+        ComboBoxInserirMarcacao.setVisible(false);
+        LabelInserirMarcacao.setVisible(false);
+        LabelDiagnostico.setVisible(false);
+        TextFieldSintomas.setVisible(false);
+        LabelSintomas.setVisible(false);
+        TextFieldDiagnostico.setVisible(false);
+        LabelInserirIdECli.setVisible(false);
+        ComboBoxInserirIdECli.setVisible(false);
+        LabelInserirPrescricoes.setVisible(false);
+        TextFieldInserirPrescricoes.setVisible(false);
+        LabelInserirIdUtente.setVisible(false);
+        TextFieldInserirIdUtente.setVisible(false);
+
+        LabelInserirTipoOcorrencia.setVisible(false);
+        ComboBoxInserirTipoOcorrencia.setVisible(false);
+
+        LabelInserirMotivo.setVisible(false);
+        TextFieldInseridoMotivo.setVisible(false);
+
+    }
+    
     
     /**
      * Creates new form GissUI
      */
     public GissUI() {
+        start();
         initComponents();
+        limparMenuConsulta();
         
-        iniciarJDBC();
+        
+        
     }
 
     /**
@@ -69,22 +109,2555 @@ public class GissUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jMenu1 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        TabbedMenu = new javax.swing.JTabbedPane();
+        PanelMarcacao = new javax.swing.JPanel();
+        ComboBoxTipoHorario = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        ComboBoxMarcacao = new javax.swing.JComboBox<>();
+        ComboBoxNumSemana = new javax.swing.JComboBox<>();
+        ComboBoxAno = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TabelaHorario = new javax.swing.JTable();
+        ComboBoxNome = new javax.swing.JComboBox<>();
+        BotaoCarregarHorario = new javax.swing.JButton();
+        TextFieldReservaUtente = new javax.swing.JTextField();
+        ButtonReservar = new javax.swing.JButton();
+        TextFieldMotivoMarcacao = new javax.swing.JTextField();
+        TextFieldHoras = new javax.swing.JTextField();
+        TextFieldData = new javax.swing.JTextField();
+        TextFieldDataReserva = new javax.swing.JTextField();
+        TextFieldHoraReserva = new javax.swing.JTextField();
+        ScrollPaneReservasDisponiveis = new javax.swing.JScrollPane();
+        ListReservasDisponiveis = new javax.swing.JList<>();
+        ComboBoxTipoReserva = new javax.swing.JComboBox<>();
+        LabelDataReserva = new javax.swing.JLabel();
+        ScrollPaneReservasEscolhidas = new javax.swing.JScrollPane();
+        ListReservasEscolhidas = new javax.swing.JList<>();
+        LabelReservasEscolhidas = new javax.swing.JLabel();
+        LabelReservasDisponiveis = new javax.swing.JLabel();
+        LabelReservar = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        PanelConsulta = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TableUtente = new javax.swing.JTable();
+        ButtonProcuraUtente = new javax.swing.JButton();
+        TextFieldIdUtente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        TextFieldDiagnostico = new javax.swing.JTextField();
+        LabelSintomas = new javax.swing.JLabel();
+        ComboBoxEstadoConsulta = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ListExames = new javax.swing.JList<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        ListAnalises = new javax.swing.JList<>();
+        ComboBoxIdECli = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        ListPrescricoes = new javax.swing.JList<>();
+        jLabel17 = new javax.swing.JLabel();
+        LabelInserirIdECli = new javax.swing.JLabel();
+        ComboBoxInserirIdECli = new javax.swing.JComboBox<>();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel19 = new javax.swing.JLabel();
+        ButtonInserirDados = new javax.swing.JButton();
+        LabelDiagnostico = new javax.swing.JLabel();
+        TextFieldSintomas = new javax.swing.JTextField();
+        LabelInserirMarcacao = new javax.swing.JLabel();
+        ComboBoxInserirMarcacao = new javax.swing.JComboBox<>();
+        TextFieldConsultaHoras = new javax.swing.JTextField();
+        TextFieldConsultaData = new javax.swing.JTextField();
+        LabelInserirPrescricoes = new javax.swing.JLabel();
+        TextFieldInserirPrescricoes = new javax.swing.JTextField();
+        TextFieldInserirIdUtente = new javax.swing.JTextField();
+        LabelInserirIdUtente = new javax.swing.JLabel();
+        LabelInserirTipoOcorrencia = new javax.swing.JLabel();
+        ComboBoxInserirTipoOcorrencia = new javax.swing.JComboBox<>();
+        TextFieldInseridoMotivo = new javax.swing.JTextField();
+        LabelInserirMotivo = new javax.swing.JLabel();
+        PanelMeioComplementar = new javax.swing.JPanel();
+        ComboBoxConsultas = new javax.swing.JComboBox<>();
+        ComboBoxTipoAnexo = new javax.swing.JComboBox<>();
+        ButtonAnexar = new javax.swing.JButton();
+        TextFieldDescricaoAnexo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+
+        jButton1.setText("jButton1");
+
+        jMenu1.setText("jMenu1");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        PanelMarcacao.setPreferredSize(new java.awt.Dimension(1024, 680));
+
+        ComboBoxTipoHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Colaborador", "Recurso", "Local" }));
+        ComboBoxTipoHorario.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxTipoHorarioPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setText("Horário");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setText("Marcação");
+
+        ComboBoxMarcacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Previa", "Sequencial" }));
+        ComboBoxMarcacao.setToolTipText("");
+        ComboBoxMarcacao.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxMarcacaoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        ComboBoxNumSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N. da Semana" }));
+
+        ComboBoxAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "" }));
+        ComboBoxAno.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxAnoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        TabelaHorario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"7:00-7:30", null, null, null, null, null, null, null},
+                {"7:30-8:00", null, null, null, null, null, null, null},
+                {"8:00-8:30", null, null, null, null, null, null, null},
+                {"8:30-9:00", null, null, null, null, null, null, null},
+                {"9:30-10:00", null, null, null, null, null, null, null},
+                {"10:00-10:30", null, null, null, null, null, null, null},
+                {"10:30-11:00", null, null, null, null, null, null, null},
+                {"11:30-12:00", null, null, null, null, null, null, null},
+                {"12:00-12:30", null, null, null, null, null, null, null},
+                {"12:30-13:00", null, null, null, null, null, null, null},
+                {"13:00-13:30", null, null, null, null, null, null, null},
+                {"13:30-14:00", null, null, null, null, null, null, null},
+                {"14:00-14:30", null, null, null, null, null, null, null},
+                {"14:30-15:00", null, null, null, null, null, null, null},
+                {"15:00-15:30", null, null, null, null, null, null, null},
+                {"15:30-16:00", null, null, null, null, null, null, null},
+                {"16:00-16:30", null, null, null, null, null, null, null},
+                {"16:30-17:00", null, null, null, null, null, null, null},
+                {"17:00-17:30", null, null, null, null, null, null, null},
+                {"17:00-17:30", null, null, null, null, null, null, null},
+                {"18:00-18:30", null, null, null, null, null, null, null},
+                {"18:30-19:00", null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Horas", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TabelaHorario.getTableHeader().setResizingAllowed(false);
+        TabelaHorario.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(TabelaHorario);
+        if (TabelaHorario.getColumnModel().getColumnCount() > 0) {
+            TabelaHorario.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        ComboBoxNome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
+
+        BotaoCarregarHorario.setText("Carregar");
+        BotaoCarregarHorario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotaoCarregarHorarioMouseClicked(evt);
+            }
+        });
+
+        ButtonReservar.setText("Reservar");
+        ButtonReservar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonReservarMouseClicked(evt);
+            }
+        });
+
+        TextFieldMotivoMarcacao.setText("Motivo da marcação");
+
+        TextFieldHoras.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        TextFieldHoras.setText("7:45");
+
+        TextFieldData.setText("2018-05-21");
+
+        TextFieldDataReserva.setText("AAAA-MM-DD");
+
+        TextFieldHoraReserva.setText("hh:mm");
+
+        ListReservasDisponiveis.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ListReservasDisponiveis.setToolTipText("");
+        ListReservasDisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListReservasDisponiveisMouseClicked(evt);
+            }
+        });
+        ScrollPaneReservasDisponiveis.setViewportView(ListReservasDisponiveis);
+
+        ComboBoxTipoReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Colaborador", "Recurso", "Local" }));
+        ComboBoxTipoReserva.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxTipoReservaPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        LabelDataReserva.setText("Data:");
+
+        ListReservasEscolhidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListReservasEscolhidasMouseClicked(evt);
+            }
+        });
+        ScrollPaneReservasEscolhidas.setViewportView(ListReservasEscolhidas);
+
+        LabelReservasEscolhidas.setText("Escolhido:");
+
+        LabelReservasDisponiveis.setText("Todos:");
+
+        LabelReservar.setText("Marcar");
+
+        jLabel8.setText("IdUtente:");
+
+        jLabel9.setText("Motivo da marcacao:");
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout PanelMarcacaoLayout = new javax.swing.GroupLayout(PanelMarcacao);
+        PanelMarcacao.setLayout(PanelMarcacaoLayout);
+        PanelMarcacaoLayout.setHorizontalGroup(
+            PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ComboBoxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BotaoCarregarHorario))
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                            .addComponent(LabelDataReserva)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addGap(62, 62, 62)
+                                        .addComponent(LabelReservar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                                .addGap(129, 129, 129)
+                                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(LabelReservasDisponiveis)
+                                                    .addComponent(LabelReservasEscolhidas)))
+                                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ButtonReservar)
+                                    .addComponent(jLabel9)
+                                    .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(15, 15, 15))
+        );
+        PanelMarcacaoLayout.setVerticalGroup(
+            PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(ComboBoxNumSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ComboBoxTipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(ComboBoxMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelReservar)
+                                    .addComponent(ComboBoxTipoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ComboBoxNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BotaoCarregarHorario))
+                            .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(TextFieldReservaUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(LabelReservasDisponiveis))
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(LabelDataReserva)
+                                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(TextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TextFieldHoraReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                    .addGap(35, 35, 35)
+                                    .addComponent(ScrollPaneReservasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PanelMarcacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                                .addComponent(LabelReservasEscolhidas)
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextFieldMotivoMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ScrollPaneReservasEscolhidas, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(ButtonReservar)
+                        .addGap(8, 8, 8))
+                    .addGroup(PanelMarcacaoLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+
+        TabbedMenu.addTab("Marcação", PanelMarcacao);
+
+        TableUtente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "IdECli", "Obs. Medico", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TableUtente);
+
+        ButtonProcuraUtente.setText("Procura");
+        ButtonProcuraUtente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonProcuraUtenteMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setText("IdUtente:");
+
+        TextFieldDiagnostico.setText("Diagnostico da Consulta");
+
+        LabelSintomas.setText("Sintomas:");
+
+        ComboBoxEstadoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--", "Diagnostico", "Prescrever Medicamentos", "Exame", "Analises" }));
+        ComboBoxEstadoConsulta.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        jLabel11.setText("Estado da consulta:");
+
+        jScrollPane3.setViewportView(ListExames);
+
+        jLabel12.setText("Exames:");
+
+        jLabel13.setText("Analises");
+
+        jScrollPane4.setViewportView(ListAnalises);
+
+        ComboBoxIdECli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
+        ComboBoxIdECli.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxIdECliPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        jLabel14.setText("idECli:");
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel15.setText("Consultar: ");
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel16.setText("Consultar Anexos:");
+
+        jScrollPane5.setViewportView(ListPrescricoes);
+
+        jLabel17.setText("Prescrições");
+
+        LabelInserirIdECli.setText("IdECli");
+
+        ComboBoxInserirIdECli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
+
+        jLabel19.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel19.setText("Inserir Dados");
+
+        ButtonInserirDados.setText("Confirmar");
+        ButtonInserirDados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonInserirDadosMouseClicked(evt);
+            }
+        });
+
+        LabelDiagnostico.setText("Diagnostico:");
+
+        TextFieldSintomas.setText("Sintomas da Consulta");
+
+        LabelInserirMarcacao.setText("Marcacao:");
+
+        ComboBoxInserirMarcacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
+
+        TextFieldConsultaHoras.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        TextFieldConsultaHoras.setText("07:45");
+
+        TextFieldConsultaData.setText("2018-05-21");
+
+        LabelInserirPrescricoes.setText("Prescrições:");
+
+        TextFieldInserirPrescricoes.setText("Prescricoes de Medicamentos");
+        TextFieldInserirPrescricoes.setAutoscrolls(false);
+        TextFieldInserirPrescricoes.setMinimumSize(new java.awt.Dimension(14, 541));
+
+        LabelInserirIdUtente.setText("IdUtente:");
+
+        LabelInserirTipoOcorrencia.setText("Tipo Ocorrencia:");
+
+        ComboBoxInserirTipoOcorrencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 - Acidentes de Trabalho", "2 - Acidentes de Viacao", "3 - Intoxicacao Alimentar", "4 - Acidente Escolar", "5 - Infecoes", "6 - Hemorragias", "7 - Idosos", "8 - Lesoes de caracter desportivo", "9 - Lesoes leves", "10 - Doencas graves" }));
+
+        LabelInserirMotivo.setText("Motivo:");
+
+        javax.swing.GroupLayout PanelConsultaLayout = new javax.swing.GroupLayout(PanelConsulta);
+        PanelConsulta.setLayout(PanelConsultaLayout);
+        PanelConsultaLayout.setHorizontalGroup(
+            PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel15)
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addComponent(TextFieldIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel16)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel14))
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addComponent(ButtonProcuraUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel12))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
+                                .addGap(0, 564, Short.MAX_VALUE)
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4)
+                                .addComponent(ComboBoxIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addComponent(TextFieldConsultaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TextFieldConsultaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1034, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
+            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel19)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LabelInserirIdECli)
+                                    .addComponent(LabelSintomas))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addComponent(ComboBoxInserirIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addComponent(TextFieldSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(LabelDiagnostico)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TextFieldDiagnostico))))
+                            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LabelInserirMarcacao)
+                                    .addComponent(LabelInserirPrescricoes)
+                                    .addComponent(LabelInserirMotivo))
+                                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(TextFieldInserirPrescricoes, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                                            .addComponent(ButtonInserirDados)
+                                            .addComponent(TextFieldInseridoMotivo)))
+                                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ComboBoxInserirMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(LabelInserirIdUtente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TextFieldInserirIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LabelInserirTipoOcorrencia)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ComboBoxInserirTipoOcorrencia, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ComboBoxEstadoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(201, 201, 201))
+        );
+        PanelConsultaLayout.setVerticalGroup(
+            PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFieldConsultaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldConsultaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TextFieldIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel16)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonProcuraUtente))
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(ComboBoxIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addGroup(PanelConsultaLayout.createSequentialGroup()
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(ComboBoxEstadoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelInserirMarcacao)
+                            .addComponent(ComboBoxInserirMarcacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelInserirIdUtente)
+                            .addComponent(TextFieldInserirIdUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelInserirTipoOcorrencia)
+                            .addComponent(ComboBoxInserirTipoOcorrencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelInserirIdECli)
+                    .addComponent(ComboBoxInserirIdECli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFieldSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelSintomas)
+                    .addComponent(LabelDiagnostico))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFieldInserirPrescricoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelInserirPrescricoes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextFieldInseridoMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelInserirMotivo))
+                .addGap(3, 3, 3)
+                .addComponent(ButtonInserirDados)
+                .addContainerGap())
+        );
+
+        TabbedMenu.addTab("Consulta", PanelConsulta);
+
+        ComboBoxConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--" }));
+
+        ComboBoxTipoAnexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha--", "Analise Clinica", "Exame" }));
+        ComboBoxTipoAnexo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ComboBoxTipoAnexoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        ButtonAnexar.setText("Anexar");
+        ButtonAnexar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonAnexarMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setText("Descrição:");
+
+        jLabel4.setText("Id da Consulta");
+
+        jLabel6.setText("Tipo de Anexo");
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setText("Anexos");
+
+        javax.swing.GroupLayout PanelMeioComplementarLayout = new javax.swing.GroupLayout(PanelMeioComplementar);
+        PanelMeioComplementar.setLayout(PanelMeioComplementarLayout);
+        PanelMeioComplementarLayout.setHorizontalGroup(
+            PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMeioComplementarLayout.createSequentialGroup()
+                .addGroup(PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelMeioComplementarLayout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addGroup(PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ComboBoxTipoAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboBoxConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ButtonAnexar)
+                            .addComponent(TextFieldDescricaoAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+            .addGroup(PanelMeioComplementarLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelMeioComplementarLayout.setVerticalGroup(
+            PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMeioComplementarLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ComboBoxTipoAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboBoxConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(26, 26, 26)
+                .addGroup(PanelMeioComplementarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(TextFieldDescricaoAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(ButtonAnexar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        TabbedMenu.addTab("Meios Complementares", PanelMeioComplementar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(TabbedMenu)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(TabbedMenu)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void BotaoCarregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCarregarHorarioMouseClicked
+        // TODO add your handling code here:
+        for (int i = 0; i < TabelaHorario.getRowCount(); i++)
+            for(int j = 1; j < TabelaHorario.getColumnCount(); j++) 
+                TabelaHorario.setValueAt("", i, j);
+            
+
+        
+        ArrayList<String> resultados = new ArrayList<>();
+        
+        String ano = tratarAno();
+        if(ano.isEmpty())
+            return;//terminar função
+        
+        ArrayList<String> semana = tratarSemana(ano);
+        if(semana.isEmpty())
+            return;//terminar função
+        
+        String tipoHorario = tratarTipoHorario();
+        if(tipoHorario.isEmpty())
+            return; //terminar função
+        
+        String id = ComboBoxNome.getSelectedItem().toString().split(" ")[0];
+        
+ 
+        for(int i = 0 ; i < 7 ; i++ )
+        {
+            
+            resultados = Marcacao.carregarHorario(semana.get(i) , tipoHorario, id);
+            for(int j = 0 ; j < resultados.size() ; j++)
+            {
+                String[] parts = resultados.get(j).split(" ");     
+                isDisponivel(parts[2], parts[5],i);
+               
+            }
+            
+        }
+        
+    }//GEN-LAST:event_BotaoCarregarHorarioMouseClicked
+
+    private void ComboBoxTipoHorarioPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxTipoHorarioPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        ComboBoxNome.removeAllItems();
+        ComboBoxNome.addItem("--Escolha--");
+        String tipoHorario = tratarTipoHorario();
+        if("break".equals(tipoHorario))
+            return; //terminar função
+        
+        ArrayList<String> resultados = Marcacao.buscarTodos(tipoHorario);
+        
+        for(int i = 0 ; i < resultados.size(); i++)
+            ComboBoxNome.addItem(resultados.get(i));
+
+    }//GEN-LAST:event_ComboBoxTipoHorarioPopupMenuWillBecomeInvisible
+
+    private void ButtonProcuraUtenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonProcuraUtenteMouseClicked
+        // TODO add your handling code here:
+        
+        //Mostrar histórico na tabela
+        consultar();
+        
+        //limparListas
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        //Guardar elementos
+
+        //Adicionar elemento selecionado
+        ListAnalises.setModel(listModel);
+        ListExames.setModel(listModel);
+        ListPrescricoes.setModel(listModel);
+        
+    }//GEN-LAST:event_ButtonProcuraUtenteMouseClicked
+
+    private void ComboBoxAnoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxAnoPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        ComboBoxNumSemana.removeAllItems();
+        ComboBoxNumSemana.addItem("N. da Semana");
+        
+        ArrayList<String> primeirosDiasSemana = tratarNumSemanas();
+        
+        
+         for(int i = 0 ; i < primeirosDiasSemana.size(); i++)
+            ComboBoxNumSemana.addItem((i+1) +" - " + primeirosDiasSemana.get(i));
+        
+    }//GEN-LAST:event_ComboBoxAnoPopupMenuWillBecomeInvisible
+
+    private void ButtonReservarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonReservarMouseClicked
+        // TODO add your handling code here:
+        
+        String tipoMarcacao = ComboBoxMarcacao.getSelectedItem().toString();
+        if(tipoMarcacao.equals("Sequencial"))
+            marcacaoSequencial();
+        
+        if(tipoMarcacao.equals("Previa"))
+            marcacaoPrevia();
+        
+    }//GEN-LAST:event_ButtonReservarMouseClicked
+
+    private void ListReservasDisponiveisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListReservasDisponiveisMouseClicked
+        
+        
+        if (evt.getClickCount() == 2) {
+            int index = ListReservasDisponiveis.locationToIndex(evt.getPoint());
+            
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            //Guardar elementos
+            for(int i = 0; i< ListReservasEscolhidas.getModel().getSize();i++)
+                listModel.addElement(ListReservasEscolhidas.getModel().getElementAt(i));
+
+            if(listModel.contains(ListReservasDisponiveis.getModel().getElementAt(index)))
+                JOptionPane.showMessageDialog(null, "O elemento selecionado já está adicionado!", "Elemento já adicionado", JOptionPane.ERROR_MESSAGE);
+                
+            else
+                listModel.addElement(ListReservasDisponiveis.getModel().getElementAt(index));
+            
+            
+            //Adicionar elemento selecionado
+            ListReservasEscolhidas.setModel(listModel);
+            
+            
+        }
+    }//GEN-LAST:event_ListReservasDisponiveisMouseClicked
+
+    private void ComboBoxMarcacaoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxMarcacaoPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        
+        if(ComboBoxMarcacao.getSelectedItem().equals("Sequencial"))
+        {
+            //não mostrar data, Tipo e as listas
+            ComboBoxTipoReserva.setVisible(false);
+            LabelReservar.setVisible(false);
+            LabelDataReserva.setVisible(false);
+            TextFieldDataReserva.setVisible(false);
+            TextFieldHoraReserva.setVisible(false);
+            LabelReservasDisponiveis.setVisible(false);
+            ListReservasDisponiveis.setVisible(false);
+            ScrollPaneReservasDisponiveis.setVisible(false);
+            LabelReservasEscolhidas.setVisible(false);
+            ScrollPaneReservasEscolhidas.setVisible(false);
+            ListReservasEscolhidas.setVisible(false);
+        }
+        else if(ComboBoxMarcacao.getSelectedItem().equals("Previa"))
+        {
+            //Mostrar tudo
+            ComboBoxTipoReserva.setVisible(true);
+            LabelReservar.setVisible(true);
+            LabelDataReserva.setVisible(true);
+            TextFieldDataReserva.setVisible(true);
+            TextFieldHoraReserva.setVisible(true);
+            LabelReservasDisponiveis.setVisible(true);
+            ListReservasDisponiveis.setVisible(true);
+            ScrollPaneReservasDisponiveis.setVisible(true);
+            LabelReservasEscolhidas.setVisible(true);
+            ScrollPaneReservasEscolhidas.setVisible(true);
+            ListReservasEscolhidas.setVisible(true);
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_ComboBoxMarcacaoPopupMenuWillBecomeInvisible
+
+    private void ListReservasEscolhidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListReservasEscolhidasMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int index = ListReservasEscolhidas.locationToIndex(evt.getPoint());
+            
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            //Guardar elementos
+            
+            for(int i = 0; i < ListReservasEscolhidas.getModel().getSize();i++)
+                listModel.addElement(ListReservasEscolhidas.getModel().getElementAt(i));
+
+            listModel.removeElement(ListReservasEscolhidas.getModel().getElementAt(index));
+            
+            //Adicionar elemento selecionado
+            ListReservasEscolhidas.setModel(listModel);
+            
+            
+        }
+        
+    }//GEN-LAST:event_ListReservasEscolhidasMouseClicked
+
+    private void ComboBoxTipoReservaPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxTipoReservaPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        
+        String tipoReserva = ComboBoxTipoReserva.getSelectedItem().toString();
+        if("Tipo".equals(tipoReserva))
+            return; //terminar função
+        
+        ArrayList<String> resultados = Marcacao.buscarTodosTipos(tipoReserva);
+        
+        for(int i = 0 ; i < resultados.size(); i++)
+            listModel.addElement(resultados.get(i));
+        
+        ListReservasDisponiveis.setModel(listModel);
+    
+    }//GEN-LAST:event_ComboBoxTipoReservaPopupMenuWillBecomeInvisible
+
+    private void ButtonAnexarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAnexarMouseClicked
+        // TODO add your handling code here:
+        
+        tratarAnexo();
+        
+    }//GEN-LAST:event_ButtonAnexarMouseClicked
+
+    private void ComboBoxTipoAnexoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxTipoAnexoPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        
+        ComboBoxConsultas.removeAllItems();
+        ComboBoxConsultas.addItem("--Escolha--");
+        String tipoAnexo = buscarTipoAnexo();
+        
+        if(tipoAnexo.equals("--Escolha--"))
+            return;
+       
+        ArrayList<String> resultados = MeiosComplementares.buscarTodos(tipoAnexo);
+        
+        for(int i = 0 ; i < resultados.size(); i++)
+            ComboBoxConsultas.addItem(resultados.get(i));
+    }//GEN-LAST:event_ComboBoxTipoAnexoPopupMenuWillBecomeInvisible
+
+    private void ComboBoxIdECliPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxIdECliPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        
+        //buscarIdECli
+        String idECli = buscarIdECliSelecionado();
+        if(idECli.equals("--Escolha--"))
+        {
+            return;
+        }
+        
+        //buscarAnexos
+        
+        //buscar Exames
+        ArrayList<String > exames = Consulta.buscarExames(idECli);
+        for(int i = 0 ; i < exames.size() ; i++)
+            System.out.println("Exame["+i+"]:"+exames.get(i));
+        
+        //buscar Análises
+        ArrayList<String > analises = Consulta.buscarAnalises(idECli);
+        for(int i = 0 ; i < analises.size() ; i++)
+            System.out.println("Exame["+i+"]:"+analises.get(i));
+        
+        //buscar prescrições
+        ArrayList<String> prescricoes = Consulta.buscarPrescricoes(idECli);
+        for(int i = 0 ; i < prescricoes.size() ; i++)
+            System.out.println("Exame["+i+"]:"+prescricoes.get(i));
+        
+        
+        //mostrar exames
+        mostrarExames(exames);
+        //mostrar analises
+        mostrarAnalises(analises);
+        //mostrar prescricoes
+        mostrarPrescricoes(prescricoes);
+        
+        
+        
+    }//GEN-LAST:event_ComboBoxIdECliPopupMenuWillBecomeInvisible
+
+    private void ButtonInserirDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonInserirDadosMouseClicked
+        // TODO add your handling code here:
+        
+        inserirDadosConsulta();
+
+        
+    }//GEN-LAST:event_ButtonInserirDadosMouseClicked
+
+    private void ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        String estadoConsulta = ComboBoxEstadoConsulta.getSelectedItem().toString();
+        
+        tratarMenuInserirDados(estadoConsulta);
+        
+        if(estadoConsulta.equals("Diagnostico"))
+        {
+            ArrayList<String> idMarcacoes = buscarPossiveisMarcacoes();
+            
+            adicionarMarcacoes(idMarcacoes);            
+        }
+        else if(estadoConsulta.equals("Prescrever Medicamentos"))
+        {
+            ArrayList<String> idECli = Consulta.buscarEpisodiosClinicos();
+            
+            adicionarEpisodiosClinicos(idECli);
+        }
+        else if(estadoConsulta.equals("Exame"))
+        {
+            ArrayList<String> idECli = Consulta.buscarEpisodiosClinicos();
+            
+            adicionarEpisodiosClinicos(idECli);
+        } 
+        
+        else if(estadoConsulta.equals("Analises"))
+        {
+            ArrayList<String> idECli = Consulta.buscarEpisodiosClinicos();
+            
+            adicionarEpisodiosClinicos(idECli);
+        } 
+        
+    
+    }//GEN-LAST:event_ComboBoxEstadoConsultaPopupMenuWillBecomeInvisible
+    
+    private void marcacaoPrevia()
+    {
+        //descubrir o id da marcação para criar uma nova
+        String idMarcacao = tratarIdMarcacao();
+        //guardar idUtente
+        String idUtente ="";
+        try{
+            int teste = Integer.parseInt(tratarIdUtente());
+            idUtente = tratarIdUtente();
+            
+            if(!Marcacao.isIdUtenteValido(idUtente))
+            {
+                JOptionPane.showMessageDialog(null, "IdUtente inválido, Utente não existe", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "IdUtente inválido", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
+        //guardar a razão da marcação
+        String motivo = tratarMotivo();
+        
+        //Buscar Hora
+        String hora = tratarReservaHora();
+        if(hora.equals("break"))
+        {
+            JOptionPane.showMessageDialog(null, "Hora inválida, hora tem que ser no formato hh:mm", "Erro Hora", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Buscar data
+        String data = tratarReservaData();
+        String dataSplit[] = data.split("-");
+        if(dataSplit.length != 3)
+        {
+            JOptionPane.showMessageDialog(null, "Data inválida, data tem que ser no formato AAAA-MM-DD", "Erro Data", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try{
+            int anoTeste = Integer.parseInt(dataSplit[0]);
+            int mesTeste = Integer.parseInt(dataSplit[1]);
+            int diaTeste = Integer.parseInt(dataSplit[2]);
+            
+            if(anoTeste > 9999 || anoTeste <=0)
+            {
+                JOptionPane.showMessageDialog(null, "Ano inválido, tem que ser AAAA-MM-DD", "Erro ano", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(mesTeste > 12 || mesTeste <=0)
+            {
+                JOptionPane.showMessageDialog(null, "Mes inválido, tem que ser AAAA-MM-DD", "Erro mes", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(diaTeste > 31 || diaTeste <=0)
+            {
+                JOptionPane.showMessageDialog(null, "Mes inválido, tem que ser AAAA-MM-DD", "Erro mes", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Data inválida, data tem que ser no formato AAAA-MM-DD", "Erro Data", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
+        
+        
+        
+        
+        
+       
+        //Ver se todos os colaboradores, recursos e locais estão disponiveis
+        //Separar a lista em 3, colaboradores, recursos e locais
+        //tratarColaboradores
+        ArrayList<String> colaboradores = tratarColaboradores();    
+        if(colaboradores.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Tem que marcar pelo menos um colaborador", "Erro sem colaborador", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ArrayList<String> locais = tratarLocal();
+        if(locais.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Tem que marcar pelo menos uma sala", "Erro sem sala", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ArrayList<String> recursos = tratarRecurso();
+        
+        
+        //ver quando é que estão todos disponiveis
+        ArrayList<String> resultados = Marcacao.buscarHorariosParaReserva(colaboradores, locais, recursos, data, hora);     
+        if(resultados.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String split[] = resultados.get(0).split(" ");
+        Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+       
+        //Colaborador
+        for(int i = 0 ; i < colaboradores.size(); i++)
+        {
+            Marcacao.atualizarHorarioTrabalho(split[i]);
+            Marcacao.gerarMarcar(idMarcacao, split[i]);
+        }
+        
+        //Local
+        for(int i = colaboradores.size() ; i < (colaboradores.size()+locais.size()) ; i++)
+        {
+            
+            Marcacao.atualizarHorarioLocal(split[i]);
+            Marcacao.gerarEscolhe(idMarcacao, split[i]);
+        
+        }
+        //Recursos
+        for(int i = locais.size() + colaboradores.size() ; i < (colaboradores.size()+locais.size()+recursos.size()) ; i++)
+        {
+            Marcacao.atualizarHorarioRecurso(split[i]);
+            Marcacao.gerarPrograma(idMarcacao, split[i]);
+        
+        }
+        
+        String dataHora = Marcacao.buscarDataHora(split[0]);
+        String splitDataHora[] = dataHora.split(" - ");
+        JOptionPane.showMessageDialog(null,"A sua marcação ficou para a data: "+splitDataHora[0] +" e hora: "+splitDataHora[1].split(".0000000")[0] , "Sucesso na marcação", JOptionPane.INFORMATION_MESSAGE);
+
+        
+    }
+    
+    private String tratarReservaHora()
+    {
+        String horas[] = TextFieldHoraReserva.getText().split(":");
+        String horario ="";
+        int hora = 0;
+        int minuto = 0;
+        try{
+            hora = Integer.parseInt(horas[0]);
+            minuto = Integer.parseInt(horas[1]);
+        
+        }
+        catch(NumberFormatException e)
+        {
+            return "break";
+        
+        }
+        if(minuto > 30)
+        {
+            hora++;
+            minuto = 0;
+        }
+        else if(minuto == 0)
+        {
+            minuto = 0;
+        }
+        else
+        {
+            minuto = 30;
+        }
+        if(hora < 7)
+            hora = 7;
+        if(hora >= 19)
+            hora = 7;
+        horario = hora < 10 ? "0"+hora : ""+hora;
+        
+        horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
+        
+        return horario;
+    }
+    
+    private String tratarReservaData()
+    {
+        String data = TextFieldDataReserva.getText();
+        return data;
+    }
+    
+    private ArrayList<String> tratarColaboradores()
+    {
+        ArrayList<String> resultados = new ArrayList<>();
+        String split[] = new String[2];
+        for(int i = 0 ; i < ListReservasEscolhidas.getModel().getSize(); i++)
+        {
+            
+            split = ListReservasEscolhidas.getModel().getElementAt(i).split(" - ");
+            
+            if(Marcacao.isColaboradorExistente(split[0], split[1]))
+            {
+                resultados.add(ListReservasEscolhidas.getModel().getElementAt(i));
+                continue;
+            }
+            
+            
+        }
+       
+        return resultados;
+    }
+    
+    private ArrayList<String> tratarLocal()
+    {
+        ArrayList<String> resultados = new ArrayList<>();
+        String split[] = new String[2];
+        for(int i = 0 ; i < ListReservasEscolhidas.getModel().getSize(); i++)
+        {
+            
+            split = ListReservasEscolhidas.getModel().getElementAt(i).split(" - ");
+            
+            if(Marcacao.isLocalExistente(split[0], split[1]))
+            {
+                resultados.add(ListReservasEscolhidas.getModel().getElementAt(i));
+                continue;
+            }
+            
+            
+        }
+      
+        return resultados;
+    }
+    
+    private ArrayList<String> tratarRecurso()
+    {
+        ArrayList<String> resultados = new ArrayList<>();
+        String split[] = new String[2];
+        for(int i = 0 ; i < ListReservasEscolhidas.getModel().getSize(); i++)
+        {
+            
+            split = ListReservasEscolhidas.getModel().getElementAt(i).split(" - ");
+            
+            if(Marcacao.isRecursoExistente(split[0], split[1]))
+            {
+                resultados.add(ListReservasEscolhidas.getModel().getElementAt(i));
+                continue;
+            }
+            
+            
+        }
+   
+        return resultados;
+    }
+    //Marcação sequencial
+    private void marcacaoSequencial()
+    {
+        //descubrir o id da marcação para criar uma nova
+        String idMarcacao = tratarIdMarcacao();
+        //guardar idUtente
+        String idUtente ="";
+        try{
+            int teste = Integer.parseInt(tratarIdUtente());
+            idUtente = tratarIdUtente();
+            if(!Marcacao.isIdUtenteValido(idUtente))
+            {
+                JOptionPane.showMessageDialog(null, "IdUtente inválido, Utente não existe", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "IdUtente inválido", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
+        //guardar a razão da marcação
+        String motivo = tratarMotivo();
+        
+        //Buscar Hora
+        String hora = tratarHora();
+        
+        //Buscar data
+        String data = tratarData();
+       
+        //reservar a primeira meia hora livre da sala, colaborador e recurso
+        ArrayList<String> resultados = Marcacao.buscarHorariosDisponiveis(data, hora);
+        
+        if(resultados.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String split[] = resultados.get(0).split(" ");
+        
+        Marcacao.atualizarHorarioTrabalho(split[0]);
+        Marcacao.atualizarHorarioLocal(split[1]);
+        
+        Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+        
+        //gerar marcar
+        Marcacao.gerarMarcar(idMarcacao, split[0]);
+        //gerar escolhe
+        Marcacao.gerarEscolhe(idMarcacao, split[1]);
+        
+        JOptionPane.showMessageDialog(null,"A sua marcação ficou para a data: "+split[2] +" e hora: " + split[3].split(".0000000")[0] , "Sucesso na marcação", JOptionPane.INFORMATION_MESSAGE);
+
+        
+    }
+    
+    private String tratarIdMarcacao()
+    {
+        int idMarcacao = Integer.parseInt(Marcacao.buscarUltimoIdMarcacao());
+        idMarcacao++;
+        return (""+idMarcacao);
+    }
+    
+    private String tratarIdUtente()
+    {
+        String idUtente = TextFieldReservaUtente.getText();
+        
+        return idUtente;
+    }
+    
+    private String tratarMotivo()
+    {
+        String motivo = TextFieldMotivoMarcacao.getText();
+        if(motivo.length()>=300)
+        {
+            motivo = null;
+            
+            JOptionPane.showMessageDialog(null, "O motivo não pode ter mais de 300 caracteres", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return motivo;
+    }
+    
+    private String tratarHora()
+    {
+        String horas[] = TextFieldHoras.getText().split(":");
+        String horario ="";
+        int hora = Integer.parseInt(horas[0]);
+        int minuto = Integer.parseInt(horas[1]);
+        
+        if(minuto >= 30)
+        {
+            hora++;
+            minuto = 0;
+        }
+        else if( minuto == 0)
+        {
+            minuto = 00;
+        }
+        else 
+        {
+            minuto = 30;
+        }
+        if(hora < 7)
+            hora = 7;
+        if(hora >= 19)
+            hora = 7;
+        horario = hora <10 ? "0"+hora : ""+hora;
+        
+        horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
+        
+        return horario;
+    }
+    
+    private String tratarData()
+    {
+        String data = TextFieldData.getText(); 
+        return data;
+    }
+    
+    private ArrayList<String> tratarNumSemanas()
+    {
+        if(ComboBoxAno.getSelectedItem().toString().equals("Ano"))
+        {
+            return new ArrayList<String>();
+        }
+        int ano = Integer.parseInt(ComboBoxAno.getSelectedItem().toString());
+        String data = "";
+           
+        
+        int diaSemana = diaDaSemana(ano-1, 13,1);
+        
+        LocalDate date = LocalDate.of(ano, 6, 1);
+        int numSemanasAno = (int) IsoFields.WEEK_OF_WEEK_BASED_YEAR.rangeRefinedBy(date).getMaximum();
+        
+        
+        int numDias = 0;
+        
+        if(diaSemana == 1)
+            numDias = 6;
+        else if(diaSemana == 0)
+            numDias = 5;
+        else if(diaSemana > 1 && diaSemana <= 6 )
+            numDias = diaSemana - 2;
+        
+        ArrayList<String> primeirosDiasSemana = new ArrayList<>();
+        int diaAtual = 0;
+        int lim = 31;
+        int mes = 12;
+        switch(numDias)
+        {
+            case 0:
+                data = "01-01";  
+                diaAtual = 1;
+                mes = 1;
+                break;
+            case 1:
+                //Terça
+                data ="12-31";
+                diaAtual = 31;
+                break;
+            case 2:
+                //Quarta
+                data ="12-30";
+                diaAtual = 30;
+                break;
+            case 3:
+                //Quinta
+                data ="12-29";
+                diaAtual = 29;
+                break;
+            case 4:
+                //Sexta
+                data ="12-28";
+                diaAtual = 28;
+                break;
+            case 5:
+                //Sábado
+                data ="12-27";
+                diaAtual = 27;
+                break;
+            case 6:
+                //Domingo
+                data ="12-26";
+                diaAtual = 26;
+                break;
+        }
+        
+        primeirosDiasSemana.add(data);
+        for(int i = 0 ; i < numSemanasAno-1 ; i++)
+        {
+            if((diaAtual + 7) > lim )
+            {
+                diaAtual = (diaAtual + 7) - lim;
+                mes++;
+                
+                switch(mes)
+                {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        lim = 31;
+                        break;
+                    
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        lim = 30;
+                        break;
+                    
+                    case 13:
+                        mes = 1;
+                        lim = 31;
+                        break;
+                    
+                    case 2:
+                        if((ano & 3) == 0 && ((ano % 25) != 0 || (ano & 15) == 0))
+
+                            lim = 29;
+                        else 
+                            lim = 28;
+                        break;
+                
+                }
+                if(mes < 10)
+                    data = "0"+mes+"-";
+                else 
+                    data = ""+mes+"-";
+                
+                if(diaAtual < 10)
+                    data +="0"+diaAtual;
+                else
+                    data +=diaAtual;
+            }
+            else
+            {
+                diaAtual += 7;
+                
+                if(mes < 10)
+                    data = "0"+mes+"-";
+                else 
+                    data = ""+mes+"-";
+                
+                if(diaAtual < 10)
+                    data +="0"+diaAtual;
+                else
+                    data +=diaAtual;
+            }
+            primeirosDiasSemana.add(data);
+        }
+
+        return primeirosDiasSemana;
+    }
+       
+    private void isDisponivel(String testar,String disponibilidade , int i)
+    {
+        
+        String status = disponibilidade.equals("T") ? "Livre" : "Ocupado";
+        
+        switch(testar)
+        {
+            case "07:00:00.0000000":
+                TabelaHorario.setValueAt(status, 0, i + 1);
+                break;
+            case "07:30:00.0000000":
+                TabelaHorario.setValueAt(status, 1, i + 1);
+                break;
+            case "08:00:00.0000000":
+                TabelaHorario.setValueAt(status, 2, i + 1);
+                break;
+            case "08:30:00.0000000":
+                TabelaHorario.setValueAt(status, 3, i + 1);
+                break;
+            case "09:00:00.0000000":
+                TabelaHorario.setValueAt(status, 4, i + 1);
+                break;
+            case "09:30:00.0000000":
+                TabelaHorario.setValueAt(status, 5, i + 1);
+                break;
+            case "10:00:00.0000000":
+                TabelaHorario.setValueAt(status, 6, i + 1);
+                break;
+            case "10:30:00.0000000":
+                TabelaHorario.setValueAt(status, 7, i + 1);
+                break;
+            case "11:00:00.0000000":
+                TabelaHorario.setValueAt(status, 8, i + 1);
+                break;
+            case "11:30:00.0000000":
+                TabelaHorario.setValueAt(status, 9, i + 1);
+                break;
+            case "12:00:00.0000000":
+                TabelaHorario.setValueAt(status, 10, i + 1);
+                break;
+            case "12:30:00.0000000":
+                TabelaHorario.setValueAt(status, 11, i + 1);
+                break;
+            case "13:00:00.0000000":
+                TabelaHorario.setValueAt(status, 12, i + 1);
+                break;
+            case "13:30:00.0000000":
+                TabelaHorario.setValueAt(status, 13, i + 1);
+                break;
+            case "14:00:00.0000000":
+                TabelaHorario.setValueAt(status, 14, i + 1);
+                break;
+            case "14:30:00.0000000":
+                TabelaHorario.setValueAt(status, 15, i + 1);
+                break;
+            case "15:00:00.0000000":
+                TabelaHorario.setValueAt(status, 16, i + 1);
+                break;
+            case "15:30:00.0000000":
+                TabelaHorario.setValueAt(status, 17, i + 1);
+                break;
+            case "16:00:00.0000000":
+                TabelaHorario.setValueAt(status, 18, i + 1);
+                break;
+            case "16:30:00.0000000":
+                TabelaHorario.setValueAt(status, 19, i + 1);
+                break;
+            case "17:00:00.0000000":
+                TabelaHorario.setValueAt(status, 20, i + 1);
+                break;
+            case "17:30:00.0000000":
+                TabelaHorario.setValueAt(status, 21, i + 1);
+                break;
+            case "18:00:00.0000000":
+                TabelaHorario.setValueAt(status, 22, i + 1);
+                break;
+            case "18:30:00.0000000":
+                TabelaHorario.setValueAt(status, 23, i + 1);
+                break;
+            case "19:00:00.0000000":
+                TabelaHorario.setValueAt(status, 24, i + 1);
+                break;
+        } 
+        
+    }
+    
+    private int diaDaSemana(int ano, int mes, int dia)
+    {
+ 
+        //N = d + 2m + [3(m+1)/5] + y + [y/4] - [y/100] + [y/400] + 2
+        // d = nº de dias
+        // m = nº do mês 
+        // NO CASO DE JANEIRO E FEVEREIRO UTILIZAMOS 13 E 14 E NO ANO ANTERIOR
+        // 1/1/1998 seria 1/13/1997
+        // y = ano
+        
+        //After you find the number N, divide it by 7, and the REMAINDER of that 
+        //division tells you the day of the week; 
+        //1 = Domingo, 2 = Segunda, 3 = Terca, 4 = Quarta, 5 = Quinta, 6 = Sexta; BUT, if the remainder is 0, then the day is Saturday, 
+        //that is: 0 = Saturday.
+        
+        float N = dia + 2*mes + (3 * (mes + 1) /5) + ano + ano/4 - ano/100 + ano/400 + 2;     
+        int diaSemana =(int) N % 7;
+        return diaSemana;
+    }
+    
+    private ArrayList<String> tratarSemana(String ano)
+    {     
+        
+        if(ComboBoxNumSemana.getSelectedItem().toString().equals("N. da Semana"))
+        {
+            return new ArrayList<String>();
+        }
+        
+        String semana = ComboBoxNumSemana.getSelectedItem().toString().split(" ")[2];
+        
+        
+        
+        return calcularSemana(ano, semana);
+        
+    }
+    
+    private ArrayList<String> calcularSemana(String s_ano, String numSemana)
+    {
+        String[] data = new String[2];
+        data = numSemana.split("-");
+        int ano = Integer.parseInt(s_ano);
+        int mes = Integer.parseInt(data[0]);
+        int dia = Integer.parseInt(data[1]);
+        ArrayList<String> semana = new ArrayList<>();
+        
+        int lim = 0;
+        switch (mes) 
+        {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+                lim = 31;
+                break;
+            case 12:
+                ano--;
+                lim = 31;
+                break;
+
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                lim = 30;
+                break;
+
+            case 13:
+                mes = 1;
+                lim = 31;
+                ano++;
+                break;
+
+            case 2:
+                if ((ano & 3) == 0 && ((ano % 25) != 0 || (ano & 15) == 0)) {
+                    lim = 29;
+                } 
+                else 
+                {
+                    lim = 28;
+                }
+                break;
+
+        }
+        for(int i = 0 ;  i < 7 ; i++)
+        {
+            
+            
+            if(dia + i >lim)
+            {
+                mes++;
+                dia = 1 - i;
+                switch(mes)
+                {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        lim = 31;
+                        break;
+                    
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        lim = 30;
+                        break;
+                    
+                    case 13:
+                        mes = 1;
+                        lim = 31;
+                        ano++;
+                        break;
+                    
+                    case 2:
+                        if((ano & 3) == 0 && ((ano % 25) != 0 || (ano & 15) == 0))
+
+                            lim = 29;
+                        else 
+                            lim = 28;
+                        break;
+                
+                }
+            }
+            if(mes < 10)
+                if(dia < 10)
+                    semana.add(""+ano+"-0"+mes+"-0"+(dia+i));
+                else
+                    semana.add(""+ano+"-0"+mes+"-"+(dia+i));
+            else
+                if(dia < 10)
+                    semana.add(""+ano+"-"+mes+"-0"+(dia+i));
+                else
+                    semana.add(""+ano+"-"+mes+"-"+(dia+i));
+            
+            
+        
+        }
+        
+        
+        return semana;
+    }
+    
+    private String tratarAno()
+    {
+        String ano = ComboBoxAno.getSelectedItem().toString();     
+        return ano;
+    }    
+    
+    private String tratarTipoHorario()
+    {
+        String tipoHorario = ComboBoxTipoHorario.getSelectedItem().toString();
+        switch(tipoHorario)
+        {
+            case "Colaborador":
+                tipoHorario = "HorarioTrabalho";
+                break;
+            case "Local":
+                tipoHorario = "HorarioLocal";
+                break;
+            case "Recurso":
+                tipoHorario = "HorarioRecurso";
+                break;
+                
+        }
+        
+        return tipoHorario;
+        
+    }
+    
+    private void tratarAnexo()
+    {
+        //1.Buscar Dados
+        //Buscar IdAnexo
+        String idAnexo = tratarIdAnexo();
+        //Buscar tipoAnexo
+        String tipoAnexo = buscarTipoAnexo();
+        if(tipoAnexo.equals("--Escolha--"))
+        { 
+            JOptionPane.showMessageDialog(null, "Tipo de Anexo inválido.", "Erro Tipo Anexo", JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
+        String idTipoAnexo = MeiosComplementares.buscarIdTipoAnexo(tipoAnexo);
+        
+        
+        //Buscar Descricao 
+        String descricaoAnexo = buscarDescricaoAnexo();
+        if(descricaoAnexo.length()>=300)
+        { 
+            JOptionPane.showMessageDialog(null, "A descricao não pode ter mais do que 300 caracteres", "Erro Descrição", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+       //2. Escolher Episodio Clinico
+       //Buscar IdECli escolhido
+        String idECli = buscarIdECli();
+        if(idECli.equals("--Escolha--"))
+        { 
+            JOptionPane.showMessageDialog(null, "Id da consulta inválido.", "Erro ID Consulta", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+           
+       //3. Guardar Anexo
+       //Gerar Anexo
+       MeiosComplementares.gerarAnexo(idAnexo, descricaoAnexo, idTipoAnexo, idECli);
+       
+       JOptionPane.showMessageDialog(null, "Análise clínica/Exame adicionado com sucesso.", "Adicionado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+            
+    }
+     
+    private String tratarIdAnexo()
+    {
+        int idAnexo = Integer.parseInt(MeiosComplementares.buscarUltimoIdAnexo());
+        idAnexo++;
+        return (""+idAnexo);
+    }
+    
+    private String buscarTipoAnexo()
+    {
+        String tipoAnexo = ComboBoxTipoAnexo.getSelectedItem().toString();  
+        
+        return tipoAnexo;
+    
+    }
+    
+    private String buscarDescricaoAnexo()
+    {
+        String descricao = TextFieldDescricaoAnexo.getText();
+      
+        return descricao;
+    
+    }
+    
+    private String buscarIdECli()
+    {
+        String idECli = ComboBoxConsultas.getSelectedItem().toString();
+        return idECli;
+    }
+    
+    private void consultar()
+    {
+        //Delete all rows
+        DefaultTableModel dm = (DefaultTableModel) TableUtente.getModel();
+        int rowCount = dm.getRowCount();
+        //Remove rows one by one from the end of the table
+        
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        
+        
+        //a) Visualizar registo de consulta e o seu progresso. 
+        //Deve permitir aceder/visualizar eventuais consultas anteriores e seus anexos 
+        //(análises, exames e prescrições). 
+        
+        
+        //1. Dados
+        //receber utente
+        String idUtente = buscarIdUtente();
+        
+        //Verificar que utente existe
+        if(!Consulta.isIdUtenteValido(idUtente))
+        {
+            JOptionPane.showMessageDialog(null, "IdUtente inválido", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String nomeUtente = Consulta.buscarNomeUtente(idUtente);
+        
+        //receber Historico
+        //buscar Episodios Clinicos desse Utente
+        ArrayList<String> episodiosClinicos = Consulta.buscarEpisodiosClinicos(idUtente);
+        String split[] = new String[2];
+        
+        //Mostrar Historico(Episodios Clinicos)
+        for(int i = 0 ; i < episodiosClinicos.size() ; i++)
+        {
+            split = episodiosClinicos.get(i).split(" - ");
+            
+            //split 0 -> idECli
+            //split 1 -> Observacao
+            //split 2 -> Estado
+            preencherTabelaConsulta(nomeUtente, split[0], split[1], split[2]); 
+        }
+        
+        //Meter os ids dos episodios clinicos na combo box
+        carregarIdECli(episodiosClinicos);
+            
+        
+        
+    }
+    
+    private String buscarIdUtente()
+    {
+        String idUtente = TextFieldIdUtente.getText();
+        
+        return idUtente;
+    }
+    
+    private void preencherTabelaConsulta(String nomeUtente, String idECli, String observacao, String estado)
+    {
+        
+        DefaultTableModel model1 = (DefaultTableModel) TableUtente.getModel();
+        model1.addRow(new Object[]{nomeUtente, idECli, observacao, estado});   
+ 
+    }
+    
+    private void carregarIdECli(ArrayList<String> episodiosClinicos)
+    {
+        ComboBoxIdECli.removeAllItems();
+        ComboBoxIdECli.addItem("--Escolha--");
+        String split[] = new String[2];
+        
+        for(int i = 0 ; i < episodiosClinicos.size() ; i++)
+        {
+            split = episodiosClinicos.get(i).split(" - ");
+            
+            //split 0 -> idECli
+            //split 1 -> Observacao
+            ComboBoxIdECli.addItem(split[0]);
+            
+        }
+    
+    }
+    
+    private String buscarIdECliSelecionado()
+    {
+        
+        String idECli = ComboBoxIdECli.getSelectedItem().toString();
+        return idECli;
+        
+    }
+    
+    private void mostrarExames(ArrayList<String> exames)
+    {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        //Guardar elementos
+            
+        for(int i = 0; i < exames.size() ;i++)
+            listModel.addElement(exames.get(i));
+
+        //Adicionar elemento selecionado
+        ListExames.setModel(listModel);
+        
+    }
+    
+    private void mostrarAnalises(ArrayList<String> analises)
+    {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        //Guardar elementos
+            
+        for(int i = 0; i < analises.size() ;i++)
+            listModel.addElement(analises.get(i));
+
+        //Adicionar elemento selecionado
+        ListAnalises.setModel(listModel);
+    }
+       
+    private void mostrarPrescricoes(ArrayList<String> prescricoes)
+    {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        //Guardar elementos
+            
+        for(int i = 0; i < prescricoes.size() ;i++)
+            listModel.addElement(prescricoes.get(i));
+
+        //Adicionar elemento selecionado
+        ListPrescricoes.setModel(listModel);
+        
+    }
+        
+    private void inserirDadosConsulta()
+    {
+        
+        //Receber estado da consulta
+        String estadoConsulta = ComboBoxEstadoConsulta.getSelectedItem().toString();
+        
+        if(estadoConsulta.equals("Diagnostico"))
+        {
+            
+            tratarDiagnostico();
+            
+        
+        }
+        else if(estadoConsulta.equals("Prescrever Medicamentos"))
+        {
+            
+            tratarPrescrever();
+        
+        }
+        else if(estadoConsulta.equals("Exame"))
+        {
+        
+            tratarExame();
+        
+        }
+        else if(estadoConsulta.equals("Analises"))
+        {
+         
+            tratarAnalises();
+            
+            
+        }
+        
+        
+        
+        
+    
+    }
+    
+    private void tratarDiagnostico()
+    {
+        //EpisodioClinico
+        //IdECli
+        String idECli = buscarIdECliMarcacao();
+        //Marcacao
+        //idMarcacao
+        String idMarcacao = ComboBoxInserirMarcacao.getSelectedItem().toString();
+        if(idMarcacao.equals("--Escolha--"))
+        {
+            JOptionPane.showMessageDialog(null, "IdMarcacao inválido.", "Erro IdMarcacao ", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //DiagnosticoTextField
+        String diagnostico = TextFieldDiagnostico.getText();
+        if(diagnostico.length() > 140)
+        {
+            JOptionPane.showMessageDialog(null, "Diagnostico com mais de 150 caracteres.", "Erro Diagnostico", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //SintomasTextField
+        String sintomas = TextFieldSintomas.getText();
+        if(sintomas.length() > 139)
+        {
+            JOptionPane.showMessageDialog(null, "Sintomas com mais de 150 caracteres.", "Erro Sintomas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String observacao = ("Sintomas:"+sintomas)+ ("Diagnostico:" + diagnostico);
+        
+        String idEstado = "2"; //Diagnostico
+        
+        String idTipoOcorrencia = buscarIdTipoOcorrencia();
+        
+        
+        
+        String idUtente;
+        
+        try{
+            
+            int teste = Integer.parseInt(buscarInserirIdUtente());
+            idUtente = buscarInserirIdUtente();
+            
+            if(!Marcacao.isIdUtenteValido(idUtente))
+            {
+                JOptionPane.showMessageDialog(null, "IdUtente inválido, Utente não existe", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "IdUtente inválido, tem que ser um numero", "Erro IdUtente ", JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        }
+        
+        //GerarIdHistorico
+        String  idHistoricoClinico = buscarIdHistoricoClinico();
+        
+        Consulta.gerarHistoricoClinico(idHistoricoClinico, idUtente);
+        
+        Consulta.gerarEpisodioClinico(idECli, observacao, idEstado, idTipoOcorrencia, idUtente, idHistoricoClinico);
+        
+        //Diagnostico
+        //buscarDiagnostico()   
+        //buscarSintomas();
+        
+        JOptionPane.showMessageDialog(null, "Guardado", "Sucesso ", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+    
+    private String buscarIdHistoricoClinico()
+    {
+        int idHistoricoClinico = Integer.parseInt(Consulta.buscarUltimoIdHistoricoClinico());
+        idHistoricoClinico++;
+        return ""+idHistoricoClinico;
+    }
+    
+    private String buscarInserirIdUtente()
+    {
+        String idUtente = TextFieldInserirIdUtente.getText();
+        
+        return idUtente; 
+    }  
+    
+    private String buscarIdTipoOcorrencia()
+    {
+        String idTipoOcorrencia = ComboBoxInserirTipoOcorrencia.getSelectedItem().toString().split(" - ")[0];
+        System.out.println("IDTO:"+idTipoOcorrencia);
+        return idTipoOcorrencia;
+    }
+    
+    private String buscarIdECliMarcacao()
+    {
+        int idECli = Integer.parseInt(Consulta.buscarUltimoIdECli());
+        idECli++;
+        return ""+idECli;
+    }
+    
+    private ArrayList<String> buscarPossiveisMarcacoes()
+    {
+        ArrayList<String> idMarcacoes = new ArrayList<>();
+        //Hora
+        String hora = tratarHoraConsulta();
+        
+        //Data
+        String data = TextFieldConsultaData.getText();
+        
+        //Receber Marcacoes que são menores do que esta data e hora
+        idMarcacoes = Consulta.buscarMarcacoes(data, hora);
+        
+        System.out.println(idMarcacoes);
+        
+        
+        return idMarcacoes;
+        
+    }
+    
+    private String tratarHoraConsulta()
+    {
+        String horas[] = TextFieldConsultaHoras.getText().split(":");
+        String horario ="";
+        int hora = Integer.parseInt(horas[0]);
+        int minuto = Integer.parseInt(horas[1]);
+        
+        if(minuto >= 30)
+        {
+            hora++;
+            minuto = 0;
+        }
+        else if( minuto == 0)
+        {
+            minuto = 00;
+        }
+        else 
+        {
+            minuto = 30;
+        }
+        if(hora < 7)
+            hora = 7;
+        if(hora > 19)
+            hora = 7;
+        horario = hora <10 ? "0"+hora : ""+hora;
+        
+        horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
+        
+        return horario;
+    }
+    
+    private String tratarDataConsulta()
+    {
+        String data = TextFieldConsultaData.getText(); 
+        return data;
+    }
+    
+    private void tratarMenuInserirDados(String estadoConsulta)
+    {
+        if(estadoConsulta.equals("Diagnostico"))
+        {
+            ComboBoxInserirMarcacao.setVisible(true);
+            LabelInserirMarcacao.setVisible(true);
+            LabelDiagnostico.setVisible(true);
+            TextFieldSintomas.setVisible(true);
+            LabelSintomas.setVisible(true);
+            TextFieldDiagnostico.setVisible(true);
+            LabelInserirIdECli.setVisible(false);
+            ComboBoxInserirIdECli.setVisible(false);
+            LabelInserirPrescricoes.setVisible(false);
+            TextFieldInserirPrescricoes.setVisible(false);
+            LabelInserirIdUtente.setVisible(true);
+            TextFieldInserirIdUtente.setVisible(true);
+            
+            LabelInserirTipoOcorrencia.setVisible(true);
+            ComboBoxInserirTipoOcorrencia.setVisible(true);
+            
+            LabelInserirMotivo.setVisible(false);
+            TextFieldInseridoMotivo.setVisible(false);
+            
+            
+            
+        }
+        else if(estadoConsulta.equals("Prescrever Medicamentos"))
+        {
+            ComboBoxInserirMarcacao.setVisible(false);
+            LabelInserirMarcacao.setVisible(false);
+            LabelDiagnostico.setVisible(false);
+            TextFieldSintomas.setVisible(false);
+            LabelSintomas.setVisible(false);
+            TextFieldDiagnostico.setVisible(false);
+            LabelInserirIdECli.setVisible(true);
+            ComboBoxInserirIdECli.setVisible(true);
+            LabelInserirPrescricoes.setVisible(true);
+            TextFieldInserirPrescricoes.setVisible(true);
+            LabelInserirIdUtente.setVisible(false);
+            TextFieldInserirIdUtente.setVisible(false);
+            
+            LabelInserirTipoOcorrencia.setVisible(false);
+            ComboBoxInserirTipoOcorrencia.setVisible(false);
+            
+            LabelInserirMotivo.setVisible(false);
+            TextFieldInseridoMotivo.setVisible(false);
+        }
+        else if(estadoConsulta.equals("Exame") || estadoConsulta.equals("Analises"))
+        {
+            ComboBoxInserirMarcacao.setVisible(false);
+            LabelInserirMarcacao.setVisible(false);
+            LabelDiagnostico.setVisible(false);
+            TextFieldSintomas.setVisible(false);
+            LabelSintomas.setVisible(false);
+            TextFieldDiagnostico.setVisible(false);
+            LabelInserirIdECli.setVisible(true);
+            ComboBoxInserirIdECli.setVisible(true);
+            LabelInserirPrescricoes.setVisible(false);
+            TextFieldInserirPrescricoes.setVisible(false);
+            LabelInserirIdUtente.setVisible(false);
+            TextFieldInserirIdUtente.setVisible(false);
+            
+            LabelInserirTipoOcorrencia.setVisible(false);
+            ComboBoxInserirTipoOcorrencia.setVisible(false);
+            
+            LabelInserirMotivo.setVisible(true);
+            TextFieldInseridoMotivo.setVisible(true);
+        }
+        
+    
+    }
+    
+    private void adicionarMarcacoes(ArrayList<String> marcacoes)
+    {
+        ComboBoxInserirMarcacao.removeAllItems();
+        ComboBoxInserirMarcacao.addItem("--Escolha--");
+        
+        for(int i = 0 ; i < marcacoes.size() ; i++)
+        {
+            ComboBoxInserirMarcacao.addItem(marcacoes.get(i));
+            
+        }
+    
+    }
+    
+    
+    private void tratarPrescrever()
+    {
+        //Id Anexo
+        String idAnexo = buscarIdAnexo();
+        
+        
+        //Receber ID
+        String idECli = ComboBoxInserirIdECli.getSelectedItem().toString();
+        if(ComboBoxInserirIdECli.equals("--Escolha--"))
+        {
+            JOptionPane.showMessageDialog(null, "IdEpisodioClinico inválido.", "Erro IdEpisodioClinico ", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Receber String
+        String descricao = TextFieldInserirPrescricoes.getText();
+        if(descricao.length() > 300)
+        {
+            JOptionPane.showMessageDialog(null, "A prescricao não pode conter mais de 300 caracteres.", "Erro Prescricao", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Gerar o Anexo
+        Consulta.gerarAnexo(idAnexo, descricao, "3", idECli);
+        
+        
+        //Atualizar EpisodioClinico
+        Consulta.atualizarEpisodioClinico(idECli, "5");
+        
+        JOptionPane.showMessageDialog(null, "Guardado", "Sucesso ", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+    
+    private String buscarIdAnexo()
+    {
+        int idAnexo =Integer.parseInt( Consulta.buscarUltimoIdAnexo());
+        idAnexo++;
+        return ""+idAnexo;
+    
+    }
+    
+    private void adicionarEpisodiosClinicos(ArrayList<String> idECli)
+    {
+        ComboBoxInserirIdECli.removeAllItems();
+        ComboBoxInserirIdECli.addItem("--Escolha--");
+        
+        for(int i = 0 ; i < idECli.size() ; i++)
+        {
+            ComboBoxInserirIdECli.addItem(idECli.get(i));
+            
+        }
+    
+    }  
+    
+    private void tratarExame()
+    {
+        
+        //Receber ID
+        String idECli = ComboBoxInserirIdECli.getSelectedItem().toString();
+        if(ComboBoxInserirIdECli.equals("--Escolha--"))
+        {
+            JOptionPane.showMessageDialog(null, "IdEpisodioClinico inválido.", "Erro IdEpisodioClinico ", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //guardar idUtente
+        String idUtente = Consulta.buscarIdUtenteEC(idECli);
+        
+        //descubrir o id da marcação para criar uma nova
+        String idMarcacao = tratarIdMarcacao();
+        
+        
+        //Buscar Motivo
+        String motivo = buscarMotivo();
+        if(motivo.length() > 300)
+        {
+            JOptionPane.showMessageDialog(null, "O motivo não pode conter mais de 300 caracteres.", "Erro motivo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Buscar Hora
+        String hora = buscarHora();
+        
+        //Buscar data
+        String data = buscarData();
+        
+        
+        //Buscar Horarios Livres
+        ArrayList<String> resultados = Marcacao.buscarHorariosDisponiveis(data, hora);
+        if(resultados.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String split[] = resultados.get(0).split(" ");
+        
+        Marcacao.atualizarHorarioTrabalho(split[0]);
+        Marcacao.atualizarHorarioLocal(split[1]);
+        
+        Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+        
+        //gerar marcar
+        Marcacao.gerarMarcar(idMarcacao, split[0]);
+        //gerar escolhe
+        Marcacao.gerarEscolhe(idMarcacao, split[1]);
+
+        JOptionPane.showMessageDialog(null,"O exame ficou para a data: "+split[2] +" e hora: " + split[3].split(".0000000")[0] , "Sucesso na marcação do exame", JOptionPane.INFORMATION_MESSAGE);
+        
+        //LabelInserirMotivo
+        Consulta.atualizarEpisodioClinico(idECli, "4");
+        
+        
+        
+    }
+    
+    private void tratarAnalises()
+    {
+        
+        //Receber ID
+        String idECli = ComboBoxInserirIdECli.getSelectedItem().toString();
+        if(ComboBoxInserirIdECli.equals("--Escolha--"))
+        {
+            JOptionPane.showMessageDialog(null, "IdEpisodioClinico inválido.", "Erro IdEpisodioClinico ", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //guardar idUtente
+        String idUtente = Consulta.buscarIdUtenteEC(idECli);
+        
+        //descubrir o id da marcação para criar uma nova
+        String idMarcacao = tratarIdMarcacao();
+        
+        
+        //Buscar Motivo
+        String motivo = buscarMotivo();
+        if(motivo.length() > 300)
+        {
+            JOptionPane.showMessageDialog(null, "O motivo não pode conter mais de 300 caracteres.", "Erro motivo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Buscar Hora
+        String hora = buscarHora();
+        
+        //Buscar data
+        String data = buscarData();
+        
+        
+        //Buscar Horarios Livres
+        ArrayList<String> resultados = Marcacao.buscarHorariosDisponiveis(data, hora);
+        if(resultados.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Não existem horarios disponiveis", "Erro Horarios Indisponiveis", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String split[] = resultados.get(0).split(" ");
+        
+        Marcacao.atualizarHorarioTrabalho(split[0]);
+        Marcacao.atualizarHorarioLocal(split[1]);
+        
+        Marcacao.gerarMarcacao(idMarcacao, motivo, idUtente);
+        
+        //gerar marcar
+        Marcacao.gerarMarcar(idMarcacao, split[0]);
+        //gerar escolhe
+        Marcacao.gerarEscolhe(idMarcacao, split[1]);
+
+        JOptionPane.showMessageDialog(null,"O exame ficou para a data: "+split[2] +" e hora: " + split[3].split(".0000000")[0] , "Sucesso na marcação do exame", JOptionPane.INFORMATION_MESSAGE);
+        
+        //LabelInserirMotivo
+        Consulta.atualizarEpisodioClinico(idECli, "3");
+        
+        
+        
+    }
+    
+    private String buscarHora()
+    {
+        String horas[] = TextFieldConsultaHoras.getText().split(":");
+        String horario ="";
+        int hora = Integer.parseInt(horas[0]);
+        int minuto = Integer.parseInt(horas[1]);
+        
+        if(minuto >= 30)
+        {
+            hora++;
+            minuto = 0;
+        }
+        else if( minuto == 0)
+        {
+            minuto = 00;
+        }
+        else 
+        {
+            minuto = 30;
+        }
+        if(hora < 7)
+            hora = 7;
+        if(hora > 19)
+            hora = 7;
+        horario = hora <10 ? "0"+hora : ""+hora;
+        
+        horario += minuto < 10 ? ":0"+minuto : ":"+minuto;
+        
+        return horario;
+    }
+    
+    private String buscarData()
+    {
+        String data = TextFieldConsultaData.getText(); 
+        return data;
+    }
+    
+    private String buscarMotivo()
+    {
+        String motivo = TextFieldInseridoMotivo.getText();
+        return motivo;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -122,5 +2695,91 @@ public class GissUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotaoCarregarHorario;
+    private javax.swing.JButton ButtonAnexar;
+    private javax.swing.JButton ButtonInserirDados;
+    private javax.swing.JButton ButtonProcuraUtente;
+    private javax.swing.JButton ButtonReservar;
+    private javax.swing.JComboBox<String> ComboBoxAno;
+    private javax.swing.JComboBox<String> ComboBoxConsultas;
+    private javax.swing.JComboBox<String> ComboBoxEstadoConsulta;
+    private javax.swing.JComboBox<String> ComboBoxIdECli;
+    private javax.swing.JComboBox<String> ComboBoxInserirIdECli;
+    private javax.swing.JComboBox<String> ComboBoxInserirMarcacao;
+    private javax.swing.JComboBox<String> ComboBoxInserirTipoOcorrencia;
+    private javax.swing.JComboBox<String> ComboBoxMarcacao;
+    private javax.swing.JComboBox<String> ComboBoxNome;
+    private javax.swing.JComboBox<String> ComboBoxNumSemana;
+    private javax.swing.JComboBox<String> ComboBoxTipoAnexo;
+    private javax.swing.JComboBox<String> ComboBoxTipoHorario;
+    private javax.swing.JComboBox<String> ComboBoxTipoReserva;
+    private javax.swing.JLabel LabelDataReserva;
+    private javax.swing.JLabel LabelDiagnostico;
+    private javax.swing.JLabel LabelInserirIdECli;
+    private javax.swing.JLabel LabelInserirIdUtente;
+    private javax.swing.JLabel LabelInserirMarcacao;
+    private javax.swing.JLabel LabelInserirMotivo;
+    private javax.swing.JLabel LabelInserirPrescricoes;
+    private javax.swing.JLabel LabelInserirTipoOcorrencia;
+    private javax.swing.JLabel LabelReservar;
+    private javax.swing.JLabel LabelReservasDisponiveis;
+    private javax.swing.JLabel LabelReservasEscolhidas;
+    private javax.swing.JLabel LabelSintomas;
+    private javax.swing.JList<String> ListAnalises;
+    private javax.swing.JList<String> ListExames;
+    private javax.swing.JList<String> ListPrescricoes;
+    private javax.swing.JList<String> ListReservasDisponiveis;
+    private javax.swing.JList<String> ListReservasEscolhidas;
+    private javax.swing.JPanel PanelConsulta;
+    private javax.swing.JPanel PanelMarcacao;
+    private javax.swing.JPanel PanelMeioComplementar;
+    private javax.swing.JScrollPane ScrollPaneReservasDisponiveis;
+    private javax.swing.JScrollPane ScrollPaneReservasEscolhidas;
+    private javax.swing.JTabbedPane TabbedMenu;
+    private javax.swing.JTable TabelaHorario;
+    private javax.swing.JTable TableUtente;
+    private javax.swing.JTextField TextFieldConsultaData;
+    private javax.swing.JTextField TextFieldConsultaHoras;
+    private javax.swing.JTextField TextFieldData;
+    private javax.swing.JTextField TextFieldDataReserva;
+    private javax.swing.JTextField TextFieldDescricaoAnexo;
+    private javax.swing.JTextField TextFieldDiagnostico;
+    private javax.swing.JTextField TextFieldHoraReserva;
+    private javax.swing.JTextField TextFieldHoras;
+    private javax.swing.JTextField TextFieldIdUtente;
+    private javax.swing.JTextField TextFieldInseridoMotivo;
+    private javax.swing.JTextField TextFieldInserirIdUtente;
+    private javax.swing.JTextField TextFieldInserirPrescricoes;
+    private javax.swing.JTextField TextFieldMotivoMarcacao;
+    private javax.swing.JTextField TextFieldReservaUtente;
+    private javax.swing.JTextField TextFieldSintomas;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }
